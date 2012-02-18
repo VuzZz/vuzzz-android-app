@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Toast;
@@ -87,21 +88,32 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
-		viewPager.setCurrentItem(1);
 		
-		titles.setViewPager(viewPager);
-
-		viewPager.setOnPageChangeListener(new AbstractOnPageChangeListener() {
+		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
-			public void onPageSelected(int arg0) {
-				if (arg0==0){
+			public void onPageSelected(int position) {
+				if (position==0){
 					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
 						listener.onHistoryFocused();
 					}
 				}
+				titles.onPageSelected(position);
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				titles.onPageScrollStateChanged(state);
+			}
+
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				titles.onPageScrolled(position, positionOffset, positionOffsetPixels);
 			}
 		});
+
+		titles.setViewPager(viewPager);
 		
+		viewPager.setCurrentItem(1);
 	}
 
 	@Override
