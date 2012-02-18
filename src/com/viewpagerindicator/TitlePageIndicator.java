@@ -643,7 +643,6 @@ public class TitlePageIndicator extends View implements PageIndicator {
             throw new IllegalStateException("ViewPager adapter must implement TitleProvider to be used with TitlePageIndicator.");
         }
         mViewPager = view;
-        mViewPager.setOnPageChangeListener(this);
         mTitleProvider = (TitleProvider)adapter;
         invalidate();
     }
