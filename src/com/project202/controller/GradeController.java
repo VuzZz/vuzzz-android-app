@@ -17,9 +17,9 @@ public class GradeController {
 	}
 
 	public static int getColorForGrade(float grade){
-		if (grade >= 0 && grade < 2.5) return R.drawable.red;
-		if (grade >= 2.5 && grade < 5) return R.drawable.orange;
-		if (grade >= 5 && grade < 7.5) return R.drawable.yellow;
-		else return R.drawable.green;
+		if (grade >= 0 && grade < 2.5) return R.color.red;
+		if (grade >= 2.5 && grade < 5) return R.color.orange;
+		if (grade >= 5 && grade < 7.5) return R.color.yellow;
+		else return R.color.green;
 	}
 }

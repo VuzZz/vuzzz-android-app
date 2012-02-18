@@ -15,19 +15,19 @@ import com.project202.model.Rating;
 public class RatingView extends MyLinearLayout {
 
 	@ViewById
-	protected TextView globalRating;
+	TextView globalRating;
 	@ViewById
-	protected TextView cultureRating;
+	TextView cultureRating;
 	@ViewById
-	protected TextView natureRating;
+	TextView natureRating;
 	@ViewById
-	protected TextView transitRating;
+	TextView transitRating;
 	@ViewById
-	protected TextView institutionsRating;
+	TextView institutionsRating;
 	@ViewById
-	protected TextView shopsRating;
+	TextView shopsRating;
 	@ViewById
-	protected TextView leisureRating;
+	TextView leisureRating;
 	
 	public RatingView(Context context) {
 		super(context);
