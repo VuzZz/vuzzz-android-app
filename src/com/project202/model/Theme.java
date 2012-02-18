@@ -9,7 +9,7 @@ public class Theme{
 	private float note;
 	private List<Criterion> criteria;
 
-	public Theme(String name, String description, float note, List<Criterion> criteria) {
+	public Theme(final String name, String description, float note, List<Criterion> criteria) {
 		this.name = ThemeName.valueOf(name);
 		this.description = description;
 		this.note = note;

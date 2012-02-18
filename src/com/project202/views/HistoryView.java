@@ -16,6 +16,7 @@ public class HistoryView extends MyLinearLayout {
 
 	@Bean
 	HistoryListAdapter adapter;
+	
 	@ViewById
 	protected ListView historyList;
 	

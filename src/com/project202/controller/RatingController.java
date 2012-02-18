@@ -12,13 +12,18 @@ import com.project202.model.Rating;
 import com.project202.model.Theme;
 
 public class RatingController {
-	public static List<PrintedRating> getTestHistoryRatings() {
-		List<PrintedRating> ratings = new ArrayList<PrintedRating>();
-		ratings.add(new PrintedRating(8f, 3f, 2f, 7f, 8f, 1f, 8f));
-		ratings.add(new PrintedRating(2f, 2f, 9f, 2f, 9f, 2f, 2f));
-		ratings.add(new PrintedRating(6f, 7f, 3f, 5f, 5f, 7f, 6f));
-		ratings.add(new PrintedRating(3f, 5f, 6f, 4f, 2f, 5f, 3f));
-
+	public static List<Rating> getTestHistoryRatings() {
+		List<Rating> ratings = new ArrayList<Rating>();
+		
+		for (int i = 0; i < 5; i++){
+			List<Theme> themes = new ArrayList<Theme>();
+			for (int j = 0; j < 6; j++){
+				Theme theme = new Theme("CULTURE", "Description", (float)(Math.random()*10), null);
+				themes.add(theme);
+			}
+			Rating r = new Rating(themes);
+			ratings.add(r);
+		}
 		return ratings;
 	}
 

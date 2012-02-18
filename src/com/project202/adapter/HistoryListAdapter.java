@@ -4,15 +4,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
-import com.project202.R;
-import com.project202.model.PrintedRating;
+import com.project202.model.Rating;
+import com.project202.views.HistoryLine;
 
 @EBean
 public class HistoryListAdapter extends BaseAdapter{
@@ -20,15 +18,18 @@ public class HistoryListAdapter extends BaseAdapter{
 	@RootContext
 	Context context;
 	
-	private List<PrintedRating> ratings;
+	private List<Rating> ratings;
+	private float maxRating;
 	
-	private class ViewHolder {
-		private TextView locationName;
-		private TextView grade;
-		private TextView deleteEntry;
-	}
-	
-	public void setRatings(List<PrintedRating> ratings){
+	public void setRatings(List<Rating> ratings){
+		float maxMark = Float.MIN_VALUE;
+		for (Rating rating : ratings){
+			float mark = rating.getMark();
+			if (mark > maxMark){
+				maxMark = mark;
+			}
+		}
+		this.maxRating = maxMark;
 		this.ratings = ratings;
 	}
 	
@@ -49,30 +50,12 @@ public class HistoryListAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
 
 		if (convertView == null) {
-			convertView = View.inflate(context, R.layout.row_history, null);
-
-			holder = new ViewHolder();
-			holder.locationName = (TextView) convertView.findViewById(R.id.location_name);
-			holder.grade = (TextView) convertView.findViewById(R.id.grade);
-			holder.deleteEntry = (TextView) convertView.findViewById(R.id.delete_entry);
-
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
+			convertView = new HistoryLine(context); 
 		}
-
-		holder.locationName.setText("Here");
-		holder.grade.setText(String.valueOf(ratings.get(position).getGlobalGrade()));
-		holder.deleteEntry.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ratings.remove(position);
-				notifyDataSetInvalidated();
-			}
-		});
+		
+		((HistoryLine) convertView).setData(ratings.get(position), maxRating);
 
 		return convertView;
 	}

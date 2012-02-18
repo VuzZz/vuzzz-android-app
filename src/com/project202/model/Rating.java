@@ -16,4 +16,12 @@ public class Rating {
 	public Rating(List<Theme> themes) {
 		this.themes = themes;
 	}
+
+	public float getMark() {
+		float sum = 0f;
+		for (Theme theme : themes){
+			sum += theme.getNote();
+		}
+		return sum;
+	}
 }
