@@ -34,4 +34,5 @@ public class HistoryView extends MyLinearLayout {
 	public String getTitle(Context context) {
 		return context.getString(R.string.history_title);
 	}
+
 }

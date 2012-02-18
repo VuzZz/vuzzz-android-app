@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
+import com.project202.ShowNoteActivity;
 import com.project202.model.Rating;
 import com.project202.views.HistoryLine;
 
@@ -17,6 +18,9 @@ public class HistoryListAdapter extends BaseAdapter{
 
 	@RootContext
 	Context context;
+	
+	@RootContext
+	ShowNoteActivity showNoteActivity;
 	
 	private List<Rating> ratings;
 	private float maxRating;
@@ -50,14 +54,13 @@ public class HistoryListAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-
 		if (convertView == null) {
-			convertView = new HistoryLine(context); 
+			convertView = new HistoryLine(context);
+			showNoteActivity.addOnSettingsFocusedHandler((HistoryLine) convertView);
 		}
-		
 		((HistoryLine) convertView).setData(ratings.get(position), maxRating);
-
+		((HistoryLine) convertView).setPair(position%2==0);
 		return convertView;
 	}
-	
+		
 }
