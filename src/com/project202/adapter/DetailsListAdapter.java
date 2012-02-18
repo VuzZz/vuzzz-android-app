@@ -35,9 +35,22 @@ public class DetailsListAdapter extends BaseAdapter{
 	public int getCount() {
 		return details.size();
 	}
+	
+	@Override
+	public int getViewTypeCount() {
+		return 2;
+	}
+	
+	@Override
+	public int getItemViewType(int position) {
+		if(details.get(position).isCriterion())
+			return 1;
+		else
+			return 0;
+	}
 
 	@Override
-	public Object getItem(int position) {
+	public PrintedDetail getItem(int position) {
 		return details.get(position);
 	}
 
