@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:apiKey="@string/maps_api_key"
+        android:clickable="true"
+        android:enabled="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_compat_height"
+        android:background="#cc000000" >
+
+        <ImageButton
+            android:id="@android:id/home"
+            style="@style/ActionBarCompatHomeItem"
+            android:layout_width="@dimen/actionbar_compat_button_home_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="A propos"
+            android:scaleType="center"
+            android:src="@drawable/ic_home" />
+
+        <ImageButton
+            android:id="@+id/location"
+            style="@style/ActionBarCompatItem"
+            android:layout_width="@dimen/actionbar_compat_button_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:contentDescription="Ma position"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu_mylocation" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            style="@style/ActionBarCompatItem"
+            android:layout_width="@dimen/actionbar_compat_button_width"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/location"
+            android:contentDescription="Chercher"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu_play_clip"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/addressEditText"
+            style="@android:style/Theme.Light"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/searchButton"
+            android:layout_toRightOf="@android:id/home"
+            android:contentDescription="Adresse"
+            android:inputType="text"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/addressHint"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/addressEditText"
+            android:layout_alignLeft="@id/addressEditText"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/ic_menu_search_small"
+            android:contentDescription="Adresse"
+            android:gravity="center_vertical"
+            android:paddingLeft="35dp"
+            android:text="Adresse"
+            android:textColor="#7f7f7f"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
