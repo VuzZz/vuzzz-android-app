@@ -3,5 +3,10 @@
 
     <string name="hello">Hello World, ShowNoteActivity!</string>
     <string name="app_name">Project202</string>
-
+	<string name="my_position">My Position</string>
+	<string name="enter_address">Enter Address</string>
+	<string name="settings_title">Settings</string>
+	<string name="rating_title">Rating</string>
+	<string name="rating_details_title">Rating Details</string>
+	<string name="history_title">History</string>
 </resources>
