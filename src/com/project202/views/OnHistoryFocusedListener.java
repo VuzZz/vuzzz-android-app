@@ -4,4 +4,6 @@ public interface OnHistoryFocusedListener {
 
 	void onHistoryFocused();
 	
+	void onHistoryHidden();
+	
 }
