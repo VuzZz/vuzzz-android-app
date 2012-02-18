@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import android.widget.Toast;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.project202.actionbar.ActionBarActivity;
 import com.project202.model.Criterion;
 import com.project202.model.Rating;
 import com.project202.model.Theme;
@@ -27,11 +27,12 @@ import com.project202.views.HistoryView_;
 import com.project202.views.MyLinearLayout;
 import com.project202.views.RatingDetailsView_;
 import com.project202.views.RatingView_;
+import com.project202.views.SettingsView_;
 
 @EActivity(R.layout.show_note)
-public class ShowNoteActivity extends Activity {
+public class ShowNoteActivity extends ActionBarActivity {
 	
-	private final int NUM_VIEWS = 3;
+	private final int NUM_VIEWS = 4;
 	private final Map<Integer,MyLinearLayout> views = new HashMap<Integer,MyLinearLayout>();
 	
 	@ViewById(R.id.view_pager)
@@ -81,11 +82,13 @@ public class ShowNoteActivity extends Activity {
 		RatingView_ ratingView = new RatingView_(this);
 		RatingDetailsView_ ratingDetailsView = new RatingDetailsView_(this);
 		HistoryView_ historyView = new HistoryView_(this);
+		SettingsView_ settingsView = new SettingsView_(this);
 		
 		// Inflating layouts
 		ratingView.onFinishInflate();
 		ratingDetailsView.onFinishInflate();
 		historyView.onFinishInflate();
+		settingsView.onFinishInflate();
 		
 		// Injecting some content to test
 		ratingView.setValuesFromRating(getTestPrintedRating());
@@ -94,6 +97,7 @@ public class ShowNoteActivity extends Activity {
 		views.put(0, historyView);
 		views.put(1, ratingView);
 		views.put(2, ratingDetailsView);
+		views.put(3, settingsView);
 		
 		// Initializing PagerAdapter
 		pagerAdapter = new CustomPagerAdapter();
