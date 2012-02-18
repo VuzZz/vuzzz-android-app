@@ -26,6 +26,7 @@ import com.project202.model.Rating;
 import com.project202.model.Theme;
 import com.project202.model.ThemeName;
 import com.project202.views.HistoryView_;
+import com.project202.views.OnHistoryFocusedListener;
 import com.project202.views.RatingDetailsView_;
 import com.project202.views.RatingView_;
 import com.project202.views.SettingsView;
@@ -48,19 +49,22 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 	@ViewById(R.id.view_pager)
 	protected ViewPager viewPager;
+	private List<OnHistoryFocusedListener> onHistoryFocusedListeners;
+
 
 	private SimplePagerAdapter pagerAdapter;
 
 	@AfterViews
 	public void afterViews() {
-
+		
+		onHistoryFocusedListeners = new ArrayList<OnHistoryFocusedListener>();
+		
 		setTitle(address);
 
 		// Creating ViewPager Views
 		RatingView_ ratingView = new RatingView_(this);
 		RatingDetailsView_ ratingDetailsView = new RatingDetailsView_(this);
-		HistoryView_ historyView = new HistoryView_(this);
-
+		final HistoryView_ historyView = new HistoryView_(this);
 		// Inflating layouts
 		ratingView.onFinishInflate();
 		ratingDetailsView.onFinishInflate();
@@ -80,7 +84,17 @@ public class ShowNoteActivity extends ActionBarActivity {
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(1);
-		
+
+		viewPager.setOnPageChangeListener(new AbstractOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int arg0) {
+				if (arg0==0){
+					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
+						listener.onHistoryFocused();
+					}
+				}
+			}
+		});
 	}
 
 	@Override
@@ -112,6 +126,10 @@ public class ShowNoteActivity extends ActionBarActivity {
 		themes.add(new Theme(ThemeName.TRANSIT.toString(), "", 6.0f, criteria));
 
 		return new Rating(themes);
+	}
+	
+	public void addOnSettingsFocusedHandler(OnHistoryFocusedListener convertView) {
+		onHistoryFocusedListeners.add(convertView);
 	}
 
 	@OptionsItem

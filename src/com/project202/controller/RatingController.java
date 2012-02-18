@@ -15,7 +15,7 @@ public class RatingController {
 	public static List<Rating> getTestHistoryRatings() {
 		List<Rating> ratings = new ArrayList<Rating>();
 		
-		for (int i = 0; i < 5; i++){
+		for (int i = 0; i < 30; i++){
 			List<Theme> themes = new ArrayList<Theme>();
 			for (int j = 0; j < 6; j++){
 				Theme theme = new Theme("CULTURE", "Description", (float)(Math.random()*10), null);
