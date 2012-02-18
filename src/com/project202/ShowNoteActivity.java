@@ -25,7 +25,10 @@ import com.project202.model.Criterion;
 import com.project202.model.Rating;
 import com.project202.model.Theme;
 import com.project202.model.ThemeName;
+import com.project202.views.HistoryView_;
 import com.project202.views.OnHistoryFocusedListener;
+import com.project202.views.RatingDetailsView_;
+import com.project202.views.RatingView_;
 import com.project202.views.SettingsView;
 
 @EActivity(R.layout.show_note)
