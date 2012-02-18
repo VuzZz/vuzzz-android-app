@@ -1,6 +1,8 @@
 package com.project202.views;
 
 import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -12,7 +14,7 @@ import com.project202.address.AbstractSeekBarChangeListener;
 import com.project202.address.SettingsPreferences_;
 
 @EViewGroup(R.layout.settings)
-public class SettingsView extends MyLinearLayout {
+public class SettingsView extends LinearLayout {
 	
 	Context context;
 	
@@ -36,12 +38,18 @@ public class SettingsView extends MyLinearLayout {
 		super(context);
 		this.context = context;
 	}
-
-	@Override
-	public String getTitle(Context context) {
-		return "Settings";
-	}	
 	
+	public SettingsView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.context = context;
+	}
+
+	public SettingsView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		this.context = context;
+	}
+
+
 	@AfterViews
 	public void afterViews(){
 		// Sets default values

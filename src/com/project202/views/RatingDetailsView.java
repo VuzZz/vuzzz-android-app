@@ -1,6 +1,7 @@
 package com.project202.views;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -13,26 +14,21 @@ import com.project202.adapter.DetailsListAdapter;
 import com.project202.controller.RatingController;
 
 @EViewGroup(R.layout.rating_details)
-public class RatingDetailsView extends MyLinearLayout {
+public class RatingDetailsView extends LinearLayout {
 
 	@Bean
 	DetailsListAdapter adapter;
 	@ViewById
 	ListView detailsList;
-	
+
 	public RatingDetailsView(Context context) {
 		super(context);
 	}
-	
+
 	@AfterViews
-	public void afterViews(){
+	public void afterViews() {
 		adapter.setDetails(RatingController.getDetailsList(ShowNoteActivity.getTestPrintedRating()));
 		detailsList.setAdapter(adapter);
-	}
-
-	@Override
-	public String getTitle(Context context) {
-		return context.getString(R.string.rating_details_title);
 	}
 
 }

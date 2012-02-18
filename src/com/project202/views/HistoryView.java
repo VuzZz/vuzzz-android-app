@@ -1,6 +1,7 @@
 package com.project202.views;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -12,7 +13,7 @@ import com.project202.adapter.HistoryListAdapter;
 import com.project202.controller.RatingController;
 
 @EViewGroup(R.layout.history)
-public class HistoryView extends MyLinearLayout {
+public class HistoryView extends LinearLayout {
 
 	@Bean
 	HistoryListAdapter adapter;
@@ -30,8 +31,4 @@ public class HistoryView extends MyLinearLayout {
 		historyList.setAdapter(adapter);
 	}
 	
-	@Override
-	public String getTitle(Context context) {
-		return context.getString(R.string.history_title);
-	}
 }
