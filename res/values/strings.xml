@@ -9,4 +9,5 @@
 	<string name="rating_title">Rating</string>
 	<string name="rating_details_title">Rating Details</string>
 	<string name="history_title">History</string>
+	<string name="searching_location">Géolocalisation en cours</string>
 </resources>

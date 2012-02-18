@@ -27,7 +27,7 @@
             android:src="@drawable/ic_home" />
 
         <ImageButton
-            android:id="@+id/location"
+            android:id="@+id/locationButton"
             style="@style/ActionBarCompatItem"
             android:layout_width="@dimen/actionbar_compat_button_width"
             android:layout_height="match_parent"
@@ -41,7 +41,7 @@
             style="@style/ActionBarCompatItem"
             android:layout_width="@dimen/actionbar_compat_button_width"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/location"
+            android:layout_toLeftOf="@id/locationButton"
             android:contentDescription="Chercher"
             android:scaleType="center"
             android:src="@drawable/ic_menu_play_clip"
@@ -56,6 +56,7 @@
             android:layout_toRightOf="@android:id/home"
             android:contentDescription="Adresse"
             android:inputType="text"
+            android:imeOptions="actionSearch"
             android:textColor="#fff" />
 
         <TextView
