@@ -1,6 +1,7 @@
 package com.project202.views;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EViewGroup;
@@ -12,7 +13,7 @@ import com.project202.model.PrintedRating;
 import com.project202.model.Rating;
 
 @EViewGroup(R.layout.rating)
-public class RatingView extends MyLinearLayout {
+public class RatingView extends LinearLayout {
 
 	@ViewById
 	TextView globalRating;
@@ -31,11 +32,6 @@ public class RatingView extends MyLinearLayout {
 	
 	public RatingView(Context context) {
 		super(context);
-	}
-
-	@Override
-	public String getTitle(Context context) {
-		return context.getString(R.string.rating_title);
 	}
 	
 	public void setValuesFromRating(Rating rating){

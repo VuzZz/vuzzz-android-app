@@ -7,6 +7,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -132,7 +133,6 @@ public class AddressActivity extends MapActivity {
 
 		mapController = mapView.getController();
 		mapController.setZoom(18);
-		mapView.setBuiltInZoomControls(true);
 
 		/*
 		 * Init location
@@ -209,7 +209,11 @@ public class AddressActivity extends MapActivity {
 	private void moveToMyLocation() {
 		GeoPoint currentLocation = myLocationOverlay.getMyLocation();
 		if (currentLocation != null) {
-			mapView.getController().animateTo(currentLocation);
+			try {
+				mapView.getController().animateTo(currentLocation);
+			} catch (Exception e) {
+				Log.e("TAAAG", "Could not animate to " + currentLocation, e);
+			}
 		} else {
 			moveToMyLocationOnFirstFix();
 			Toast.makeText(this, R.string.searching_location, Toast.LENGTH_SHORT).show();
@@ -223,7 +227,7 @@ public class AddressActivity extends MapActivity {
 			}
 		});
 	}
-	
+
 	protected void noteAddress(GeoPoint location) {
 		addressOverlay.hideAddressPopup();
 		String mockAddress = "42 rue des petits indiens, 75006 Paris";
