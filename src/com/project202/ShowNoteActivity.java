@@ -30,6 +30,7 @@ import com.project202.views.OnHistoryFocusedListener;
 import com.project202.views.RatingDetailsView_;
 import com.project202.views.RatingView_;
 import com.project202.views.SettingsView;
+import com.viewpagerindicator.TitlePageIndicator;
 
 @EActivity(R.layout.show_note)
 @OptionsMenu(R.menu.show_note_menu)
@@ -49,8 +50,11 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 	@ViewById(R.id.view_pager)
 	protected ViewPager viewPager;
+
 	private List<OnHistoryFocusedListener> onHistoryFocusedListeners;
 
+	@ViewById
+	TitlePageIndicator titles;
 
 	private SimplePagerAdapter pagerAdapter;
 
@@ -84,6 +88,8 @@ public class ShowNoteActivity extends ActionBarActivity {
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(1);
+		
+		titles.setViewPager(viewPager);
 
 		viewPager.setOnPageChangeListener(new AbstractOnPageChangeListener() {
 			@Override
@@ -95,6 +101,7 @@ public class ShowNoteActivity extends ActionBarActivity {
 				}
 			}
 		});
+		
 	}
 
 	@Override
