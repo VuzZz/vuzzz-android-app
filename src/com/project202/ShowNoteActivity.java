@@ -96,6 +96,10 @@ public class ShowNoteActivity extends ActionBarActivity {
 					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
 						listener.onHistoryFocused();
 					}
+				} else {
+					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
+						listener.onHistoryHidden();
+					}
 				}
 				titles.onPageSelected(position);
 			}

@@ -55,11 +55,11 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	@Override
 	public void draw(Canvas canvas) {
 		
+		canvas.drawColor(pair ? 0x11AAAAAA : 0xFFFFFFFF);
+		
 		if (hidden) {
 			return;
 		}
-		
-		canvas.drawColor(pair ? 0x11AAAAAA : 0xFFFFFFFF);
 
 		long now = System.currentTimeMillis();
 		long deltaTime = now - animationStart;
