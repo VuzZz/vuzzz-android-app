@@ -47,8 +47,6 @@ public class ShowNoteActivity extends ActionBarActivity {
 	@AnimationRes
 	Animation slideOutFromTop;
 
-	private final int NUM_VIEWS = 3;
-
 	@ViewById(R.id.view_pager)
 	protected ViewPager viewPager;
 	private List<OnHistoryFocusedListener> onHistoryFocusedListeners;
@@ -86,6 +84,7 @@ public class ShowNoteActivity extends ActionBarActivity {
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(1);
+
 		viewPager.setOnPageChangeListener(new AbstractOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int arg0) {

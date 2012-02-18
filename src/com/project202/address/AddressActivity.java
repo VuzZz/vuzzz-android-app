@@ -191,14 +191,12 @@ public class AddressActivity extends MapActivity {
 	protected void onResume() {
 		super.onResume();
 		myLocationOverlay.enableMyLocation();
-		myLocationOverlay.enableCompass();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		myLocationOverlay.disableMyLocation();
-		myLocationOverlay.disableCompass();
 	}
 
 	@Override
