@@ -1,4 +1,4 @@
-package com.project202;
+package com.project202.address;
 
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;

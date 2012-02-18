@@ -1,15 +1,31 @@
 package com.project202.model;
 
+import java.util.List;
+
 public class Theme{
 
 	private ThemeName name;
 	private String description;
 	private float note;
+	private List<Criterion> criteria;
 
-	public Theme(String name, String description, float note) {
+	public Theme(String name, String description, float note, List<Criterion> criteria) {
 		this.name = ThemeName.valueOf(name);
 		this.description = description;
 		this.note = note;
+		this.criteria = criteria;
+	}
+
+	public List<Criterion> getCriteria() {
+		return criteria;
+	}
+
+	public void setCriteria(List<Criterion> criteria) {
+		this.criteria = criteria;
+	}
+
+	public void setName(ThemeName name) {
+		this.name = name;
 	}
 
 	public ThemeName getName() {

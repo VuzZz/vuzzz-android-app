@@ -1,4 +1,4 @@
-package com.project202;
+package com.project202.address;
 
 import java.util.List;
 
@@ -30,6 +30,8 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.project202.R;
+import com.project202.ShowNoteActivity_;
 
 @EActivity(R.layout.address_map)
 @NoTitle
@@ -225,5 +227,6 @@ public class AddressActivity extends MapActivity {
 	protected void noteAddress(GeoPoint location) {
 		addressOverlay.hideAddressPopup();
 		String mockAddress = "42 rue des petits indiens, 75006 Paris";
+		ShowNoteActivity_.intent(this).address(mockAddress).start();
 	}
 }

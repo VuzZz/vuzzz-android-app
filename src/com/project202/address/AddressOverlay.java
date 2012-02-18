@@ -1,4 +1,4 @@
-package com.project202;
+package com.project202.address;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

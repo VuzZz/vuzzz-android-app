@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<drawable name="red">#FFFF0000</drawable>
-	<drawable name="orange">#FFFF6600</drawable>
-	<drawable name="yellow">#FFFFFF00</drawable>
-	<drawable name="green">#FF00FF00</drawable>
+	<color name="red">#FF0000</color>
+	<color name="orange">#FF6600</color>
+	<color name="yellow">#FFFF00</color>
+	<color name="green">#00FF00</color>
 </resources>

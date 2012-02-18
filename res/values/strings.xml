@@ -3,11 +3,18 @@
 
     <string name="hello">Hello World, ShowNoteActivity!</string>
     <string name="app_name">Project202</string>
-	<string name="my_position">My Position</string>
-	<string name="enter_address">Enter Address</string>
-	<string name="settings_title">Settings</string>
-	<string name="rating_title">Rating</string>
-	<string name="rating_details_title">Rating Details</string>
-	<string name="history_title">History</string>
-	<string name="searching_location">Géolocalisation en cours</string>
+    <string name="my_position">My Position</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="settings_title">Settings</string>
+    <string name="rating_title">Rating</string>
+    <string name="rating_details_title">Rating Details</string>
+    <string name="history_title">History</string>
+    <string name="searching_location">Géolocalisation en cours</string>
+    <string name="culture_theme_weight">Culture</string>
+    <string name="institutions_theme_weight">Institutions</string>
+    <string name="leisure_theme_weight">Leisure</string>
+    <string name="nature_theme_weight">Nature</string>
+    <string name="shops_theme_weight">Shops</string>
+    <string name="transit_theme_weight">Transit</string>
+
 </resources>

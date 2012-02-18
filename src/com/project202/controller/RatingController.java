@@ -3,6 +3,10 @@ package com.project202.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
+import com.project202.model.Criterion;
+import com.project202.model.PrintedDetail;
 import com.project202.model.PrintedRating;
 import com.project202.model.Rating;
 import com.project202.model.Theme;
@@ -51,5 +55,19 @@ public class RatingController {
 
 		return printedRating;
 
+	}
+	public static List<PrintedDetail> getDetailsList(Rating rating){
+		List<PrintedDetail> details = new ArrayList<PrintedDetail>();
+		
+		for(Theme t : rating.getThemes()){
+			details.add(new PrintedDetail(t.getName().toString(), t.getDescription(), t.getNote(), false));
+			for(Criterion c : t.getCriteria()){
+				details.add(new PrintedDetail(c.getName(), c.getDescription(), c.getNote(), true));
+			}
+		}
+		
+		Log.d("LIST", details.toString());
+		
+		return details;
 	}
 }
