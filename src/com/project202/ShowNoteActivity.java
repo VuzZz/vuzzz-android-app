@@ -1,6 +1,8 @@
 package com.project202;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
@@ -17,6 +19,9 @@ import android.widget.Toast;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.project202.model.Rating;
+import com.project202.model.Theme;
+import com.project202.model.ThemeName;
 import com.project202.views.HistoryView_;
 import com.project202.views.MyLinearLayout;
 import com.project202.views.RatingDetailsView_;
@@ -83,6 +88,9 @@ public class ShowNoteActivity extends Activity {
 		ratingDetailsView.onFinishInflate();
 		historyView.onFinishInflate();
 		
+		// Injecting some content to test
+		ratingView.setValuesFromRating(getTestPrintedRating());
+		
 		// Storing views
 		views.put(0, settingsView);
 		views.put(1, historyView);
@@ -108,5 +116,17 @@ public class ShowNoteActivity extends Activity {
 		if (data != null) {
 			Toast.makeText(this, data.toString(), Toast.LENGTH_LONG).show();
 		}
+	}
+	
+	// Until we implement services
+	private Rating getTestPrintedRating(){
+		List<Theme> themes = new ArrayList<Theme>();
+		themes.add(new Theme(ThemeName.LEISURE.toString(), "pouet", 1.0f));
+		themes.add(new Theme(ThemeName.CULTURE.toString(), "pouet", 3.0f));
+		themes.add(new Theme(ThemeName.INSTITUTIONS.toString(), "pouet", 6.0f));
+		themes.add(new Theme(ThemeName.NATURE.toString(), "pouet", 8.0f));
+		themes.add(new Theme(ThemeName.SHOPS.toString(), "pouet", 6.0f));
+		themes.add(new Theme(ThemeName.TRANSIT.toString(), "pouet", 6.0f));
+		return new Rating(themes);
 	}
 }

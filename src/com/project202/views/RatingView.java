@@ -6,12 +6,27 @@ import android.widget.TextView;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.R;
+import com.project202.controller.GradeController;
+import com.project202.model.PrintedRating;
+import com.project202.model.Rating;
 
 @EViewGroup(R.layout.rating)
 public class RatingView extends MyLinearLayout {
 
 	@ViewById
 	protected TextView globalRating;
+	@ViewById
+	protected TextView cultureRating;
+	@ViewById
+	protected TextView natureRating;
+	@ViewById
+	protected TextView transitRating;
+	@ViewById
+	protected TextView institutionsRating;
+	@ViewById
+	protected TextView shopsRating;
+	@ViewById
+	protected TextView leisureRating;
 	
 	public RatingView(Context context) {
 		super(context);
@@ -22,9 +37,28 @@ public class RatingView extends MyLinearLayout {
 		return context.getString(R.string.rating_title);
 	}
 	
-	public void setGlobalRating(String globalRating, int color){
-		this.globalRating.setText(globalRating);
-		this.setBackgroundColor(color);
+	public void setValuesFromRating(Rating rating){
+		PrintedRating printedRating = GradeController.getPrintedRating(rating);
+		this.globalRating.setText(String.valueOf(printedRating.getGlobalGrade()));
+		this.globalRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getGlobalGrade()));
+		
+		this.cultureRating.setText(String.valueOf(printedRating.getCultureGrade()));
+		this.cultureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getCultureGrade()));
+		
+		this.natureRating.setText(String.valueOf(printedRating.getNatureGrade()));
+		this.natureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getNatureGrade()));
+		
+		this.transitRating.setText(String.valueOf(printedRating.getTransitGrade()));
+		this.transitRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getTransitGrade()));
+		
+		this.institutionsRating.setText(String.valueOf(printedRating.getInstitutionsGrade()));
+		this.institutionsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getInstitutionsGrade()));
+		
+		this.shopsRating.setText(String.valueOf(printedRating.getShopsGrade()));
+		this.shopsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getShopsGrade()));
+		
+		this.leisureRating.setText(String.valueOf(printedRating.getLeisureGrade()));
+		this.leisureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getLeisureGrade()));
 	}
-
+	
 }
