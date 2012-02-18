@@ -7,6 +7,7 @@ import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.R;
 import com.project202.controller.GradeController;
+import com.project202.controller.RatingController;
 import com.project202.model.PrintedRating;
 import com.project202.model.Rating;
 
@@ -38,7 +39,7 @@ public class RatingView extends MyLinearLayout {
 	}
 	
 	public void setValuesFromRating(Rating rating){
-		PrintedRating printedRating = GradeController.getPrintedRating(rating);
+		PrintedRating printedRating = RatingController.getPrintedRating(rating);
 		this.globalRating.setText(String.valueOf(printedRating.getGlobalGrade()));
 		this.globalRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getGlobalGrade()));
 		

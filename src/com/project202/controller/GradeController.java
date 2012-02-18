@@ -1,48 +1,11 @@
 package com.project202.controller;
 
-
 import com.project202.R;
 import com.project202.model.PrintedRating;
-import com.project202.model.Rating;
-import com.project202.model.Theme;
 
 public class GradeController {
-	public static PrintedRating getPrintedRating(Rating rating){
-		
-		PrintedRating printedRating = new PrintedRating();
-		
-		for (Theme theme : rating.getThemes()){
-			switch(theme.getName()){
-			case LEISURE:
-				printedRating.setLeisureGrade(theme.getNote());
-				break;
-			case SHOPS:
-				printedRating.setShopsGrade(theme.getNote());
-				break;
-			case TRANSIT:
-				printedRating.setTransitGrade(theme.getNote());
-				break;
-			case CULTURE:
-				printedRating.setCultureGrade(theme.getNote());
-				break;
-			case INSTITUTIONS:
-				printedRating.setInstitutionsGrade(theme.getNote());
-				break;
-			case NATURE:
-				printedRating.setNatureGrade(theme.getNote());
-				break;
-			default:
-				throw new UnsupportedOperationException();
-			}
-		}
-		
-		printedRating.setGlobalGrade(getGlobalRating(printedRating));
-		
-		return printedRating;
-		
-	}
 	
-	private static float getGlobalRating(PrintedRating printedRating){
+	public static float getGlobalGrade(PrintedRating printedRating){
 		float sum = 0f;
 		sum += printedRating.getCultureGrade();
 		sum += printedRating.getInstitutionsGrade();
