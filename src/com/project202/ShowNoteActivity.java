@@ -46,8 +46,6 @@ public class ShowNoteActivity extends ActionBarActivity {
 	@AnimationRes
 	Animation slideOutFromTop;
 
-	private final int NUM_VIEWS = 3;
-
 	@ViewById(R.id.view_pager)
 	protected ViewPager viewPager;
 
@@ -82,6 +80,7 @@ public class ShowNoteActivity extends ActionBarActivity {
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(1);
+		
 	}
 
 	@Override
