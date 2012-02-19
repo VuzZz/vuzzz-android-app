@@ -50,6 +50,9 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@Extra("rating")
 	Rating rating;
+	
+	@Extra("firstView")
+	Integer firstView;
 
 	@ViewById
 	SettingsView settingsView;
@@ -94,33 +97,25 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		ratingDetailsView.onFinishInflate();
 		historyView.onFinishInflate();
 
-		// Injecting content
-		ratingView.setOnRatingClickListener(this);
-		ratingView.setValuesFromRating(rating);
-		List<Rating> ratings = loadRatingsFromFiles();
-		historyView.setRatings(ratings);
-		ratingDetailsView.setRating(rating);
-		settingsView.setOnSettingsUpdatedListener(this);
-		
-		if(rating == null && !ratings.isEmpty())
-			rating = ratings.get(0);
-
 		// Registering listeners
 		onSettingsUpdatedListeners.add(ratingView);
 		onSettingsUpdatedListeners.add(historyView);
 		onSettingsUpdatedListeners.add(ratingDetailsView);
+
+		// Injecting content
+		ratingView.setOnRatingClickListener(this);
+		settingsView.setOnSettingsUpdatedListener(this);
 		
 		// Storing views
 		List<View> views = Arrays.<View> asList(historyView, ratingView, ratingDetailsView);
-
 		List<String> pageTitles = Arrays.asList(getString(R.string.history_title), getString(R.string.rating_title), getString(R.string.rating_details_title));
-
+		
 		// Initializing PagerAdapter
 		pagerAdapter = new SimplePagerAdapter(views, pageTitles);
-
+		
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
-
+		
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -135,21 +130,35 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 				}
 				titles.onPageSelected(position);
 			}
-
+			
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				titles.onPageScrollStateChanged(state);
 			}
-
+			
 			@Override
 			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 				titles.onPageScrolled(position, positionOffset, positionOffsetPixels);
 			}
 		});
-
+		
 		titles.setViewPager(viewPager);
 
-		viewPager.setCurrentItem(1);
+		List<Rating> ratings = loadRatingsFromFiles();
+		historyView.setRatings(ratings);
+
+		boolean ratingNull = rating==null;
+		
+		if(ratingNull && !ratings.isEmpty())
+			rating = ratings.get(0);
+		
+		ratingView.setValuesFromRating(rating);
+		ratingDetailsView.setRating(rating);
+
+		if(ratingNull)
+			viewPager.setCurrentItem(0);
+		else
+			viewPager.setCurrentItem(1);
 	}
 
 	private List<Rating> loadRatingsFromFiles() {
