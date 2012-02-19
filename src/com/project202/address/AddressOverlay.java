@@ -42,7 +42,7 @@ public class AddressOverlay extends Overlay {
 
 		FONT_SIZE = DimenHelper.pixelSize(context, 16f);
 		INNER_SPACE = DimenHelper.pixelSize(context, 20f);
-		RADIUS = DimenHelper.pixelSize(context, 13f);
+		RADIUS = DimenHelper.pixelSize(context, 8f);
 		PADDING = DimenHelper.pixelSize(context, 3.3f);
 		PADDING2 = DimenHelper.pixelSize(context, 1.3f);
 
@@ -61,6 +61,7 @@ public class AddressOverlay extends Overlay {
 	}
 
 	public void showAddressPopup(GeoPoint location) {
+		this.address = null;
 		this.addressLocation = location;
 	}
 
@@ -135,7 +136,7 @@ public class AddressOverlay extends Overlay {
 
 			// Draw \/
 			path.reset();
-			int halfInnerSpace = 0; // INNER_SPACE / 4;
+			int halfInnerSpace = 0;
 			path.moveTo(baseX, baseY - halfInnerSpace);
 			path.lineTo(baseX - INNER_SPACE / 2, baseY - INNER_SPACE - PADDING2);
 			path.lineTo(baseX + INNER_SPACE / 2, baseY - INNER_SPACE - PADDING2);
@@ -170,6 +171,10 @@ public class AddressOverlay extends Overlay {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public Address getAddress() {
+		return address;
 	}
 
 }

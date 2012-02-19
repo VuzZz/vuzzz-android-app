@@ -1,5 +1,7 @@
 package com.project202.address;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,7 @@ import com.project202.AboutDialogHelper;
 import com.project202.LogHelper;
 import com.project202.R;
 import com.project202.loading.DownloadActivity_;
+import com.project202.loading.RatingDownloadTask;
 
 @EActivity(R.layout.address_map)
 @NoTitle
@@ -59,9 +62,12 @@ public class AddressActivity extends MapActivity {
 
 	@ViewById
 	View searchButton;
-	
+
 	@ViewById
 	View locationButton;
+
+	@ViewById
+	View historyButton;
 
 	@SystemService
 	InputMethodManager inputMethodManager;
@@ -83,6 +89,8 @@ public class AddressActivity extends MapActivity {
 	private Geocoder geocoder;
 
 	private SearchOverlay searchOverlay;
+
+	private boolean hasHistory;
 
 	@AfterViews
 	void initLayout() {
@@ -128,7 +136,8 @@ public class AddressActivity extends MapActivity {
 				boolean addressTapped = addressOverlay.onSingleTapUp(x, y);
 				if (addressTapped) {
 					GeoPoint addressLocation = addressOverlay.getAddressLocation();
-					noteAddress(addressLocation);
+					Address address = addressOverlay.getAddress();
+					noteAddress(address, addressLocation);
 				} else {
 					Address tappedAddress = searchOverlay.onSingleTapUp(x, y);
 					if (tappedAddress != null) {
@@ -206,10 +215,12 @@ public class AddressActivity extends MapActivity {
 		String address = addressEditText.getText().toString();
 		findAddressLocations(address);
 	}
-	
+
 	@Click
 	void historyButtonClicked() {
-		Toast.makeText(this, "MOCK History Button Clicked", Toast.LENGTH_LONG).show();
+		if (hasHistory) {
+			Toast.makeText(this, "MOCK History Button Clicked", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Background
@@ -296,6 +307,21 @@ public class AddressActivity extends MapActivity {
 	protected void onResume() {
 		super.onResume();
 		myLocationOverlay.enableMyLocation();
+
+		File directory = getFilesDir();
+		File[] historyFiles = directory.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File dir, String filename) {
+				return filename.startsWith(RatingDownloadTask.HISTO_FILE_PREFIX);
+			}
+		});
+
+		if (historyFiles.length > 0) {
+			hasHistory = true;
+		} else {
+			hasHistory = false;
+		}
 	}
 
 	@Override
@@ -335,12 +361,22 @@ public class AddressActivity extends MapActivity {
 		});
 	}
 
-	protected void noteAddress(GeoPoint location) {
+	protected void noteAddress(Address address, GeoPoint location) {
 		addressOverlay.hideAddressPopup();
-		String mockAddress = "42 rue des petits indiens, 75006 Paris";
+
+		StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+			if (first) {
+				first = false;
+			} else {
+				sb.append(", ");
+			}
+			sb.append(address.getAddressLine(i));
+		}
 
 		DownloadActivity_.intent(this) //
-				.address(mockAddress) //
+				.address(sb.toString()) //
 				.latitudeE6(location.getLatitudeE6()) //
 				.longitudeE6(location.getLongitudeE6()) //
 				.start();
