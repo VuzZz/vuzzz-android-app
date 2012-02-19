@@ -87,6 +87,13 @@ public class AddressOverlay extends Overlay {
 		float left = baseX - width / 2;
 		float top = baseY - height - INNER_SPACE;
 
+		if (address != null) {
+			width += ICON_SIZE + INNER_SPACE;
+			panelPaint.setColor(0xFFFFFFFF);
+		} else {
+			panelPaint.setColor(0xFFEEEEEE);
+		}
+
 		if (shadow) {
 
 			// Draw Background
@@ -107,13 +114,6 @@ public class AddressOverlay extends Overlay {
 			canvas.drawPath(path, shadowPaint);
 
 		} else {
-
-			if (address != null) {
-				width += ICON_SIZE + INNER_SPACE;
-				panelPaint.setColor(0xFFFFFFFF);
-			} else {
-				panelPaint.setColor(0xFFEEEEEE);
-			}
 
 			rectF.left = left;
 			rectF.top = top;

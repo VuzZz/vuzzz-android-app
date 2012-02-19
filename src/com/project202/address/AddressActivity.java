@@ -154,7 +154,7 @@ public class AddressActivity extends MapActivity {
 
 		addressOverlay = new AddressOverlay();
 
-		searchOverlay = new SearchOverlay(mapView);
+		searchOverlay = new SearchOverlay(this);
 
 		mapOverlays.add(myLocationOverlay);
 		mapOverlays.add(searchOverlay);
