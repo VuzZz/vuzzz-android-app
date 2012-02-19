@@ -46,9 +46,5 @@ public class HistoryView extends LinearLayout implements OnSettingsUpdatedListen
 	@Override
 	public void onSettingsUpdated() {
 		adapter.setRatings(currentRatings);
-//		int count = historyList.getCount();
-//		for (int i = 0 ; i < count ; i ++){
-//			((HistoryLine) historyList.getChildAt(i)).playAnimation();
-//		}
 	}
 }

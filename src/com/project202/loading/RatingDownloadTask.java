@@ -61,6 +61,8 @@ public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>>
 
 		Rating rating = restClient.getRating(latitude, longitude);
 		rating.address = address;
+		rating.latitude = latitude;
+		rating.longitude = longitude;
 		
 		objectMapper.writeValue(context.openFileOutput(HISTO_FILE_PREFIX + new Date(), 0), rating);
 

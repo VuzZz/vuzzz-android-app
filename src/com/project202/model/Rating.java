@@ -10,6 +10,10 @@ public class Rating implements Serializable {
 	public List<Theme> themes;
 	
 	public String address;
+	
+	public double latitude;
+	
+	public double longitude;
 
 	public List<Theme> getThemes() {
 		return themes;
