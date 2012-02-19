@@ -1,5 +1,8 @@
 package com.project202.adapter;
 
+import com.project202.DimenHelper;
+
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -9,15 +12,18 @@ import android.graphics.drawable.Drawable;
 
 public class CubeBackgroundDrawable extends Drawable {
 
-	private static final float HEIGHT = 50f;
-	private static final float THICKNESS = 10f;
-	private static final float PADDING = 10f;
+	private  float HEIGHT;
+	private  float THICKNESS;
+	private  float PADDING;
 	
 	private Paint paint;
 	private int color;
 	
-	public CubeBackgroundDrawable(int color) {
+	public CubeBackgroundDrawable(Context context, int color) {
 		this.color = color;
+		HEIGHT = DimenHelper.pixelSize(context, 38f);
+		THICKNESS = DimenHelper.pixelSize(context, 8f);
+		PADDING = DimenHelper.pixelSize(context, 10f);
 		paint = new Paint();
 		paint.setAntiAlias(true);
 		paint.setStyle(Style.FILL);

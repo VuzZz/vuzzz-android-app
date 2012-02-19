@@ -34,7 +34,7 @@ public class Theme implements Serializable, RatingDetails{
 	}
 	
 	public String getName() {
-		return name.toString();
+		return name.getName();
 	}
 
 	public void setName(String name) {

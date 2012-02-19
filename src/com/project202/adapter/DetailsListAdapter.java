@@ -101,7 +101,7 @@ public class DetailsListAdapter extends BaseAdapter {
 				convertView = View.inflate(context, R.layout.row_details, null);
 				convertView.setMinimumHeight(70);
 				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(
-						ratingDetails.getColor()));
+						context, ratingDetails.getColor()));
 			}
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.detail_name);
