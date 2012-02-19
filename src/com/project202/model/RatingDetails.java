@@ -4,4 +4,5 @@ public interface RatingDetails {
 	String getName();
 	String getDescription();
 	float getNote();
+	int getColor();
 }

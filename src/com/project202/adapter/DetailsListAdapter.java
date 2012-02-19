@@ -90,25 +90,34 @@ public class DetailsListAdapter extends BaseAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 
+		RatingDetails ratingDetails = details.get(position);
+		
 		if (convertView == null) {
-			if (details.get(position) instanceof Criterion)
+			if (ratingDetails instanceof Criterion){
 				convertView = View.inflate(context, R.layout.row_details_criterion, null);
-			else
+			} else {
 				convertView = View.inflate(context, R.layout.row_details, null);
-
+				convertView.setMinimumHeight(70);
+				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(ratingDetails.getColor()));
+			}
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.detail_name);
 			holder.note = (TextView) convertView.findViewById(R.id.detail_grade);
 			holder.description = (TextView) convertView.findViewById(R.id.detail_description);
-
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
+			
+			if (! (ratingDetails instanceof Criterion)){
+				((CubeBackgroundDrawable) convertView.getBackground()).setColor(ratingDetails.getColor());
+			}
 		}
 
 		holder.name.setText(details.get(position).getName());
-		holder.note.setText(String.valueOf(details.get(position).getNote()));
-		holder.description.setText(details.get(position).getDescription());
+		holder.note.setText(String.format("%.1f", details.get(position).getNote()));
+		if (holder.description!=null){
+			holder.description.setText(details.get(position).getDescription());
+		}
 
 		return convertView;
 	}
