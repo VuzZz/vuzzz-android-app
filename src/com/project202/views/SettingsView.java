@@ -6,7 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Background;
 import com.googlecode.androidannotations.annotations.EViewGroup;
+import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.project202.OnSettingsUpdatedListener;
@@ -16,9 +18,9 @@ import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.settings)
 public class SettingsView extends LinearLayout {
-	
+
 	Context context;
-	
+
 	@ViewById
 	SeekBar cultureWeight;
 	@ViewById
@@ -31,17 +33,17 @@ public class SettingsView extends LinearLayout {
 	SeekBar shopsWeight;
 	@ViewById
 	SeekBar transitWeight;
-	
+
 	OnSettingsUpdatedListener listener;
-	
+
 	@Pref
 	SettingsPreferences_ settingsPreferences;
-	
+
 	public SettingsView(Context context) {
 		super(context);
 		this.context = context;
 	}
-	
+
 	public SettingsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
@@ -53,7 +55,7 @@ public class SettingsView extends LinearLayout {
 	}
 
 	@AfterViews
-	public void afterViews(){
+	public void afterViews() {
 		// Sets default values
 		cultureWeight.setProgress(settingsPreferences.cultureWeight().get());
 		securityWeight.setProgress(settingsPreferences.securityWeight().get());
@@ -63,53 +65,88 @@ public class SettingsView extends LinearLayout {
 		transitWeight.setProgress(settingsPreferences.transitWeight().get());
 		setProgressChangeListeners();
 	}
-	
-	private void setProgressChangeListeners(){
+
+	private void setProgressChangeListeners() {
 		cultureWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.cultureWeight().put(progress);
-				listener.onSettingsUpdated();
+				updateCulture(progress);
 			}
 		});
 		securityWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.securityWeight().put(progress);
-				listener.onSettingsUpdated();
+				updateSecurity(progress);
 			}
 		});
 		leisureWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.leisureWeight().put(progress);
-				listener.onSettingsUpdated();
+				updateLeisure(progress);
 			}
 		});
 		natureWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.natureWeight().put(progress);
-				listener.onSettingsUpdated();
+				updateNature(progress);
 			}
 		});
 		shopsWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.shopsWeight().put(progress);
-				listener.onSettingsUpdated();
+				updateShops(progress);
 			}
 		});
 		transitWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.transitWeight().put(progress);
-				listener.onSettingsUpdated();
+				updateTransit(progress);
 			}
 		});
 	}
+
+	@Background
+	void updateCulture(int progress) {
+		settingsPreferences.cultureWeight().put(progress);
+		settingsUpdated();
+	}
 	
-	public void setOnSettingsUpdatedListener(OnSettingsUpdatedListener listener){
+	@Background
+	void updateSecurity(int progress) {
+		settingsPreferences.securityWeight().put(progress);
+		settingsUpdated();
+	}
+	
+	@Background
+	void updateLeisure(int progress) {
+		settingsPreferences.leisureWeight().put(progress);
+		settingsUpdated();
+	}
+	
+	@Background
+	void updateNature(int progress) {
+		settingsPreferences.natureWeight().put(progress);
+		settingsUpdated();
+	}
+	
+	@Background
+	void updateShops(int progress) {
+		settingsPreferences.shopsWeight().put(progress);
+		settingsUpdated();
+	}
+	
+	@Background
+	void updateTransit(int progress) {
+		settingsPreferences.transitWeight().put(progress);
+		settingsUpdated();
+	}
+
+	@UiThread
+	void settingsUpdated() {
+		listener.onSettingsUpdated();
+	}
+
+	public void setOnSettingsUpdatedListener(OnSettingsUpdatedListener listener) {
 		this.listener = listener;
 	}
 }
