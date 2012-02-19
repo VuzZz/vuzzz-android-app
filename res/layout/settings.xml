@@ -19,14 +19,14 @@
         android:max="2" />
 
     <TextView
-        android:id="@+id/institutions_label"
+        android:id="@+id/security_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/institutions_theme_weight"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <SeekBar
-        android:id="@+id/institutions_weight"
+        android:id="@+id/security_weight"
         android:max="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

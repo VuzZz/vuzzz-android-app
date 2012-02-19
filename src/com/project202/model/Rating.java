@@ -7,7 +7,7 @@ public class Rating implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private List<Theme> themes;
+	public List<Theme> themes;
 
 	public List<Theme> getThemes() {
 		return themes;
@@ -17,15 +17,27 @@ public class Rating implements Serializable {
 		this.themes = themes;
 	}
 
+	public Rating(){
+		
+	}
+	
 	public Rating(List<Theme> themes) {
 		this.themes = themes;
 	}
 
-	public float getMark() {
+	public Float getMark() {
 		float sum = 0f;
 		for (Theme theme : themes){
 			sum += theme.getNote();
 		}
-		return sum;
+		return sum/6f;
+	}
+	
+	public Float getThemeMark(ThemeName themeName){
+		for(Theme t : themes){
+			if(t.getThemeName().equals(themeName))
+				return t.getNote();
+		}
+		return 0f;
 	}
 }

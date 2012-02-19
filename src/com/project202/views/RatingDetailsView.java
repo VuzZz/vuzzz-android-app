@@ -9,9 +9,8 @@ import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.R;
-import com.project202.ShowNoteActivity;
 import com.project202.adapter.DetailsListAdapter;
-import com.project202.controller.RatingController;
+import com.project202.model.Rating;
 import com.project202.model.ThemeName;
 import com.project202.views.RatingView.OnRatingClickListener;
 
@@ -29,14 +28,16 @@ public class RatingDetailsView extends LinearLayout implements OnRatingClickList
 
 	@AfterViews
 	public void afterViews() {
-		adapter.setDetails(RatingController.getDetailsList(ShowNoteActivity.getTestPrintedRating()));
 		detailsList.setAdapter(adapter);
 	}
 
 	@Override
 	public void onRatingClickListener(ThemeName themeName) {
 		detailsList.setSelectionFromTop(adapter.getThemeItemPosition(themeName), 0);
-		
+	}
+	
+	public void setRating(Rating rating){
+		adapter.setRating(rating);
 	}
 
 }

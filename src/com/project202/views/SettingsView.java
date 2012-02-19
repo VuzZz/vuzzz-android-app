@@ -21,7 +21,7 @@ public class SettingsView extends LinearLayout {
 	@ViewById
 	SeekBar cultureWeight;
 	@ViewById
-	SeekBar institutionsWeight;
+	SeekBar securityWeight;
 	@ViewById
 	SeekBar leisureWeight;
 	@ViewById
@@ -54,7 +54,7 @@ public class SettingsView extends LinearLayout {
 	public void afterViews(){
 		// Sets default values
 		cultureWeight.setProgress(settingsPreferences.cultureWeight().get());
-		institutionsWeight.setProgress(settingsPreferences.institutionsWeight().get());
+		securityWeight.setProgress(settingsPreferences.securityWeight().get());
 		leisureWeight.setProgress(settingsPreferences.leisureWeight().get());
 		natureWeight.setProgress(settingsPreferences.natureWeight().get());
 		shopsWeight.setProgress(settingsPreferences.shopsWeight().get());
@@ -70,10 +70,10 @@ public class SettingsView extends LinearLayout {
 				settingsPreferences.cultureWeight().put(progress);
 			}
 		});
-		institutionsWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
+		securityWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				settingsPreferences.institutionsWeight().put(progress);
+				settingsPreferences.securityWeight().put(progress);
 			}
 		});
 		leisureWeight.setOnSeekBarChangeListener(new AbstractSeekBarChangeListener() {

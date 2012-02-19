@@ -17,6 +17,6 @@ public interface SettingsPreferences {
 	@DefaultInt(1)
 	int leisureWeight();
 	@DefaultInt(1)
-	int institutionsWeight();
+	int securityWeight();
 
 }

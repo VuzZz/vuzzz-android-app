@@ -3,15 +3,17 @@ package com.project202.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Theme implements Serializable{
+public class Theme implements Serializable, RatingDetails{
 
 	private static final long serialVersionUID = 1L;
 	
-	private ThemeName name;
-	private String description;
-	private float note;
-	private List<Criterion> criteria;
+	public ThemeName name;
+	public String description;
+	public float note;
+	public List<Criterion> criteria;
 
+	public Theme(){}
+	
 	public Theme(final String name, String description, float note, List<Criterion> criteria) {
 		this.name = ThemeName.valueOf(name);
 		this.description = description;
@@ -27,12 +29,12 @@ public class Theme implements Serializable{
 		this.criteria = criteria;
 	}
 
-	public void setName(ThemeName name) {
-		this.name = name;
-	}
-
-	public ThemeName getName() {
+	public ThemeName getThemeName() {
 		return name;
+	}
+	
+	public String getName() {
+		return name.toString();
 	}
 
 	public void setName(String name) {

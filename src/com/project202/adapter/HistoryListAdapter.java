@@ -1,5 +1,6 @@
 package com.project202.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -22,7 +23,7 @@ public class HistoryListAdapter extends BaseAdapter {
 	@RootContext
 	ShowNoteActivity showNoteActivity;
 
-	private List<Rating> ratings;
+	private List<Rating> ratings = new ArrayList<Rating>();
 	private float maxRating;
 
 	public void setRatings(List<Rating> ratings) {
@@ -35,6 +36,8 @@ public class HistoryListAdapter extends BaseAdapter {
 		}
 		this.maxRating = maxMark;
 		this.ratings = ratings;
+		
+		notifyDataSetChanged();
 	}
 
 	@Override

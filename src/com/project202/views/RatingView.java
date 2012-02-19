@@ -8,9 +8,6 @@ import android.widget.TextView;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.R;
-import com.project202.controller.GradeController;
-import com.project202.controller.RatingController;
-import com.project202.model.PrintedRating;
 import com.project202.model.Rating;
 import com.project202.model.ThemeName;
 
@@ -30,7 +27,7 @@ public class RatingView extends LinearLayout {
 	@ViewById
 	TextView transitRating;
 	@ViewById
-	TextView institutionsRating;
+	TextView securityRating;
 	@ViewById
 	TextView shopsRating;
 	@ViewById
@@ -47,12 +44,9 @@ public class RatingView extends LinearLayout {
 	}
 	
 	public void setValuesFromRating(Rating rating){
-		PrintedRating printedRating = RatingController.getPrintedRating(rating);
-		globalRating.setText(String.valueOf(printedRating.getGlobalGrade()));
-		globalRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getGlobalGrade()));
+		globalRating.setText(rating.getMark().toString());
 		
-		cultureRating.setText(String.valueOf(printedRating.getCultureGrade()));
-		cultureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getCultureGrade()));
+		cultureRating.setText(rating.getThemeMark(ThemeName.CULTURE).toString());
 		cultureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -60,8 +54,7 @@ public class RatingView extends LinearLayout {
 			}
 		});
 		
-		natureRating.setText(String.valueOf(printedRating.getNatureGrade()));
-		natureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getNatureGrade()));
+		natureRating.setText(rating.getThemeMark(ThemeName.NATURE).toString());
 		natureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -69,8 +62,7 @@ public class RatingView extends LinearLayout {
 			}
 		});
 		
-		transitRating.setText(String.valueOf(printedRating.getTransitGrade()));
-		transitRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getTransitGrade()));
+		transitRating.setText(rating.getThemeMark(ThemeName.TRANSIT).toString());
 		transitRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -78,17 +70,15 @@ public class RatingView extends LinearLayout {
 			}
 		});
 		
-		institutionsRating.setText(String.valueOf(printedRating.getInstitutionsGrade()));
-		institutionsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getInstitutionsGrade()));
-		institutionsRating.setOnClickListener(new OnClickListener() {
+		securityRating.setText(rating.getThemeMark(ThemeName.SECURITY).toString());
+		securityRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.INSTITUTIONS);
+				listener.onRatingClickListener(ThemeName.SECURITY);
 			}
 		});
 		
-		shopsRating.setText(String.valueOf(printedRating.getShopsGrade()));
-		shopsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getShopsGrade()));
+		shopsRating.setText(rating.getThemeMark(ThemeName.SHOPS).toString());
 		shopsRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -96,8 +86,7 @@ public class RatingView extends LinearLayout {
 			}
 		});
 		
-		leisureRating.setText(String.valueOf(printedRating.getLeisureGrade()));
-		leisureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getLeisureGrade()));
+		leisureRating.setText(rating.getThemeMark(ThemeName.LEISURE).toString());
 		leisureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -1,5 +1,6 @@
 package com.project202.loading;
 
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -10,23 +11,28 @@ import org.springframework.http.converter.json.MappingJacksonHttpMessageConverte
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
+import android.content.Context;
 
-import com.project202.controller.RatingController;
 import com.project202.model.Rating;
 import com.project202.rest.RestClient_;
 
 public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>> extends LoadingTask<T, Rating> {
 
+	public final static String HISTO_FILE_PREFIX = "histo_file_";
+	
 	private final long latitudeE6;
 	private final long longitudeE6;
 	private RestClient_ restClient;
+	private Context context;
+	private ObjectMapper objectMapper;
 
 	public RatingDownloadTask(T activity, int latitudeE6, int longitudeE6) {
 		super(activity);
+		this.context = activity;
 		this.latitudeE6 = latitudeE6;
 		this.longitudeE6 = longitudeE6;
 
-		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.configure(DeserializationConfig.Feature.AUTO_DETECT_SETTERS, false);
 		objectMapper.configure(DeserializationConfig.Feature.USE_GETTERS_AS_SETTERS, false);
@@ -47,18 +53,14 @@ public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>>
 
 	@Override
 	protected Rating load() throws Exception {
-		Rating fakeRating = RatingController.getTestHistoryRatings().get(0);
-
 		double latitude = latitudeE6 / (double) 1E6;
 		double longitude = longitudeE6 / (double) 1E6;
 
-		// Rating rating = restClient.getRating(latitude, longitude);
+		Rating rating = restClient.getRating(latitude, longitude);
+		
+		objectMapper.writeValue(context.openFileOutput(HISTO_FILE_PREFIX + new Date(), 0), rating);
 
-		// TODO download, store ?
-
-		Thread.sleep(2000);
-
-		return fakeRating;
+		return rating;
 	}
 
 }

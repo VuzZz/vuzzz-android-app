@@ -1,5 +1,6 @@
 package com.project202.adapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,59 +14,70 @@ import android.widget.TextView;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import com.project202.R;
-import com.project202.model.PrintedDetail;
+import com.project202.model.Criterion;
+import com.project202.model.Rating;
+import com.project202.model.RatingDetails;
+import com.project202.model.Theme;
 import com.project202.model.ThemeName;
 
 @EBean
-public class DetailsListAdapter extends BaseAdapter{
+public class DetailsListAdapter extends BaseAdapter {
 
 	@RootContext
 	Context context;
-	
-	private List<PrintedDetail> details;
-	
+
+	private List<RatingDetails> details = new ArrayList<RatingDetails>();
+
 	private Map<ThemeName, Integer> themePositions;
 
-	public void setDetails(List<PrintedDetail> details){
-		this.details = details;
-		
-		for(int i=0;i < details.size(); i++){
-			PrintedDetail pd = details.get(i);
-			if(!pd.isCriterion())
+	public void setRating(Rating rating) {
+
+		for (Theme t : rating.getThemes()) {
+			details.add(t);
+			if(t.getCriteria() != null)
+				for (Criterion c : t.getCriteria())
+					details.add(c);
+		}
+
+		for (int i = 0; i < details.size(); i++) {
+			RatingDetails pd = details.get(i);
+			if (pd instanceof Theme)
 				themePositions.put(ThemeName.valueOf(pd.getName()), i);
 		}
+		
+		notifyDataSetChanged();
 	}
-	
+
 	private class ViewHolder {
 		private TextView description;
 		private TextView name;
 		private TextView note;
 	}
-	
-	public DetailsListAdapter(){
+
+	public DetailsListAdapter() {
 		this.themePositions = new HashMap<ThemeName, Integer>();
 	}
-	
+
 	@Override
 	public int getCount() {
 		return details.size();
 	}
-	
+
 	@Override
 	public int getViewTypeCount() {
 		return 2;
 	}
-	
+
 	@Override
 	public int getItemViewType(int position) {
-		if(details.get(position).isCriterion())
+		if (details.get(position) instanceof Criterion)
 			return 1;
 		else
 			return 0;
 	}
 
 	@Override
-	public PrintedDetail getItem(int position) {
+	public RatingDetails getItem(int position) {
 		return details.get(position);
 	}
 
@@ -79,11 +91,11 @@ public class DetailsListAdapter extends BaseAdapter{
 		ViewHolder holder;
 
 		if (convertView == null) {
-			if(details.get(position).isCriterion())
+			if (details.get(position) instanceof Criterion)
 				convertView = View.inflate(context, R.layout.row_details_criterion, null);
 			else
 				convertView = View.inflate(context, R.layout.row_details, null);
-			
+
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.detail_name);
 			holder.note = (TextView) convertView.findViewById(R.id.detail_grade);
@@ -100,9 +112,9 @@ public class DetailsListAdapter extends BaseAdapter{
 
 		return convertView;
 	}
-	
-	public int getThemeItemPosition(ThemeName themeName){
+
+	public int getThemeItemPosition(ThemeName themeName) {
 		return themePositions.get(themeName);
 	}
-	
+
 }

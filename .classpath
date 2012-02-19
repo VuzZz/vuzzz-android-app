@@ -2,17 +2,18 @@
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="lib" path="lib/androidannotations-2.5-SNAPSHOT-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/androidannotations-2.5-SNAPSHOT-api.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-all-1.9.4.jar"/>
-	<classpathentry kind="lib" path="lib/spring-android-core-1.0.0.M4.jar"/>
-	<classpathentry kind="lib" path="lib/spring-android-rest-template-1.0.0.M4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/android-support-v4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/spring-android-core-1.0.0.M4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/spring-android-rest-template-1.0.0.M4.jar" sourcepath="/home/bluepyth/Downloads/spring-android-rest-template-1.0.0.M4-sources.jar"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.4.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

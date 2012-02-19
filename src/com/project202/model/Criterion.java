@@ -2,16 +2,17 @@ package com.project202.model;
 
 import java.io.Serializable;
 
-public class Criterion implements Serializable {
+public class Criterion implements Serializable, RatingDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String name;
-	private String description;
-	private float note;
+	public String name;
+	public String description;
+	public float note;
+	
+	public Criterion(){};
 	
 	public Criterion(String name, String description, float note) {
-		super();
 		this.name = name;
 		this.description = description;
 		this.note = note;

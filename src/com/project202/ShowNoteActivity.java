@@ -1,19 +1,23 @@
 package com.project202;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Click;
@@ -23,9 +27,7 @@ import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.project202.adapter.SimplePagerAdapter;
-import com.project202.model.Criterion;
 import com.project202.model.Rating;
-import com.project202.model.Theme;
 import com.project202.model.ThemeName;
 import com.project202.views.HistoryView_;
 import com.project202.views.OnHistoryFocusedListener;
@@ -80,20 +82,23 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 		RatingView_ ratingView = new RatingView_(this);
 		ratingDetailsView = new RatingDetailsView_(this);
 		final HistoryView_ historyView = new HistoryView_(this);
+
 		// Inflating layouts
 		ratingView.onFinishInflate();
 		ratingDetailsView.onFinishInflate();
 		historyView.onFinishInflate();
 
-		// Injecting some content to test
+		// Injecting content
 		ratingView.setOnRatingClickListener(this);
-		ratingView.setValuesFromRating(getTestPrintedRating());
+		ratingView.setValuesFromRating(rating);
+		historyView.setRatings(loadRatingsFromFiles());
+		ratingDetailsView.setRating(rating);
 
 		// Storing views
-
 		List<View> views = Arrays.<View> asList(historyView, ratingView, ratingDetailsView);
 
 		List<String> pageTitles = Arrays.asList(getString(R.string.history_title), getString(R.string.rating_title), getString(R.string.rating_details_title));
+
 		// Initializing PagerAdapter
 		pagerAdapter = new SimplePagerAdapter(views, pageTitles);
 
@@ -131,35 +136,30 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 		viewPager.setCurrentItem(1);
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		Intent intent = getIntent();
-		Uri data = intent.getData();
-
-		// When the application is started through Intent
-		if (data != null) {
-			Toast.makeText(this, data.toString(), Toast.LENGTH_LONG).show();
+	private List<Rating> loadRatingsFromFiles() {
+		File directory = getFilesDir();
+		File[] historyFiles = directory.listFiles();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.configure(DeserializationConfig.Feature.AUTO_DETECT_SETTERS, false);
+		objectMapper.configure(DeserializationConfig.Feature.USE_GETTERS_AS_SETTERS, false);
+		objectMapper.configure(SerializationConfig.Feature.AUTO_DETECT_GETTERS, false);
+		
+		List<Rating> ratings = new ArrayList<Rating>();
+		
+		for(File histFile : historyFiles){
+			try {
+				ratings.add(objectMapper.readValue(histFile, Rating.class));
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-	}
-
-	// Until we implement services
-	public static Rating getTestPrintedRating() {
-		List<Criterion> criteria = new ArrayList<Criterion>();
-		criteria.add(new Criterion("Test", "hahahahahhahahahhaha", 9.0f));
-		criteria.add(new Criterion("Test", "hahahahahhahahahhaha", 4.0f));
-		criteria.add(new Criterion("Test", "hahahahahhahahahhaha", 2.0f));
-
-		List<Theme> themes = new ArrayList<Theme>();
-		themes.add(new Theme(ThemeName.LEISURE.toString(), "", 1.0f, criteria));
-		themes.add(new Theme(ThemeName.CULTURE.toString(), "", 3.0f, criteria));
-		themes.add(new Theme(ThemeName.INSTITUTIONS.toString(), "", 6.0f, criteria));
-		themes.add(new Theme(ThemeName.NATURE.toString(), "", 8.0f, criteria));
-		themes.add(new Theme(ThemeName.SHOPS.toString(), "", 6.0f, criteria));
-		themes.add(new Theme(ThemeName.TRANSIT.toString(), "", 6.0f, criteria));
-
-		return new Rating(themes);
+		return ratings;
 	}
 
 	public void addOnSettingsFocusedHandler(OnHistoryFocusedListener convertView) {
@@ -182,7 +182,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 		ratingDetailsView.onRatingClickListener(themeName);
 		viewPager.setCurrentItem(2);
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		if(settingsView.getVisibility() == View.VISIBLE)
