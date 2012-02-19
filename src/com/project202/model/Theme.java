@@ -66,4 +66,9 @@ public class Theme implements Serializable, RatingDetails{
 		return name.getColor();
 	}
 
+	@Override
+	public float getCoefficient() {
+		throw new UnsupportedOperationException("Hey what's up dude ?");
+	}
+
 }

@@ -19,6 +19,7 @@ public class RatingDetailsView extends LinearLayout implements OnRatingClickList
 
 	@Bean
 	DetailsListAdapter adapter;
+	
 	@ViewById
 	ListView detailsList;
 
