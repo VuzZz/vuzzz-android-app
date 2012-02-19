@@ -234,5 +234,9 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 		shopsRating.updateMarkDisplay(percent);
 		leisureRating.updateMarkDisplay(percent);
 	}
+	
+	public SettingsPreferences_ getPreferences() {
+		return preferences;
+	}
 
 }

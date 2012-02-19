@@ -227,6 +227,7 @@ public class AddressActivity extends MapActivity {
 							double longitude = Double.parseDouble(queryParameter.substring(comma + 1));
 							GeoPoint location = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 							showAddressPopup(location);
+							return;
 						} catch (NumberFormatException e) {
 							LogHelper.logException("Could not parse coordinates", e);
 						}

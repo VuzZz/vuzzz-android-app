@@ -22,6 +22,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
@@ -32,6 +33,7 @@ import com.project202.adapter.SimplePagerAdapter;
 import com.project202.loading.RatingDownloadTask;
 import com.project202.model.Rating;
 import com.project202.model.ThemeName;
+import com.project202.model.Weighted;
 import com.project202.views.HistoryView_;
 import com.project202.views.OnHistoryFocusedListener;
 import com.project202.views.RatingDetailsView_;
@@ -47,7 +49,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@Extra("rating")
 	Rating rating;
-	
+
 	@Extra("firstView")
 	Integer firstView;
 
@@ -69,21 +71,25 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@ViewById
 	TitlePageIndicator titles;
-	
+
 	@ViewById
 	TextView titleView;
+
+	@Bean
+	ShareManager shareManager;
 
 	private SimplePagerAdapter pagerAdapter;
 
 	private List<OnSettingsUpdatedListener> onSettingsUpdatedListeners = new ArrayList<OnSettingsUpdatedListener>();
+
+	private RatingView_ ratingView;
 
 	@AfterViews
 	public void afterViews() {
 
 		onHistoryFocusedListeners = new ArrayList<OnHistoryFocusedListener>();
 
-		// Creating ViewPager Views
-		final RatingView_ ratingView = new RatingView_(this);
+		ratingView = new RatingView_(this);
 		ratingDetailsView = new RatingDetailsView_(this);
 		final HistoryView_ historyView = new HistoryView_(this);
 
@@ -100,17 +106,17 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		// Injecting content
 		ratingView.setOnRatingClickListener(this);
 		settingsView.setOnSettingsUpdatedListener(this);
-		
+
 		// Storing views
 		List<View> views = Arrays.<View> asList(historyView, ratingView, ratingDetailsView);
 		List<String> pageTitles = Arrays.asList(getString(R.string.history_title), getString(R.string.rating_title), getString(R.string.rating_details_title));
-		
+
 		// Initializing PagerAdapter
 		pagerAdapter = new SimplePagerAdapter(views, pageTitles);
-		
+
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
-		
+
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -123,75 +129,75 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 						listener.onHistoryHidden();
 					}
 				}
-				
+
 				if (position == 1) {
 					ratingView.onRatingFocused();
 				} else {
 					ratingView.onRatingHidden();
 				}
-				
+
 				titles.onPageSelected(position);
 			}
-			
+
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				titles.onPageScrollStateChanged(state);
 			}
-			
+
 			@Override
 			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 				titles.onPageScrolled(position, positionOffset, positionOffsetPixels);
 			}
 		});
-		
+
 		titles.setViewPager(viewPager);
 
 		List<Rating> ratings = loadRatingsFromFiles();
 		historyView.setRatings(ratings);
 
-		boolean ratingNull = rating==null;
-		
-		if(ratingNull && !ratings.isEmpty())
+		boolean ratingNull = rating == null;
+
+		if (ratingNull && !ratings.isEmpty())
 			rating = ratings.get(0);
-		
+
 		ratingView.setValuesFromRating(rating);
 		ratingDetailsView.setRating(rating);
-		
+
 		titleView.setText(rating.address);
 
-		if(ratingNull)
+		if (ratingNull)
 			viewPager.setCurrentItem(0);
 		else
 			viewPager.setCurrentItem(1);
-		
+
 	}
 
 	private List<Rating> loadRatingsFromFiles() {
 		File directory = getFilesDir();
 		File[] historyFiles = directory.listFiles(new FilenameFilter() {
-			
+
 			@Override
 			public boolean accept(File dir, String filename) {
 				return filename.startsWith(RatingDownloadTask.HISTO_FILE_PREFIX);
 			}
 		});
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		objectMapper.configure(DeserializationConfig.Feature.AUTO_DETECT_SETTERS, false);
 		objectMapper.configure(DeserializationConfig.Feature.USE_GETTERS_AS_SETTERS, false);
 		objectMapper.configure(SerializationConfig.Feature.AUTO_DETECT_GETTERS, false);
-		
+
 		List<Rating> ratings = new ArrayList<Rating>();
-		
+
 		Arrays.sort(historyFiles, new Comparator<File>() {
 			@Override
 			public int compare(File lhs, File rhs) {
 				return rhs.getName().compareTo(lhs.getName());
 			}
 		});
-		
-		for(File histFile : historyFiles){
+
+		for (File histFile : historyFiles) {
 			try {
 				ratings.add(objectMapper.readValue(histFile, Rating.class));
 			} catch (JsonParseException e) {
@@ -228,7 +234,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@Override
 	public void onBackPressed() {
-		if(settingsView.getVisibility() == View.VISIBLE)
+		if (settingsView.getVisibility() == View.VISIBLE)
 			settingsButtonClicked();
 		else
 			super.onBackPressed();
@@ -239,11 +245,16 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		HomeHelper.goToHome(this);
 	}
 
-	
 	@Override
 	public void onSettingsUpdated() {
-		for(OnSettingsUpdatedListener l : onSettingsUpdatedListeners)
+		for (OnSettingsUpdatedListener l : onSettingsUpdatedListeners)
 			l.onSettingsUpdated();
+	}
+
+	@Click
+	void shareButtonClicked() {
+		final String format = "Une adresse où il fait bon vivre : [%s] a obtenu %s/10 http://vuzzz.com/geo?q=%s,%s";
+		shareManager.share(String.format(format, rating.address, String.format("%.1f", Weighted.getWeightedMark(rating, ratingView.getPreferences())), Double.toString(rating.latitude), Double.toString(rating.longitude)));
 	}
 
 }
