@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
@@ -39,7 +40,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 
 @EActivity(R.layout.show_note)
 @NoTitle
-public class ShowNoteActivity extends Activity implements OnRatingClickListener {
+public class ShowNoteActivity extends Activity implements OnRatingClickListener, OnSettingsUpdatedListener {
 
 	@Extra("address")
 	String address;
@@ -71,6 +72,8 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 
 	private SimplePagerAdapter pagerAdapter;
 
+	private List<OnSettingsUpdatedListener> onSettingsUpdatedListeners = new ArrayList<OnSettingsUpdatedListener>();
+	
 	@AfterViews
 	public void afterViews() {
 
@@ -91,9 +94,19 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 		// Injecting content
 		ratingView.setOnRatingClickListener(this);
 		ratingView.setValuesFromRating(rating);
-		historyView.setRatings(loadRatingsFromFiles());
+		List<Rating> ratings = loadRatingsFromFiles();
+		historyView.setRatings(ratings);
 		ratingDetailsView.setRating(rating);
+		settingsView.setOnSettingsUpdatedListener(this);
+		
+		if(rating == null && !ratings.isEmpty())
+			rating = ratings.get(0);
 
+		// Registering listeners
+		onSettingsUpdatedListeners.add(ratingView);
+		onSettingsUpdatedListeners.add(historyView);
+		onSettingsUpdatedListeners.add(ratingDetailsView);
+		
 		// Storing views
 		List<View> views = Arrays.<View> asList(historyView, ratingView, ratingDetailsView);
 
@@ -148,6 +161,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 		
 		List<Rating> ratings = new ArrayList<Rating>();
 		
+		Arrays.sort(historyFiles, new Comparator<File>() {
+			@Override
+			public int compare(File lhs, File rhs) {
+				return rhs.getName().compareTo(lhs.getName());
+			}
+		});
+		
 		for(File histFile : historyFiles){
 			try {
 				ratings.add(objectMapper.readValue(histFile, Rating.class));
@@ -194,6 +214,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 	@Click
 	void homeClicked() {
 		HomeHelper.goToHome(this);
+	}
+
+	
+	@Override
+	public void onSettingsUpdated() {
+		for(OnSettingsUpdatedListener l : onSettingsUpdatedListeners)
+			l.onSettingsUpdated();
 	}
 
 }

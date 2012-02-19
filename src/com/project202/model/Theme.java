@@ -20,7 +20,7 @@ public class Theme implements Serializable, RatingDetails{
 		this.note = note;
 		this.criteria = criteria;
 	}
-
+	
 	public List<Criterion> getCriteria() {
 		return criteria;
 	}
@@ -63,7 +63,12 @@ public class Theme implements Serializable, RatingDetails{
 
 	@Override
 	public int getColor() {
-		return name.getColor();
+		return name.getLightColor();
+	}
+
+	@Override
+	public float getCoefficient() {
+		throw new UnsupportedOperationException("Hey what's up dude ?");
 	}
 
 }

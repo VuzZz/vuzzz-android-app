@@ -3,105 +3,100 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    <TextView
+
+    <com.project202.component.RatingButton_
         android:id="@+id/global_rating"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1.0"
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="10dp"
+        android:layout_weight="1.0"/>
+
     <LinearLayout
         android:id="@+id/first_line"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1.0"
         android:orientation="horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-	    <TextView
-	        android:id="@+id/leisure_rating"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1.0"
-	        android:gravity="center"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginBottom="5dp"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="5dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    <TextView
-	        android:id="@+id/culture_rating"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1.0"
-	        android:gravity="center"
-	        android:layout_marginLeft="5dp"
-	        android:layout_marginBottom="5dp"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge" >
+
+        <com.project202.component.RatingButton_
+            android:id="@+id/leisure_rating"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0" />
+
+        <com.project202.component.RatingButton_
+            android:id="@+id/culture_rating"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0"/>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/second_line"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1.0"
-        android:orientation="horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-	    <TextView
-	        android:id="@+id/nature_rating"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1.0"
-	        android:gravity="center"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginBottom="5dp"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="5dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    <TextView
-	        android:id="@+id/security_rating"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1.0"
-	        android:gravity="center"
-	        android:layout_marginLeft="5dp"
-	        android:layout_marginBottom="5dp"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:orientation="horizontal" >
+
+        <com.project202.component.RatingButton_
+            android:id="@+id/nature_rating"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0"/>
+
+        <com.project202.component.RatingButton_
+            android:id="@+id/institutions_rating"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0" />
     </LinearLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/third_line"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:layout_weight="1.0"
-        android:orientation="horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge">
-	    <TextView
-	        android:id="@+id/shops_rating"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1.0"
-	        android:gravity="center"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginBottom="10dp"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginRight="5dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    <TextView
-	        android:id="@+id/transit_rating"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1.0"
-	        android:gravity="center"
-	        android:layout_marginTop="5dp"
-	        android:layout_marginBottom="10dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_marginLeft="5dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	</LinearLayout>
+        android:orientation="horizontal" >
+
+        <com.project202.component.RatingButton_
+            android:id="@+id/shops_rating"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0" />
+
+        <com.project202.component.RatingButton_
+            android:id="@+id/transit_rating"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+
 </LinearLayout>

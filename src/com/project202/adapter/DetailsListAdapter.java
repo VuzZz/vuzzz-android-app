@@ -34,7 +34,7 @@ public class DetailsListAdapter extends BaseAdapter {
 
 		for (Theme t : rating.getThemes()) {
 			details.add(t);
-			if(t.getCriteria() != null)
+			if (t.getCriteria() != null)
 				for (Criterion c : t.getCriteria())
 					details.add(c);
 		}
@@ -44,11 +44,12 @@ public class DetailsListAdapter extends BaseAdapter {
 			if (pd instanceof Theme)
 				themePositions.put(ThemeName.valueOf(pd.getName()), i);
 		}
-		
+
 		notifyDataSetChanged();
 	}
 
 	private class ViewHolder {
+		private TextView coefficient;
 		private TextView description;
 		private TextView name;
 		private TextView note;
@@ -91,32 +92,44 @@ public class DetailsListAdapter extends BaseAdapter {
 		ViewHolder holder;
 
 		RatingDetails ratingDetails = details.get(position);
-		
+
 		if (convertView == null) {
-			if (ratingDetails instanceof Criterion){
-				convertView = View.inflate(context, R.layout.row_details_criterion, null);
+			if (ratingDetails instanceof Criterion) {
+				convertView = View.inflate(context,
+						R.layout.row_details_criterion, null);
 			} else {
 				convertView = View.inflate(context, R.layout.row_details, null);
 				convertView.setMinimumHeight(70);
-				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(ratingDetails.getColor()));
+				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(
+						ratingDetails.getColor()));
 			}
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.detail_name);
-			holder.note = (TextView) convertView.findViewById(R.id.detail_grade);
-			holder.description = (TextView) convertView.findViewById(R.id.detail_description);
+			holder.note = (TextView) convertView
+					.findViewById(R.id.detail_grade);
+			holder.description = (TextView) convertView
+					.findViewById(R.id.detail_description);
+			holder.coefficient = (TextView) convertView
+					.findViewById(R.id.detail_coeff);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
-			
-			if (! (ratingDetails instanceof Criterion)){
-				((CubeBackgroundDrawable) convertView.getBackground()).setColor(ratingDetails.getColor());
+			if (!(ratingDetails instanceof Criterion)) {
+				((CubeBackgroundDrawable) convertView.getBackground())
+						.setColor(ratingDetails.getColor());
 			}
 		}
 
 		holder.name.setText(details.get(position).getName());
-		holder.note.setText(String.format("%.1f", details.get(position).getNote()));
-		if (holder.description!=null){
+		holder.note.setText(String.format("%.1f", details.get(position)
+				.getNote()));
+		if (holder.description != null) {
 			holder.description.setText(details.get(position).getDescription());
+		}
+		if (holder.coefficient != null) {
+			holder.coefficient.setText("Coef."
+					+ details.get(position).getCoefficient());
+
 		}
 
 		return convertView;
