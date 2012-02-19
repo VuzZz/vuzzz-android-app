@@ -68,6 +68,9 @@ public class AddressActivity extends MapActivity {
 
 	@ViewById
 	View historyButton;
+	
+	@ViewById
+	View loadingMenuView;
 
 	@SystemService
 	InputMethodManager inputMethodManager;
@@ -91,6 +94,8 @@ public class AddressActivity extends MapActivity {
 	private SearchOverlay searchOverlay;
 
 	private boolean hasHistory;
+
+	private boolean loading;
 
 	@AfterViews
 	void initLayout() {
@@ -197,23 +202,49 @@ public class AddressActivity extends MapActivity {
 	}
 
 	protected void onAddressEmpty() {
+		if (loading) {
+			loadingMenuView.setVisibility(View.VISIBLE);
+			locationButton.setVisibility(View.GONE);
+		} else {
+			loadingMenuView.setVisibility(View.GONE);
+			locationButton.setVisibility(View.VISIBLE);
+		}
 		searchButton.setVisibility(View.GONE);
-		locationButton.setVisibility(View.VISIBLE);
 		addressHint.setVisibility(View.VISIBLE);
 	}
 
 	protected void onAddressNotEmpty() {
-		searchButton.setVisibility(View.VISIBLE);
+		if (loading) {
+			loadingMenuView.setVisibility(View.VISIBLE);
+			searchButton.setVisibility(View.GONE);
+		} else {
+			loadingMenuView.setVisibility(View.GONE);
+			searchButton.setVisibility(View.VISIBLE);
+		}
 		locationButton.setVisibility(View.GONE);
 		addressHint.setVisibility(View.GONE);
 	}
 
 	@Click
 	void searchButtonClicked() {
+		if (loading) {
+			Toast.makeText(this, "Vous êtes déjà en train de rechercher une adresse", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		addressOverlay.hideAddressPopup();
 		inputMethodManager.hideSoftInputFromWindow(addressEditText.getWindowToken(), 0);
 		String address = addressEditText.getText().toString();
 		findAddressLocations(address);
+		loading = true;
+		updateLoading();
+	}
+	
+	private void updateLoading() {
+		if (addressEditText.getText().length() > 0) {
+			onAddressNotEmpty();
+		} else {
+			onAddressEmpty();
+		}
 	}
 
 	@Click
@@ -242,15 +273,21 @@ public class AddressActivity extends MapActivity {
 	@UiThread
 	void searchAddressError() {
 		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+		loading = false;
+		updateLoading();
 	}
 
 	@UiThread
 	void noAddressFound() {
 		Toast.makeText(this, "Aucun résultat correspondant à l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+		loading = false;
+		updateLoading();
 	}
 
 	@UiThread
 	void addressesFound(List<Address> addresses) {
+		loading = false;
+		updateLoading();
 
 		List<GeoPoint> geopoints = new ArrayList<GeoPoint>();
 
