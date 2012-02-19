@@ -50,7 +50,6 @@ public class AddressOverlay extends Overlay {
 		textPaint.setColor(0xFF666666);
 		textPaint.setTextSize(FONT_SIZE);
 		panelPaint.setAntiAlias(true);
-		panelPaint.setColor(0xFFFFFFFF);
 		panelPaint.setStyle(Style.FILL);
 		shadowPaint.setStyle(Style.FILL);
 		shadowPaint.setAntiAlias(true);
@@ -98,7 +97,6 @@ public class AddressOverlay extends Overlay {
 		float top = baseY - height - INNER_SPACE;
 
 		if (address != null) {
-			width += INNER_SPACE;
 			panelPaint.setColor(0xFFFFFFFF);
 		} else {
 			panelPaint.setColor(0xFFEEEEEE);
