@@ -28,6 +28,6 @@
     <string name="rate_android_market">Android Market</string>
     <string name="share_project">Partager Project202</string>
     <string name="share_project_content">"Tu connais Project202 ? Génial pour connaître la qualité de vie d'un lieu ! Et c'est dispo sur mobile : http://Project.org"</string>
- 
+ 	<string name="note_max">/10</string>
 
 </resources>

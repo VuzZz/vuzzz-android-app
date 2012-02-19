@@ -36,4 +36,9 @@ public class Criterion implements Serializable, RatingDetails {
 	public void setNote(float note) {
 		this.note = note;
 	}
+
+	@Override
+	public int getColor() {
+		return 0;
+	}
 }
