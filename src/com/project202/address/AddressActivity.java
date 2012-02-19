@@ -150,13 +150,15 @@ public class AddressActivity extends MapActivity {
 
 		Criteria criteria = new Criteria();
 		String provider = locationManager.getBestProvider(criteria, true);
-		Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
+		if (provider != null) {
+			Location lastKnownLocation = locationManager.getLastKnownLocation(provider);
 
-		if (lastKnownLocation != null) {
-			int lastKnownLatitude = (int) (lastKnownLocation.getLatitude() * 1E6);
-			int lastKnownLongitude = (int) (lastKnownLocation.getLongitude() * 1E6);
-			GeoPoint initGeoPoint = new GeoPoint(lastKnownLatitude, lastKnownLongitude);
-			mapController.animateTo(initGeoPoint);
+			if (lastKnownLocation != null) {
+				int lastKnownLatitude = (int) (lastKnownLocation.getLatitude() * 1E6);
+				int lastKnownLongitude = (int) (lastKnownLocation.getLongitude() * 1E6);
+				GeoPoint initGeoPoint = new GeoPoint(lastKnownLatitude, lastKnownLongitude);
+				mapController.animateTo(initGeoPoint);
+			}
 		}
 
 		moveToMyLocationOnFirstFix();

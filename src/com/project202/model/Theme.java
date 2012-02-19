@@ -63,7 +63,7 @@ public class Theme implements Serializable, RatingDetails{
 
 	@Override
 	public int getColor() {
-		return name.getColor();
+		return name.getLightColor();
 	}
 
 	@Override
