@@ -68,7 +68,7 @@ public class AddressActivity extends MapActivity {
 
 	@ViewById
 	View historyButton;
-	
+
 	@ViewById
 	View loadingMenuView;
 
@@ -138,11 +138,12 @@ public class AddressActivity extends MapActivity {
 				shouldMoveToMyLocationOnFirstFix = false;
 				float x = e.getX();
 				float y = e.getY();
-				boolean addressTapped = addressOverlay.onSingleTapUp(x, y);
-				if (addressTapped) {
-					GeoPoint addressLocation = addressOverlay.getAddressLocation();
+				GeoPoint addressLocation = addressOverlay.onSingleTapUp(x, y);
+				if (addressLocation != null) {
 					Address address = addressOverlay.getAddress();
-					noteAddress(address, addressLocation);
+					if (address != null) {
+						noteAddress(address, addressLocation);
+					}
 				} else {
 					Address tappedAddress = searchOverlay.onSingleTapUp(x, y);
 					if (tappedAddress != null) {
@@ -238,7 +239,7 @@ public class AddressActivity extends MapActivity {
 		loading = true;
 		updateLoading();
 	}
-	
+
 	private void updateLoading() {
 		if (addressEditText.getText().length() > 0) {
 			onAddressNotEmpty();
@@ -346,12 +347,12 @@ public class AddressActivity extends MapActivity {
 			searchAddressFromLocationError();
 		}
 	}
-	
+
 	@UiThread
 	void addressFound(Address address) {
 		addressOverlay.setAddress(address);
 	}
-	
+
 	@UiThread
 	void searchAddressFromLocationError() {
 		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
