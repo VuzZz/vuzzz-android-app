@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Rating implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	public List<Theme> themes;
 
 	public List<Theme> getThemes() {
@@ -17,25 +17,16 @@ public class Rating implements Serializable {
 		this.themes = themes;
 	}
 
-	public Rating(){
-		
+	public Rating() {
 	}
-	
+
 	public Rating(List<Theme> themes) {
 		this.themes = themes;
 	}
 
-	public Float getMark() {
-		float sum = 0f;
-		for (Theme theme : themes){
-			sum += theme.getNote();
-		}
-		return sum/6f;
-	}
-	
-	public Float getThemeMark(ThemeName themeName){
-		for(Theme t : themes){
-			if(t.getThemeName().equals(themeName))
+	public Float getThemeMark(ThemeName themeName) {
+		for (Theme t : themes) {
+			if (t.getThemeName().equals(themeName))
 				return t.getNote();
 		}
 		return 0f;
