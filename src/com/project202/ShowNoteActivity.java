@@ -22,7 +22,6 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Background;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
@@ -40,6 +39,7 @@ import com.project202.views.RatingView.OnRatingClickListener;
 import com.project202.views.RatingView_;
 import com.project202.views.SettingsView;
 import com.viewpagerindicator.TitlePageIndicator;
+import com.vuzzz.android.R;
 
 @EActivity(R.layout.show_note)
 @NoTitle

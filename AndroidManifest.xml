@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.project202"
+    package="com.vuzzz.android"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -35,30 +35,30 @@
         <activity
             android:name="com.project202.ShowNoteActivity_"
             android:label="@string/app_name" >
-            <intent-filter android:priority="0" >
-                <action android:name="android.intent.action.VIEW" />
-                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-                <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
-                <data android:scheme="geo" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
+<!--             <intent-filter android:priority="0" > -->
+<!--                 <action android:name="android.intent.action.VIEW" /> -->
+<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
+<!--                 <category android:name="android.intent.category.BROWSABLE" /> -->
+<!--                 <data android:scheme="geo" /> -->
+<!--             </intent-filter> -->
+<!--             <intent-filter> -->
+<!--                 <action android:name="android.intent.action.MAIN" /> -->
+<!--                 <action android:name="android.intent.action.VIEW" /> -->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
+<!--                 <category android:name="android.intent.category.BROWSABLE" /> -->
 
-                <data
-                    android:host="maps.google.com"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter android:label="MyApp" >
-                <action android:name="android.intent.action.VIEW" />
+<!--                 <data -->
+<!--                     android:host="maps.google.com" -->
+<!--                     android:scheme="http" /> -->
+<!--             </intent-filter> -->
+<!--             <intent-filter android:label="MyApp" > -->
+<!--                 <action android:name="android.intent.action.VIEW" /> -->
 
-                <category android:name="android.intent.category.DEFAULT" />
+<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
 
-                <data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
-            </intent-filter>
+<!--                 <data android:mimeType="vnd.android.cursor.item/postal-address_v2" /> -->
+<!--             </intent-filter> -->
         </activity>
     </application>
 

@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
-import com.project202.R;
 import com.project202.model.Criterion;
 import com.project202.model.Rating;
 import com.project202.model.RatingDetails;
 import com.project202.model.Theme;
 import com.project202.model.ThemeName;
+import com.vuzzz.android.R;
 
 @EBean
 public class DetailsListAdapter extends BaseAdapter {

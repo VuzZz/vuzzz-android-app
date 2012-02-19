@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Build;
 
 import com.project202.address.AddressActivity_;
+import com.vuzzz.android.R;
 
 public class HomeHelper {
 

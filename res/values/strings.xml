@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, ShowNoteActivity!</string>
-    <string name="app_name">Project202</string>
+    <string name="app_name">VuzZz</string>
     <string name="my_position">Ma position</string>
     <string name="enter_address">Entrez une adresse</string>
     <string name="settings_title">Paramètres</string>
@@ -23,11 +23,11 @@
     <string name="error_information_message">Les informations n\'ont pu être téléchargées</string>
     <string name="share_with">Partager via</string>
     <string name="about">A propos</string>
-    <string name="about_content" formatted="false" >"<![CDATA[L'équipe <b>Projet 122</b> a besoin de vous !<br /><br />N'hésitez pas à nous aider en nous donnant une (bonne) note sur l'<b>Android Market</b>, et en <b>partageant</b> l'application avec vos amis.<br /><br />Pour en savoir plus : <a href="http://project.org">Project.org</a>.]]>"</string>
+    <string name="about_content" formatted="false" >"<![CDATA[L'équipe <b>VuzZz</b> a besoin de vous !<br /><br />N'hésitez pas à nous aider en nous donnant une (bonne) note sur l'<b>Android Market</b>, et en <b>partageant</b> l'application avec vos amis.<br /><br />Pour en savoir plus : <a href="http://www.vuzzz.com">VuzZz.com</a>.]]>"</string>
     <string name="about_ok">Cool !</string>
     <string name="rate_android_market">Android Market</string>
-    <string name="share_project">Partager Project202</string>
-    <string name="share_project_content">"Tu connais Project202 ? Génial pour connaître la qualité de vie d'un lieu ! Et c'est dispo sur mobile : http://Project.org"</string>
+    <string name="share_project">Partager VuzZz</string>
+    <string name="share_project_content">"Tu connais VuzZz ? Génial pour connaître la qualité de vie d'un lieu ! Et c'est dispo sur mobile : http://www.vuzzz.com"</string>
  	<string name="note_max">/10</string>
 
 </resources>

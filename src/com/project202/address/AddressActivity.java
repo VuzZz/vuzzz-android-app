@@ -43,9 +43,9 @@ import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.AboutDialogHelper;
 import com.project202.LogHelper;
-import com.project202.R;
 import com.project202.loading.DownloadActivity_;
 import com.project202.loading.RatingDownloadTask;
+import com.vuzzz.android.R;
 
 @EActivity(R.layout.address_map)
 @NoTitle
