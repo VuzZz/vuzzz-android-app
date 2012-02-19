@@ -30,7 +30,7 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 
 	private boolean pair;
 
-	private static final int[] colors = new int[] { 0xFFFF4444, 0xFFFFBB33, 0xFF99CC00, 0xFFAA66CC, 0xFF33B5E5, 0xFF9932ff };
+	private static final int[] colors = new int[] { 0xFFFF4444, 0xFFFFBB33, 0xFF99CC00, 0xFFAA66CC, 0xFF33B5E5, 0xFFff8b32 };
 
 	private static final Paint paint = new Paint();
 
