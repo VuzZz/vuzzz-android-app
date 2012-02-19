@@ -81,43 +81,43 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 	void afterViews() {
 		globalRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		globalRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
-		globalRating.getThemeTextView().setText("NOTE TOTAL");
+		globalRating.setTheme("NOTE GLOBALE");
 		
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
-		cultureRating.getThemeTextView().setText(ThemeName.CULTURE.getName());
+		cultureRating.setTheme(ThemeName.CULTURE.getName());
 		culturePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
-		cultureRating.getThemeTextView().setCompoundDrawables(culturePicto.getCurrent(), null, null, null);
+		cultureRating.setPicto(culturePicto);
 
 		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
 		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
-		natureRating.getThemeTextView().setText(ThemeName.NATURE.getName());
+		natureRating.setTheme(ThemeName.NATURE.getName());
 		naturePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
-		natureRating.getThemeTextView().setCompoundDrawables(naturePicto, null, null, null);
+		natureRating.setPicto(naturePicto);
 		
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
-		transitRating.getThemeTextView().setText(ThemeName.TRANSIT.getName());
+		transitRating.setTheme(ThemeName.TRANSIT.getName());
 		transitPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
-		transitRating.getThemeTextView().setCompoundDrawables(transitPicto, null, null, null);
+		transitRating.setPicto(transitPicto);
 
 		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
 		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
-		leisureRating.getThemeTextView().setText(ThemeName.LEISURE.getName());
+		leisureRating.setTheme(ThemeName.LEISURE.getName());
 		leisurePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
-		leisureRating.getThemeTextView().setCompoundDrawables(leisurePicto, null, null, null);
+		leisureRating.setPicto(leisurePicto);
 
 		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
 		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
-		securityRating.getThemeTextView().setText(ThemeName.SECURITY.getName());
+		securityRating.setTheme(ThemeName.SECURITY.getName());
 		securityPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
-		securityRating.getThemeTextView().setCompoundDrawables(securityPicto, null, null, null);
+		securityRating.setPicto(securityPicto);
 		
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
-		shopsRating.getThemeTextView().setText(ThemeName.SHOPS.getName());
+		shopsRating.setTheme(ThemeName.SHOPS.getName());
 		shopsPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
-		shopsRating.getThemeTextView().setCompoundDrawables(shopsPicto, null, null, null);
+		shopsRating.setPicto(shopsPicto);
 	}
 
 	public void setOnRatingClickListener(OnRatingClickListener listener){
@@ -127,9 +127,9 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 	public void setValuesFromRating(Rating rating){
 		this.currentRating = rating;
 
-		globalRating.getRatingTextView().setText(Weighted.getWeightedMark(rating, preferences).toString());
+		globalRating.setMark(Weighted.getWeightedMark(rating, preferences));
 		
-		cultureRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.CULTURE).toString());
+		cultureRating.setMark(rating.getThemeMark(ThemeName.CULTURE));
 		cultureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -137,7 +137,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 			}
 		});
 		
-		natureRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.NATURE).toString());
+		natureRating.setMark(rating.getThemeMark(ThemeName.NATURE));
 		natureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -145,7 +145,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 			}
 		});
 		
-		transitRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.TRANSIT).toString());
+		transitRating.setMark(rating.getThemeMark(ThemeName.TRANSIT));
 		transitRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -153,7 +153,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 			}
 		});
 		
-		securityRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.SECURITY).toString());
+		securityRating.setMark(rating.getThemeMark(ThemeName.SECURITY));
 		securityRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -161,7 +161,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 			}
 		});
 		
-		shopsRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.SHOPS).toString());
+		shopsRating.setMark(rating.getThemeMark(ThemeName.SHOPS));
 		shopsRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -169,7 +169,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 			}
 		});
 		
-		leisureRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.LEISURE).toString());
+		leisureRating.setMark(rating.getThemeMark(ThemeName.LEISURE));
 		leisureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

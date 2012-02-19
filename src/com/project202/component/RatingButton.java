@@ -1,6 +1,7 @@
 package com.project202.component;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,20 +31,16 @@ public class RatingButton extends RelativeLayout {
 		super(context, attrs);
 	}
 
-	public TextView getRatingTextView() {
-		return ratingTextView;
+	public void setMark(Float aMark) {
+		ratingTextView.setText(String.format("%.1f", aMark));
 	}
 
-	public void setRatingTextView(TextView ratingTextView) {
-		this.ratingTextView = ratingTextView;
+	public void setTheme(String theme) {
+		themeTextView.setText(theme);
 	}
-
-	public TextView getThemeTextView() {
-		return themeTextView;
-	}
-
-	public void setThemeTextView(TextView themeTextView) {
-		this.themeTextView = themeTextView;
+	
+	public void setPicto(Drawable drawable) {
+		themeTextView.setCompoundDrawables(drawable, null, null, null);
 	}
 
 	public LinearLayout getFooterLayout() {

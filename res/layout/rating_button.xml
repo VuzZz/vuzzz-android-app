@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+    android:layout_height="match_parent" >
 
     <TextView
         android:id="@+id/rating_button_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:text="9"
         android:textColor="@android:color/white"
         android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rating_button_rate"
+        android:layout_alignBottom="@id/rating_button_rate"
+        android:text="@string/note_max"
+        android:textColor="@android:color/white"
+        android:textSize="10dp" />
 
     <LinearLayout
         android:id="@+id/rating_button_footer"
@@ -30,7 +38,7 @@
             android:drawablePadding="10dp"
             android:textColor="@android:color/white"
             android:textSize="12dp" />
-        
+
     </LinearLayout>
 
 </RelativeLayout>
