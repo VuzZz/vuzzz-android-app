@@ -42,7 +42,7 @@ public class AddressOverlay extends Overlay {
 
 		FONT_SIZE = DimenHelper.pixelSize(context, 16f);
 		INNER_SPACE = DimenHelper.pixelSize(context, 20f);
-		RADIUS = DimenHelper.pixelSize(context, 13f);
+		RADIUS = DimenHelper.pixelSize(context, 8f);
 		PADDING = DimenHelper.pixelSize(context, 3.3f);
 		PADDING2 = DimenHelper.pixelSize(context, 1.3f);
 
@@ -171,6 +171,10 @@ public class AddressOverlay extends Overlay {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public Address getAddress() {
+		return address;
 	}
 
 }

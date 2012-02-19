@@ -136,7 +136,8 @@ public class AddressActivity extends MapActivity {
 				boolean addressTapped = addressOverlay.onSingleTapUp(x, y);
 				if (addressTapped) {
 					GeoPoint addressLocation = addressOverlay.getAddressLocation();
-					noteAddress(addressLocation);
+					Address address = addressOverlay.getAddress();
+					noteAddress(address, addressLocation);
 				} else {
 					Address tappedAddress = searchOverlay.onSingleTapUp(x, y);
 					if (tappedAddress != null) {
@@ -360,12 +361,22 @@ public class AddressActivity extends MapActivity {
 		});
 	}
 
-	protected void noteAddress(GeoPoint location) {
+	protected void noteAddress(Address address, GeoPoint location) {
 		addressOverlay.hideAddressPopup();
-		String mockAddress = "42 rue des petits indiens, 75006 Paris";
+
+		StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+			if (first) {
+				first = false;
+			} else {
+				sb.append(", ");
+			}
+			sb.append(address.getAddressLine(i));
+		}
 
 		DownloadActivity_.intent(this) //
-				.address(mockAddress) //
+				.address(sb.toString()) //
 				.latitudeE6(location.getLatitudeE6()) //
 				.longitudeE6(location.getLongitudeE6()) //
 				.start();
