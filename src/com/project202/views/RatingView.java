@@ -78,6 +78,9 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 	@DrawableRes(R.drawable.ic_rating_shop)
 	Drawable shopsPicto;
 
+	@DrawableRes(R.drawable.ic_rating_global)
+	Drawable globalPicto;
+	
 	OnRatingClickListener listener;
 
 	public RatingView(Context context) {
@@ -86,8 +89,11 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 
 	@AfterViews
 	void afterViews() {
-		globalRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
-		globalRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
+		globalRating.setBackgroundColor(0xFFa3b7b5);
+		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
+		globalRating.setTextSize(40);
+		globalPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		globalRating.setPicto(globalPicto);
 		globalRating.setTheme("NOTE GLOBALE");
 
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
