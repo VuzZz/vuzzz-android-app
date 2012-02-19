@@ -37,7 +37,8 @@
             android:layout_width="@dimen/actionbar_compat_loading_width"
             android:layout_marginLeft="@dimen/actionbar_compat_loading_padding"
             android:layout_marginRight="@dimen/actionbar_compat_loading_padding"
-            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/actionbar_compat_loading_padding"
+            android:layout_height="@dimen/actionbar_compat_loading_width"
             android:layout_alignParentRight="true"
             android:contentDescription="@string/loading" />
 
