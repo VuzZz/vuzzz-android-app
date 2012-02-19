@@ -2,10 +2,12 @@ package com.project202.address;
 
 import java.util.List;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -25,11 +27,13 @@ import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.project202.AboutDialogHelper;
 import com.project202.LogHelper;
 import com.project202.R;
 import com.project202.loading.DownloadActivity_;
@@ -52,6 +56,9 @@ public class AddressActivity extends MapActivity {
 
 	@SystemService
 	InputMethodManager inputMethodManager;
+	
+	@Bean
+	AboutDialogHelper aboutDialogHelper;
 
 	@SystemService
 	LocationManager locationManager;
@@ -235,5 +242,20 @@ public class AddressActivity extends MapActivity {
 				.latitudeE6(location.getLatitudeE6()) //
 				.longitudeE6(location.getLongitudeE6()) //
 				.start();
+	}
+	
+	@Click
+	void homeClicked() {
+		showDialog(R.id.about_dialog);
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id, Bundle args) {
+		switch (id) {
+		case R.id.about_dialog:
+			return aboutDialogHelper.createAboutDialog();
+		default:
+			return null;
+		}
 	}
 }
