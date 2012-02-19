@@ -44,6 +44,7 @@ import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.AboutDialogHelper;
 import com.project202.LogHelper;
 import com.project202.R;
+import com.project202.ShowNoteActivity_;
 import com.project202.loading.DownloadActivity_;
 import com.project202.loading.RatingDownloadTask;
 
@@ -250,7 +251,7 @@ public class AddressActivity extends MapActivity {
 	@Click
 	void historyButtonClicked() {
 		if (hasHistory) {
-			Toast.makeText(this, "MOCK History Button Clicked", Toast.LENGTH_LONG).show();
+			ShowNoteActivity_.intent(this).firstView(0).start();
 		}
 	}
 
@@ -457,6 +458,8 @@ public class AddressActivity extends MapActivity {
 	void homeClicked() {
 		showDialog(R.id.about_dialog);
 	}
+	
+	
 
 	@Override
 	protected Dialog onCreateDialog(int id, Bundle args) {
