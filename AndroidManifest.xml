@@ -22,10 +22,13 @@
             android:name="com.google.android.maps"
             android:required="true" />
 
-        <activity android:name="com.project202.loading.DownloadActivity_" />
+        <activity
+            android:name="com.project202.loading.DownloadActivity_"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.project202.address.AddressActivity_"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,31 +37,37 @@
         </activity>
         <activity
             android:name="com.project202.ShowNoteActivity_"
-            android:label="@string/app_name" >
-<!--             <intent-filter android:priority="0" > -->
-<!--                 <action android:name="android.intent.action.VIEW" /> -->
-<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
-<!--                 <category android:name="android.intent.category.BROWSABLE" /> -->
-<!--                 <data android:scheme="geo" /> -->
-<!--             </intent-filter> -->
-<!--             <intent-filter> -->
-<!--                 <action android:name="android.intent.action.MAIN" /> -->
-<!--                 <action android:name="android.intent.action.VIEW" /> -->
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
 
-<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
-<!--                 <category android:name="android.intent.category.BROWSABLE" /> -->
+            <!-- <intent-filter android:priority="0" > -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+            <!-- <data android:scheme="geo" /> -->
+            <!-- </intent-filter> -->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
 
-<!--                 <data -->
-<!--                     android:host="maps.google.com" -->
-<!--                     android:scheme="http" /> -->
-<!--             </intent-filter> -->
-<!--             <intent-filter android:label="MyApp" > -->
-<!--                 <action android:name="android.intent.action.VIEW" /> -->
 
-<!--                 <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
 
-<!--                 <data android:mimeType="vnd.android.cursor.item/postal-address_v2" /> -->
-<!--             </intent-filter> -->
+
+            <!-- <data -->
+            <!-- android:host="maps.google.com" -->
+            <!-- android:scheme="http" /> -->
+            <!-- </intent-filter> -->
+            <!-- <intent-filter android:label="MyApp" > -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+
+
+            <!-- <data android:mimeType="vnd.android.cursor.item/postal-address_v2" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 
