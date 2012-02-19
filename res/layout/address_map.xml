@@ -47,12 +47,24 @@
             android:src="@drawable/ic_menu_play_clip"
             android:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/loadingMenuView"
+            style="@style/ActionBarCompatProgressIndicator"
+            android:layout_width="@dimen/actionbar_compat_loading_width"
+            android:layout_height="@dimen/actionbar_compat_loading_width"
+            android:layout_marginLeft="@dimen/actionbar_compat_loading_padding"
+            android:layout_marginRight="@dimen/actionbar_compat_loading_padding"
+            android:layout_marginTop="@dimen/actionbar_compat_loading_padding"
+            android:layout_toLeftOf="@id/searchButton"
+            android:contentDescription="@string/loading"
+            android:visibility="gone" />
+
         <ImageButton
             android:id="@+id/locationButton"
             style="@style/ActionBarCompatItem"
             android:layout_width="@dimen/actionbar_compat_button_width"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/searchButton"
+            android:layout_toLeftOf="@id/loadingMenuView"
             android:contentDescription="Ma position"
             android:scaleType="center"
             android:src="@drawable/ic_menu_mylocation" />

@@ -8,15 +8,15 @@ import android.widget.LinearLayout;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
-import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.googlecode.androidannotations.annotations.res.DrawableRes;
+import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.project202.OnSettingsUpdatedListener;
-import com.project202.R;
 import com.project202.address.SettingsPreferences_;
 import com.project202.component.RatingButton;
 import com.project202.model.Rating;
 import com.project202.model.ThemeName;
 import com.project202.model.Weighted;
+import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating)
 public class RatingView extends LinearLayout implements OnSettingsUpdatedListener {

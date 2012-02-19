@@ -12,9 +12,9 @@ import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.OnSettingsUpdatedListener;
-import com.project202.R;
 import com.project202.adapter.HistoryListAdapter;
 import com.project202.model.Rating;
+import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.history)
 public class HistoryView extends LinearLayout implements OnSettingsUpdatedListener {

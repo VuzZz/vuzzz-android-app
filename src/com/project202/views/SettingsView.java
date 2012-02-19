@@ -10,9 +10,9 @@ import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.project202.OnSettingsUpdatedListener;
-import com.project202.R;
 import com.project202.address.AbstractSeekBarChangeListener;
 import com.project202.address.SettingsPreferences_;
+import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.settings)
 public class SettingsView extends LinearLayout {

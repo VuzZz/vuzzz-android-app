@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
-import com.project202.R;
+import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating_button)
 public class RatingButton extends RelativeLayout {

@@ -9,11 +9,11 @@ import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.OnSettingsUpdatedListener;
-import com.project202.R;
 import com.project202.adapter.DetailsListAdapter;
 import com.project202.model.Rating;
 import com.project202.model.ThemeName;
 import com.project202.views.RatingView.OnRatingClickListener;
+import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating_details)
 public class RatingDetailsView extends LinearLayout implements OnRatingClickListener, OnSettingsUpdatedListener{

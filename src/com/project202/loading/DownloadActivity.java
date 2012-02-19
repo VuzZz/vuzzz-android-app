@@ -14,9 +14,9 @@ import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.HomeHelper;
-import com.project202.R;
 import com.project202.ShowNoteActivity_;
 import com.project202.model.Rating;
+import com.vuzzz.android.R;
 
 @EActivity(R.layout.loading)
 @NoTitle

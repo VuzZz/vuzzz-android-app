@@ -18,6 +18,7 @@ import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import com.googlecode.androidannotations.annotations.res.HtmlRes;
 import com.googlecode.androidannotations.annotations.res.StringRes;
+import com.vuzzz.android.R;
 
 @EBean
 public class AboutDialogHelper {

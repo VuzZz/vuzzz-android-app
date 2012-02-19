@@ -66,7 +66,7 @@ public class AddressOverlay extends Overlay {
 		mapView.invalidate();
 		this.address = null;
 		this.addressLocation = location;
-		
+
 	}
 
 	public void hideAddressPopup() {
@@ -90,6 +90,13 @@ public class AddressOverlay extends Overlay {
 		if (address != null) {
 			firstString = address.getAddressLine(0);
 			secondString = address.getAddressLine(1);
+
+			if (firstString == null) {
+				firstString = "";
+			}
+			if (secondString == null) {
+				secondString = "";
+			}
 		}
 
 		float firstStringSize = textPaint.measureText(firstString);
@@ -163,15 +170,12 @@ public class AddressOverlay extends Overlay {
 	/**
 	 * Return true if popup was clicked
 	 */
-	public boolean onSingleTapUp(float x, float y) {
-		if (addressLocation == null) {
-			return false;
+	public GeoPoint onSingleTapUp(float x, float y) {
+		if (addressLocation != null && panel.contains(x, y)) {
+			return addressLocation;
 		}
-		 return address != null && panel.contains(x, y);
-	}
 
-	public GeoPoint getAddressLocation() {
-		return addressLocation;
+		return null;
 	}
 
 	public void setAddress(Address address) {

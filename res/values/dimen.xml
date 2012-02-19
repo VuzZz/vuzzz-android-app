@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="settings_margin">15dp</dimen>
+    <dimen name="settings_margin2">40dp</dimen>
+    <dimen name="settings_drawable_padding">10dp</dimen>
+    <dimen name="settings_bar_width">130dp</dimen>
+    <dimen name="settings_padding">15dp</dimen>
+    <dimen name="settings_item">60dp</dimen>
+    <dimen name="settings_item_margin">10dp</dimen>
+</resources>

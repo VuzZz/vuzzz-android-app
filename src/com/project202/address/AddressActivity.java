@@ -43,9 +43,10 @@ import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.AboutDialogHelper;
 import com.project202.LogHelper;
-import com.project202.R;
+import com.project202.ShowNoteActivity_;
 import com.project202.loading.DownloadActivity_;
 import com.project202.loading.RatingDownloadTask;
+import com.vuzzz.android.R;
 
 @EActivity(R.layout.address_map)
 @NoTitle
@@ -69,6 +70,9 @@ public class AddressActivity extends MapActivity {
 	@ViewById
 	View historyButton;
 
+	@ViewById
+	View loadingMenuView;
+
 	@SystemService
 	InputMethodManager inputMethodManager;
 
@@ -91,6 +95,8 @@ public class AddressActivity extends MapActivity {
 	private SearchOverlay searchOverlay;
 
 	private boolean hasHistory;
+
+	private boolean loading;
 
 	@AfterViews
 	void initLayout() {
@@ -133,11 +139,12 @@ public class AddressActivity extends MapActivity {
 				shouldMoveToMyLocationOnFirstFix = false;
 				float x = e.getX();
 				float y = e.getY();
-				boolean addressTapped = addressOverlay.onSingleTapUp(x, y);
-				if (addressTapped) {
-					GeoPoint addressLocation = addressOverlay.getAddressLocation();
+				GeoPoint addressLocation = addressOverlay.onSingleTapUp(x, y);
+				if (addressLocation != null) {
 					Address address = addressOverlay.getAddress();
-					noteAddress(address, addressLocation);
+					if (address != null) {
+						noteAddress(address, addressLocation);
+					}
 				} else {
 					Address tappedAddress = searchOverlay.onSingleTapUp(x, y);
 					if (tappedAddress != null) {
@@ -197,29 +204,55 @@ public class AddressActivity extends MapActivity {
 	}
 
 	protected void onAddressEmpty() {
+		if (loading) {
+			loadingMenuView.setVisibility(View.VISIBLE);
+			locationButton.setVisibility(View.GONE);
+		} else {
+			loadingMenuView.setVisibility(View.GONE);
+			locationButton.setVisibility(View.VISIBLE);
+		}
 		searchButton.setVisibility(View.GONE);
-		locationButton.setVisibility(View.VISIBLE);
 		addressHint.setVisibility(View.VISIBLE);
 	}
 
 	protected void onAddressNotEmpty() {
-		searchButton.setVisibility(View.VISIBLE);
+		if (loading) {
+			loadingMenuView.setVisibility(View.VISIBLE);
+			searchButton.setVisibility(View.GONE);
+		} else {
+			loadingMenuView.setVisibility(View.GONE);
+			searchButton.setVisibility(View.VISIBLE);
+		}
 		locationButton.setVisibility(View.GONE);
 		addressHint.setVisibility(View.GONE);
 	}
 
 	@Click
 	void searchButtonClicked() {
+		if (loading) {
+			Toast.makeText(this, "Vous êtes déjà en train de rechercher une adresse", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		addressOverlay.hideAddressPopup();
 		inputMethodManager.hideSoftInputFromWindow(addressEditText.getWindowToken(), 0);
 		String address = addressEditText.getText().toString();
 		findAddressLocations(address);
+		loading = true;
+		updateLoading();
+	}
+
+	private void updateLoading() {
+		if (addressEditText.getText().length() > 0) {
+			onAddressNotEmpty();
+		} else {
+			onAddressEmpty();
+		}
 	}
 
 	@Click
 	void historyButtonClicked() {
 		if (hasHistory) {
-			Toast.makeText(this, "MOCK History Button Clicked", Toast.LENGTH_LONG).show();
+			ShowNoteActivity_.intent(this).firstView(0).start();
 		}
 	}
 
@@ -242,15 +275,21 @@ public class AddressActivity extends MapActivity {
 	@UiThread
 	void searchAddressError() {
 		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+		loading = false;
+		updateLoading();
 	}
 
 	@UiThread
 	void noAddressFound() {
 		Toast.makeText(this, "Aucun résultat correspondant à l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+		loading = false;
+		updateLoading();
 	}
 
 	@UiThread
 	void addressesFound(List<Address> addresses) {
+		loading = false;
+		updateLoading();
 
 		List<GeoPoint> geopoints = new ArrayList<GeoPoint>();
 
@@ -309,12 +348,12 @@ public class AddressActivity extends MapActivity {
 			searchAddressFromLocationError();
 		}
 	}
-	
+
 	@UiThread
 	void addressFound(Address address) {
 		addressOverlay.setAddress(address);
 	}
-	
+
 	@UiThread
 	void searchAddressFromLocationError() {
 		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
@@ -420,6 +459,8 @@ public class AddressActivity extends MapActivity {
 	void homeClicked() {
 		showDialog(R.id.about_dialog);
 	}
+	
+	
 
 	@Override
 	protected Dialog onCreateDialog(int id, Bundle args) {
