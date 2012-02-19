@@ -56,7 +56,7 @@ public class AddressActivity extends MapActivity {
 
 	@SystemService
 	InputMethodManager inputMethodManager;
-	
+
 	@Bean
 	AboutDialogHelper aboutDialogHelper;
 
@@ -68,6 +68,8 @@ public class AddressActivity extends MapActivity {
 	private MapController mapController;
 
 	private AddressOverlay addressOverlay;
+
+	private boolean shouldMoveToMyLocationOnFirstFix;
 
 	@AfterViews
 	void initLayout() {
@@ -105,6 +107,7 @@ public class AddressActivity extends MapActivity {
 
 			@Override
 			public boolean onSingleTapUp(MotionEvent e) {
+				shouldMoveToMyLocationOnFirstFix = false;
 				float x = e.getX();
 				float y = e.getY();
 				boolean addressTapped = addressOverlay.onSingleTapUp(x, y);
@@ -180,6 +183,7 @@ public class AddressActivity extends MapActivity {
 	}
 
 	private void showAddressPopup(GeoPoint location) {
+		shouldMoveToMyLocationOnFirstFix = false;
 		addressOverlay.showAddressPopup(location);
 		mapController.animateTo(location);
 	}
@@ -226,9 +230,12 @@ public class AddressActivity extends MapActivity {
 	}
 
 	private void moveToMyLocationOnFirstFix() {
+		shouldMoveToMyLocationOnFirstFix = true;
 		myLocationOverlay.runOnFirstFix(new Runnable() {
 			public void run() {
-				moveToMyLocation();
+				if (shouldMoveToMyLocationOnFirstFix) {
+					moveToMyLocation();
+				}
 			}
 		});
 	}
@@ -243,12 +250,12 @@ public class AddressActivity extends MapActivity {
 				.longitudeE6(location.getLongitudeE6()) //
 				.start();
 	}
-	
+
 	@Click
 	void homeClicked() {
 		showDialog(R.id.about_dialog);
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id, Bundle args) {
 		switch (id) {
