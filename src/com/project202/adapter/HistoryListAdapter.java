@@ -10,8 +10,11 @@ import android.widget.BaseAdapter;
 
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
+import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.project202.ShowNoteActivity;
+import com.project202.address.SettingsPreferences_;
 import com.project202.model.Rating;
+import com.project202.model.Weighted;
 import com.project202.views.HistoryLine;
 
 @EBean
@@ -22,6 +25,9 @@ public class HistoryListAdapter extends BaseAdapter {
 
 	@RootContext
 	ShowNoteActivity showNoteActivity;
+	
+	@Pref
+	SettingsPreferences_ preferences;
 
 	private List<Rating> ratings = new ArrayList<Rating>();
 	private float maxRating;
@@ -29,7 +35,7 @@ public class HistoryListAdapter extends BaseAdapter {
 	public void setRatings(List<Rating> ratings) {
 		float maxMark = Float.MIN_VALUE;
 		for (Rating rating : ratings) {
-			float mark = rating.getMark();
+			float mark = Weighted.getWeightedMark(rating,preferences);
 			if (mark > maxMark) {
 				maxMark = mark;
 			}

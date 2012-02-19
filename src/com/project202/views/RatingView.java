@@ -7,9 +7,12 @@ import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.project202.R;
+import com.project202.address.SettingsPreferences_;
 import com.project202.model.Rating;
 import com.project202.model.ThemeName;
+import com.project202.model.Weighted;
 
 @EViewGroup(R.layout.rating)
 public class RatingView extends LinearLayout {
@@ -33,6 +36,9 @@ public class RatingView extends LinearLayout {
 	@ViewById
 	TextView leisureRating;
 	
+	@Pref
+	SettingsPreferences_ preferences;
+	
 	OnRatingClickListener listener;
 	
 	public RatingView(Context context) {
@@ -44,7 +50,7 @@ public class RatingView extends LinearLayout {
 	}
 	
 	public void setValuesFromRating(Rating rating){
-		globalRating.setText(rating.getMark().toString());
+		globalRating.setText(Weighted.getWeightedMark(rating, preferences).toString());
 		
 		cultureRating.setText(rating.getThemeMark(ThemeName.CULTURE).toString());
 		cultureRating.setOnClickListener(new OnClickListener() {

@@ -20,7 +20,7 @@ public class Theme implements Serializable, RatingDetails{
 		this.note = note;
 		this.criteria = criteria;
 	}
-
+	
 	public List<Criterion> getCriteria() {
 		return criteria;
 	}
