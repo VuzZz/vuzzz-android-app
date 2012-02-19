@@ -16,5 +16,10 @@
     <string name="nature_theme_weight">Nature</string>
     <string name="shops_theme_weight">Shops</string>
     <string name="transit_theme_weight">Transit</string>
+    <string name="loading">Chargement en cours...</string>
+    <string name="cancel">Annuler</string>
+    <string name="retry">Réessayer</string>
+    <string name="downloading_error_title">Erreur</string>
+    <string name="error_information_message">Les informations n\'ont pu être téléchargées</string>
 
 </resources>

@@ -1,9 +1,12 @@
 package com.project202.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Theme{
+public class Theme implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private ThemeName name;
 	private String description;
 	private float note;

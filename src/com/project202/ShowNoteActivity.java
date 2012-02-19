@@ -39,6 +39,9 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 	@Extra("address")
 	String address;
+	
+	@Extra("rating")
+	Rating rating;
 
 	@ViewById
 	SettingsView settingsView;
