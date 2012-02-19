@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -44,12 +43,13 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	
 	public HistoryLine(Context context) {
 		super(context);
+		setMinimumHeight((int)pixelSize(context, 75));
 		setWillNotDraw(false);
-		setMinimumHeight((int)pixelSize(context, 80));
+		paint.setFakeBoldText(true);
 		paint.setTextSize(pixelSize(context, 15));
 		paint.setStyle(Style.FILL);
 		paint.setAntiAlias(true);
-		VERTICAL_SPACE = pixelSize(context, 7f);
+		VERTICAL_SPACE = pixelSize(context, 12f);
 		LEFT_SPACE = pixelSize(context, 15f);
 		THICKNESS = pixelSize(context, 15f);
 		HORIZONTAL_SPACE = pixelSize(context, 15f);
@@ -70,22 +70,18 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		// Animation
 		long now = System.currentTimeMillis();
 		long deltaTime = now - animationStart;
-		float right_space;
 		float interpolation = 0;
-		if (deltaTime >= DURATION) {
-			right_space = 20;
-		} else {
+		if (deltaTime < DURATION) {
 			float percent = deltaTime / (float) DURATION;
 			interpolation = bounceInterpolator.getInterpolation(percent);
-			right_space = getWidth() - interpolation * getWidth() + 20;
 			postInvalidateDelayed(17);
 		}
 
 		// Prepare Drawing
 		float left = HORIZONTAL_SPACE;
 		float top = VERTICAL_SPACE;
-		float width = getWidth()-HORIZONTAL_SPACE*2;
-		float height = getHeight()-VERTICAL_SPACE*2;
+		float width = getWidth()-HORIZONTAL_SPACE*2-THICKNESS;
+		float height = getHeight()-VERTICAL_SPACE*2-THICKNESS;
 		if (deltaTime < DURATION){
 			width = width*interpolation;
 		}
@@ -93,7 +89,6 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		// Drawing
 		float offset = 0f;
 		for (Theme theme : rating.getThemes()) {
-			
 			float themeWidth = 0f;
 			if (theme.getNote()==0){
 				themeWidth = 1f;
@@ -103,12 +98,12 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 			
 			path.reset();
 			float leftBase = left + offset;
-			path.moveTo(leftBase, top + THICKNESS);
-			path.lineTo(leftBase + THICKNESS, top);
+			path.moveTo(leftBase, 				top + THICKNESS);
+			path.lineTo(leftBase + THICKNESS, 	top);
 			path.lineTo(leftBase + THICKNESS + themeWidth, top);
 			path.lineTo(leftBase + THICKNESS + themeWidth, top + height);
-			path.lineTo(leftBase + themeWidth, top + height + THICKNESS);
-			path.lineTo(leftBase, top + height + THICKNESS);
+			path.lineTo(leftBase + themeWidth, 	top + height + THICKNESS);
+			path.lineTo(leftBase, 				top + height + THICKNESS);
 			path.close();
 			paint.setColor(theme.getColor());
 			canvas.drawPath(path, paint);
@@ -136,7 +131,7 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 
 		paint.setColor(0xFFFFFFFF);
 		if (rating.address != null){
-			canvas.drawText(rating.address, LEFT_SPACE + VERTICAL_SPACE * 2, height / 2f + 10, paint);
+			canvas.drawText(rating.address, left + HORIZONTAL_SPACE, top + THICKNESS +  height/2 + 4, paint);
 		}
 	}
 
@@ -146,6 +141,10 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		invalidate();
 	}
 
+	public void playAnimation() {
+		onHistoryFocused();
+	}
+	
 	@Override
 	public void onHistoryFocused() {
 		hidden = false;
@@ -161,4 +160,5 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	public void onHistoryHidden() {
 		hidden = true;
 	}
+
 }
