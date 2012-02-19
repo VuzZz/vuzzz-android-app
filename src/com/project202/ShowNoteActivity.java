@@ -143,19 +143,21 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		
 		titles.setViewPager(viewPager);
 
-		if(rating != null){
-			ratingView.setValuesFromRating(rating);
-			ratingDetailsView.setRating(rating);
-			viewPager.setCurrentItem(1);
-		}
-		
 		List<Rating> ratings = loadRatingsFromFiles();
 		historyView.setRatings(ratings);
-		
-		if(rating == null && !ratings.isEmpty())
-			rating = ratings.get(0);
 
-		viewPager.setCurrentItem(0);
+		boolean ratingNull = rating==null;
+		
+		if(ratingNull && !ratings.isEmpty())
+			rating = ratings.get(0);
+		
+		ratingView.setValuesFromRating(rating);
+		ratingDetailsView.setRating(rating);
+
+		if(ratingNull)
+			viewPager.setCurrentItem(0);
+		else
+			viewPager.setCurrentItem(1);
 	}
 
 	private List<Rating> loadRatingsFromFiles() {
