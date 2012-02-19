@@ -13,6 +13,7 @@ import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
@@ -201,6 +202,40 @@ public class AddressActivity extends MapActivity {
 		}
 
 		moveToMyLocationOnFirstFix();
+
+		handleVuzZzIntent();
+	}
+
+	@Override
+	public void onNewIntent(Intent intent) {
+		setIntent(intent);
+		handleVuzZzIntent();
+	}
+
+	private void handleVuzZzIntent() {
+		Intent intent = getIntent();
+		if (intent.getAction() != null && intent.getAction().equals(Intent.ACTION_VIEW)) {
+			Uri data = intent.getData();
+			List<String> pathSegments = data.getPathSegments();
+			if (pathSegments.size() == 1) {
+				String queryParameter = data.getQueryParameter("q");
+				if (queryParameter != null) {
+					int comma = queryParameter.indexOf(',');
+					if (comma != -1 && comma < queryParameter.length() - 1) {
+						try {
+							double latitude = Double.parseDouble(queryParameter.substring(0, comma));
+							double longitude = Double.parseDouble(queryParameter.substring(comma + 1));
+							GeoPoint location = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
+							showAddressPopup(location);
+						} catch (NumberFormatException e) {
+							LogHelper.logException("Could not parse coordinates", e);
+						}
+					}
+				}
+			}
+
+			Toast.makeText(this, "Désolé, l'adresse n'est pas lisible", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	protected void onAddressEmpty() {
@@ -459,8 +494,6 @@ public class AddressActivity extends MapActivity {
 	void homeClicked() {
 		showDialog(R.id.about_dialog);
 	}
-	
-	
 
 	@Override
 	protected Dialog onCreateDialog(int id, Bundle args) {

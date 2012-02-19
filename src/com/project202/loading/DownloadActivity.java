@@ -114,7 +114,7 @@ public class DownloadActivity extends Activity implements TaskResultListener<Rat
 	public void onTaskSuccess(Rating result) {
 		step = Step.DONE;
 		task = null;
-		ShowNoteActivity_.intent(this).address(address).rating(result).start();
+		ShowNoteActivity_.intent(this).rating(result).start();
 		finish();
 	}
 

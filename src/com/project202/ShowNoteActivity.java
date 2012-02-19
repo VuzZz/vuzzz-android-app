@@ -15,7 +15,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
 import android.app.Activity;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
@@ -45,9 +44,6 @@ import com.vuzzz.android.R;
 @EActivity(R.layout.show_note)
 @NoTitle
 public class ShowNoteActivity extends Activity implements OnRatingClickListener, OnSettingsUpdatedListener {
-
-	@Extra("address")
-	String address;
 
 	@Extra("rating")
 	Rating rating;
@@ -85,8 +81,6 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	public void afterViews() {
 
 		onHistoryFocusedListeners = new ArrayList<OnHistoryFocusedListener>();
-
-		titleView.setText(address);
 
 		// Creating ViewPager Views
 		final RatingView_ ratingView = new RatingView_(this);
@@ -162,6 +156,8 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		
 		ratingView.setValuesFromRating(rating);
 		ratingDetailsView.setRating(rating);
+		
+		titleView.setText(rating.address);
 
 		if(ratingNull)
 			viewPager.setCurrentItem(0);
