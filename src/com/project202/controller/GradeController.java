@@ -22,4 +22,5 @@ public class GradeController {
 		if (grade >= 5 && grade < 7.5) return R.color.yellow;
 		else return R.color.green;
 	}
+	
 }
