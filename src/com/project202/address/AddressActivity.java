@@ -216,21 +216,18 @@ public class AddressActivity extends MapActivity {
 		Intent intent = getIntent();
 		if (intent.getAction() != null && intent.getAction().equals(Intent.ACTION_VIEW)) {
 			Uri data = intent.getData();
-			List<String> pathSegments = data.getPathSegments();
-			if (pathSegments.size() == 1) {
-				String queryParameter = data.getQueryParameter("q");
-				if (queryParameter != null) {
-					int comma = queryParameter.indexOf(',');
-					if (comma != -1 && comma < queryParameter.length() - 1) {
-						try {
-							double latitude = Double.parseDouble(queryParameter.substring(0, comma));
-							double longitude = Double.parseDouble(queryParameter.substring(comma + 1));
-							GeoPoint location = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
-							showAddressPopup(location);
-							return;
-						} catch (NumberFormatException e) {
-							LogHelper.logException("Could not parse coordinates", e);
-						}
+			String queryParameter = data.getQueryParameter("q");
+			if (queryParameter != null) {
+				int comma = queryParameter.indexOf(',');
+				if (comma != -1 && comma < queryParameter.length() - 1) {
+					try {
+						double latitude = Double.parseDouble(queryParameter.substring(0, comma));
+						double longitude = Double.parseDouble(queryParameter.substring(comma + 1));
+						GeoPoint location = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
+						showAddressPopup(location);
+						return;
+					} catch (NumberFormatException e) {
+						LogHelper.logException("Could not parse coordinates", e);
 					}
 				}
 			}
