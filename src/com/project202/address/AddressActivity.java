@@ -59,6 +59,9 @@ public class AddressActivity extends MapActivity {
 
 	@ViewById
 	View searchButton;
+	
+	@ViewById
+	View locationButton;
 
 	@SystemService
 	InputMethodManager inputMethodManager;
@@ -186,11 +189,13 @@ public class AddressActivity extends MapActivity {
 
 	protected void onAddressEmpty() {
 		searchButton.setVisibility(View.GONE);
+		locationButton.setVisibility(View.VISIBLE);
 		addressHint.setVisibility(View.VISIBLE);
 	}
 
 	protected void onAddressNotEmpty() {
 		searchButton.setVisibility(View.VISIBLE);
+		locationButton.setVisibility(View.GONE);
 		addressHint.setVisibility(View.GONE);
 	}
 
@@ -200,6 +205,11 @@ public class AddressActivity extends MapActivity {
 		inputMethodManager.hideSoftInputFromWindow(addressEditText.getWindowToken(), 0);
 		String address = addressEditText.getText().toString();
 		findAddressLocations(address);
+	}
+	
+	@Click
+	void historyButtonClicked() {
+		Toast.makeText(this, "MOCK History Button Clicked", Toast.LENGTH_LONG).show();
 	}
 
 	@Background

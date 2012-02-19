@@ -27,36 +27,46 @@
             android:src="@drawable/ic_home" />
 
         <ImageButton
-            android:id="@+id/locationButton"
+            android:id="@+id/historyButton"
             style="@style/ActionBarCompatItem"
             android:layout_width="@dimen/actionbar_compat_button_width"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:contentDescription="Ma position"
+            android:contentDescription="Historique"
             android:scaleType="center"
-            android:src="@drawable/ic_menu_mylocation" />
+            android:src="@drawable/ic_menu_recent_history" />
 
         <ImageButton
             android:id="@+id/searchButton"
             style="@style/ActionBarCompatItem"
             android:layout_width="@dimen/actionbar_compat_button_width"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/locationButton"
+            android:layout_toLeftOf="@id/historyButton"
             android:contentDescription="Chercher"
             android:scaleType="center"
             android:src="@drawable/ic_menu_play_clip"
             android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/locationButton"
+            style="@style/ActionBarCompatItem"
+            android:layout_width="@dimen/actionbar_compat_button_width"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/searchButton"
+            android:contentDescription="Ma position"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu_mylocation" />
 
         <EditText
             android:id="@+id/addressEditText"
             style="@android:style/Theme.Light"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/searchButton"
+            android:layout_toLeftOf="@id/locationButton"
             android:layout_toRightOf="@android:id/home"
             android:contentDescription="Adresse"
-            android:inputType="text"
             android:imeOptions="actionSearch"
+            android:inputType="text"
             android:textColor="#fff" />
 
         <TextView
