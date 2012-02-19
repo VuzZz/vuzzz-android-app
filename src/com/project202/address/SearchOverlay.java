@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -12,7 +11,6 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.location.Address;
-import android.util.TypedValue;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -27,6 +25,7 @@ public class SearchOverlay extends Overlay {
 	private final float HALF_CUBE_SIZE;
 	private final float THICKNESS;
 	private final float FONT_SIZE;
+	private final float TOP_PADDING;
 
 	private final Paint paint = new Paint();
 	private final Paint textPaint = new Paint();
@@ -40,15 +39,15 @@ public class SearchOverlay extends Overlay {
 	private List<RectF> hitRects;
 	private float logoLetterHalfWidth;
 	private float halfTextSize;
-	
+
 	public SearchOverlay(Context context) {
-		
-	
+
 		CUBE_SIZE = DimenHelper.pixelSize(context, 25f);
 		HALF_CUBE_SIZE = CUBE_SIZE / 2;
 		THICKNESS = DimenHelper.pixelSize(context, 5f);
 		FONT_SIZE = DimenHelper.pixelSize(context, 15f);
-		
+		TOP_PADDING = DimenHelper.pixelSize(context, 2f);
+
 		paint.setAntiAlias(true);
 		paint.setStyle(Style.FILL);
 		textPaint.setAntiAlias(true);
@@ -57,7 +56,6 @@ public class SearchOverlay extends Overlay {
 		textPaint.setFakeBoldText(true);
 		logoLetterHalfWidth = textPaint.measureText(LOGO_LETTER) / 2;
 		halfTextSize = FONT_SIZE / 2;
-		
 
 	}
 
@@ -83,7 +81,7 @@ public class SearchOverlay extends Overlay {
 
 			Path path = new Path();
 
-			float top = point.y - THICKNESS;
+			float top = point.y - THICKNESS - TOP_PADDING;
 			float left = point.x - HALF_CUBE_SIZE;
 
 			rect.left = left;

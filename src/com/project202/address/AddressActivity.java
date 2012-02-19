@@ -152,7 +152,7 @@ public class AddressActivity extends MapActivity {
 			}
 		};
 
-		addressOverlay = new AddressOverlay();
+		addressOverlay = new AddressOverlay(this);
 
 		searchOverlay = new SearchOverlay(this);
 
@@ -220,7 +220,7 @@ public class AddressActivity extends MapActivity {
 	void searchAddressError() {
 		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
 	}
-	
+
 	@UiThread
 	void noAddressFound() {
 		Toast.makeText(this, "Aucun résultat correspondant à l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
@@ -301,7 +301,8 @@ public class AddressActivity extends MapActivity {
 		GeoPoint currentLocation = myLocationOverlay.getMyLocation();
 		if (currentLocation != null) {
 			try {
-				mapView.getController().animateTo(currentLocation);
+				mapController.setZoom(18);
+				mapController.animateTo(currentLocation);
 			} catch (Exception e) {
 				LogHelper.logException("Could not animate to " + currentLocation, e);
 			}

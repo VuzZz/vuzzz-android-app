@@ -1,5 +1,6 @@
 package com.project202.address;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -12,13 +13,15 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
+import com.project202.DimenHelper;
 
 public class AddressOverlay extends Overlay {
 
-	private static final int FONT_SIZE = 30;
-	private static final int INNER_SPACE = 40;
-	private static final int RADIUS = 7;
-	private static final int ICON_SIZE = 0;
+	private final float FONT_SIZE;
+	private final float INNER_SPACE;
+	private final float RADIUS;
+	private final float PADDING;
+	private final float PADDING2;
 
 	private GeoPoint addressLocation;
 
@@ -35,7 +38,14 @@ public class AddressOverlay extends Overlay {
 
 	private Address address = null;
 
-	public AddressOverlay() {
+	public AddressOverlay(Context context) {
+
+		FONT_SIZE = DimenHelper.pixelSize(context, 16f);
+		INNER_SPACE = DimenHelper.pixelSize(context, 20f);
+		RADIUS = DimenHelper.pixelSize(context, 13f);
+		PADDING = DimenHelper.pixelSize(context, 3.3f);
+		PADDING2 = DimenHelper.pixelSize(context, 1.3f);
+
 		textPaint.setAntiAlias(true);
 		textPaint.setColor(0xFF666666);
 		textPaint.setTextSize(FONT_SIZE);
@@ -83,12 +93,12 @@ public class AddressOverlay extends Overlay {
 		float baseY = addressPoint.y;
 		float width = Math.max(firstStringSize, secondStringSize) + INNER_SPACE * 2;
 
-		float height = FONT_SIZE + INNER_SPACE * 2 - 5;
+		float height = FONT_SIZE + INNER_SPACE * 2 - PADDING;
 		float left = baseX - width / 2;
 		float top = baseY - height - INNER_SPACE;
 
 		if (address != null) {
-			width += ICON_SIZE + INNER_SPACE;
+			width += INNER_SPACE;
 			panelPaint.setColor(0xFFFFFFFF);
 		} else {
 			panelPaint.setColor(0xFFEEEEEE);
@@ -108,8 +118,8 @@ public class AddressOverlay extends Overlay {
 			path.reset();
 			int halfInnerSpace = 0; // INNER_SPACE / 4;
 			path.moveTo(baseX + shadowOffset, (baseY - halfInnerSpace) + shadowOffset);
-			path.lineTo((baseX - INNER_SPACE / 2) + shadowOffset, (baseY - INNER_SPACE - 2) + shadowOffset);
-			path.lineTo((baseX + INNER_SPACE / 2) + shadowOffset, (baseY - INNER_SPACE - 2) + shadowOffset);
+			path.lineTo((baseX - INNER_SPACE / 2) + shadowOffset, (baseY - INNER_SPACE - PADDING2) + shadowOffset);
+			path.lineTo((baseX + INNER_SPACE / 2) + shadowOffset, (baseY - INNER_SPACE - PADDING2) + shadowOffset);
 			path.close();
 			canvas.drawPath(path, shadowPaint);
 
@@ -129,8 +139,8 @@ public class AddressOverlay extends Overlay {
 			path.reset();
 			int halfInnerSpace = 0; // INNER_SPACE / 4;
 			path.moveTo(baseX, baseY - halfInnerSpace);
-			path.lineTo(baseX - INNER_SPACE / 2, baseY - INNER_SPACE - 2);
-			path.lineTo(baseX + INNER_SPACE / 2, baseY - INNER_SPACE - 2);
+			path.lineTo(baseX - INNER_SPACE / 2, baseY - INNER_SPACE - PADDING2);
+			path.lineTo(baseX + INNER_SPACE / 2, baseY - INNER_SPACE - PADDING2);
 			path.close();
 			canvas.drawPath(path, panelPaint);
 			canvas.drawLine(baseX, baseY - halfInnerSpace, baseX - INNER_SPACE / 2, baseY - INNER_SPACE, strokePaint);
@@ -140,7 +150,7 @@ public class AddressOverlay extends Overlay {
 			textPaint.setFakeBoldText(true);
 			canvas.drawText(firstString, left + INNER_SPACE, top + INNER_SPACE, textPaint);
 			textPaint.setFakeBoldText(false);
-			canvas.drawText(secondString, left + INNER_SPACE, top + INNER_SPACE + FONT_SIZE + 10, textPaint);
+			canvas.drawText(secondString, left + INNER_SPACE, top + INNER_SPACE + FONT_SIZE + 2 * PADDING, textPaint);
 		}
 
 		return false;
