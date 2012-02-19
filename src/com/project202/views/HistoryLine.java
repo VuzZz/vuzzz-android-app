@@ -126,8 +126,10 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		paint.setColor(0x11000000);
 		canvas.drawPath(path, paint);
 
-		paint.setColor(0xFFFFFFFF);
 		if (rating.address != null){
+			paint.setColor(0x88000000);
+			canvas.drawText(rating.address, left + HORIZONTAL_SPACE + 1, top + THICKNESS +  height/2 + 5, paint);
+			paint.setColor(0xFFFFFFFF);
 			canvas.drawText(rating.address, left + HORIZONTAL_SPACE, top + THICKNESS +  height/2 + 4, paint);
 		}
 	}
