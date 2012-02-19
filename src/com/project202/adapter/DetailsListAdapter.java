@@ -32,6 +32,7 @@ public class DetailsListAdapter extends BaseAdapter {
 	private Map<String, Integer> themePositions;
 
 	public void setRating(Rating rating) {
+		details.clear();
 
 		for (Theme t : rating.getThemes()) {
 			details.add(t);
