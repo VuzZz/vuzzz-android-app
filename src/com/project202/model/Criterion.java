@@ -1,6 +1,11 @@
 package com.project202.model;
 
-public class Criterion {
+import java.io.Serializable;
+
+public class Criterion implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String name;
 	private String description;
 	private float note;

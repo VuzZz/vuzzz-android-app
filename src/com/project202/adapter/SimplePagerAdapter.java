@@ -2,6 +2,8 @@ package com.project202.adapter;
 
 import java.util.List;
 
+import com.viewpagerindicator.TitleProvider;
+
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,7 +14,7 @@ import android.view.View;
  * views nor updating / saving state. To be used when you have a limited number
  * of views that can be pre instantiated.
  */
-public class SimplePagerAdapter extends PagerAdapter {
+public class SimplePagerAdapter extends PagerAdapter implements TitleProvider {
 
 	private final List<View> views;
 	
@@ -21,11 +23,6 @@ public class SimplePagerAdapter extends PagerAdapter {
 	public SimplePagerAdapter(List<View> views, List<String> pageTitles) {
 		this.views = views;
 		this.pageTitles = pageTitles;
-	}
-	
-	@Override
-	public CharSequence getPageTitle(int position) {
-		return pageTitles.get(position);
 	}
 
 	@Override
@@ -65,6 +62,11 @@ public class SimplePagerAdapter extends PagerAdapter {
 
 	@Override
 	public void startUpdate(View view) {
+	}
+
+	@Override
+	public String getTitle(int position) {
+		return pageTitles.get(position);
 	}
 
 }

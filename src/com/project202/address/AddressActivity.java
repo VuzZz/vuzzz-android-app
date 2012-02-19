@@ -7,7 +7,6 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,8 +30,9 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.project202.LogHelper;
 import com.project202.R;
-import com.project202.ShowNoteActivity_;
+import com.project202.loading.DownloadActivity_;
 
 @EActivity(R.layout.address_map)
 @NoTitle
@@ -210,7 +210,7 @@ public class AddressActivity extends MapActivity {
 			try {
 				mapView.getController().animateTo(currentLocation);
 			} catch (Exception e) {
-				Log.e("TAAAG", "Could not animate to " + currentLocation, e);
+				LogHelper.logException("Could not animate to " + currentLocation, e);
 			}
 		} else {
 			moveToMyLocationOnFirstFix();
@@ -229,6 +229,11 @@ public class AddressActivity extends MapActivity {
 	protected void noteAddress(GeoPoint location) {
 		addressOverlay.hideAddressPopup();
 		String mockAddress = "42 rue des petits indiens, 75006 Paris";
-		ShowNoteActivity_.intent(this).address(mockAddress).start();
+
+		DownloadActivity_.intent(this) //
+				.address(mockAddress) //
+				.latitudeE6(location.getLatitudeE6()) //
+				.longitudeE6(location.getLongitudeE6()) //
+				.start();
 	}
 }

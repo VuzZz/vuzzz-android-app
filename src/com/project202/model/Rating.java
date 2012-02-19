@@ -1,8 +1,12 @@
 package com.project202.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Rating {
+public class Rating implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private List<Theme> themes;
 
 	public List<Theme> getThemes() {

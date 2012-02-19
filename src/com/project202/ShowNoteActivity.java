@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Toast;
@@ -28,15 +29,20 @@ import com.project202.model.ThemeName;
 import com.project202.views.HistoryView_;
 import com.project202.views.OnHistoryFocusedListener;
 import com.project202.views.RatingDetailsView_;
+import com.project202.views.RatingView.OnRatingClickListener;
 import com.project202.views.RatingView_;
 import com.project202.views.SettingsView;
+import com.viewpagerindicator.TitlePageIndicator;
 
 @EActivity(R.layout.show_note)
 @OptionsMenu(R.menu.show_note_menu)
-public class ShowNoteActivity extends ActionBarActivity {
+public class ShowNoteActivity extends ActionBarActivity implements OnRatingClickListener {
 
 	@Extra("address")
 	String address;
+	
+	@Extra("rating")
+	Rating rating;
 
 	@ViewById
 	SettingsView settingsView;
@@ -49,8 +55,13 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 	@ViewById(R.id.view_pager)
 	protected ViewPager viewPager;
+
 	private List<OnHistoryFocusedListener> onHistoryFocusedListeners;
 
+	private RatingDetailsView_ ratingDetailsView;
+	
+	@ViewById
+	TitlePageIndicator titles;
 
 	private SimplePagerAdapter pagerAdapter;
 
@@ -63,7 +74,7 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 		// Creating ViewPager Views
 		RatingView_ ratingView = new RatingView_(this);
-		RatingDetailsView_ ratingDetailsView = new RatingDetailsView_(this);
+		ratingDetailsView = new RatingDetailsView_(this);
 		final HistoryView_ historyView = new HistoryView_(this);
 		// Inflating layouts
 		ratingView.onFinishInflate();
@@ -71,6 +82,7 @@ public class ShowNoteActivity extends ActionBarActivity {
 		historyView.onFinishInflate();
 
 		// Injecting some content to test
+		ratingView.setOnRatingClickListener(this);
 		ratingView.setValuesFromRating(getTestPrintedRating());
 
 		// Storing views
@@ -83,18 +95,36 @@ public class ShowNoteActivity extends ActionBarActivity {
 
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
-		viewPager.setCurrentItem(1);
-
-		viewPager.setOnPageChangeListener(new AbstractOnPageChangeListener() {
+		
+		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
-			public void onPageSelected(int arg0) {
-				if (arg0==0){
+			public void onPageSelected(int position) {
+				if (position==0){
 					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
 						listener.onHistoryFocused();
 					}
+				} else {
+					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
+						listener.onHistoryHidden();
+					}
 				}
+				titles.onPageSelected(position);
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				titles.onPageScrollStateChanged(state);
+			}
+
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				titles.onPageScrolled(position, positionOffset, positionOffsetPixels);
 			}
 		});
+
+		titles.setViewPager(viewPager);
+		
+		viewPager.setCurrentItem(1);
 	}
 
 	@Override
@@ -141,6 +171,20 @@ public class ShowNoteActivity extends ActionBarActivity {
 			settingsView.startAnimation(slideInFromBottom);
 			settingsView.setVisibility(View.VISIBLE);
 		}
+	}
+
+	@Override
+	public void onRatingClickListener(ThemeName themeName) {
+		ratingDetailsView.onRatingClickListener(themeName);
+		viewPager.setCurrentItem(2);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(settingsView.getVisibility() == View.VISIBLE)
+			menuSettingsSelected();
+		else
+			super.onBackPressed();
 	}
 
 }

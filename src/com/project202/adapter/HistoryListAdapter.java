@@ -14,29 +14,29 @@ import com.project202.model.Rating;
 import com.project202.views.HistoryLine;
 
 @EBean
-public class HistoryListAdapter extends BaseAdapter{
+public class HistoryListAdapter extends BaseAdapter {
 
 	@RootContext
 	Activity activity;
-	
+
 	@RootContext
 	ShowNoteActivity showNoteActivity;
-	
+
 	private List<Rating> ratings;
 	private float maxRating;
-	
-	public void setRatings(List<Rating> ratings){
+
+	public void setRatings(List<Rating> ratings) {
 		float maxMark = Float.MIN_VALUE;
-		for (Rating rating : ratings){
+		for (Rating rating : ratings) {
 			float mark = rating.getMark();
-			if (mark > maxMark){
+			if (mark > maxMark) {
 				maxMark = mark;
 			}
 		}
 		this.maxRating = maxMark;
 		this.ratings = ratings;
 	}
-	
+
 	@Override
 	public int getCount() {
 		return ratings.size();
@@ -54,13 +54,15 @@ public class HistoryListAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		HistoryLine historyLine;
 		if (convertView == null) {
-			convertView = new HistoryLine(activity); 
-			showNoteActivity.addOnSettingsFocusedHandler((HistoryLine) convertView);
+			historyLine = new HistoryLine(activity);
+			showNoteActivity.addOnSettingsFocusedHandler(historyLine);
+		} else {
+			historyLine = (HistoryLine) convertView;
 		}
-		((HistoryLine) convertView).setData(ratings.get(position), maxRating);
-		((HistoryLine) convertView).setPair(position%2==0);
-		return convertView;
+		historyLine.setData(ratings.get(position), maxRating);
+		historyLine.setPair(position % 2 == 0);
+		return historyLine;
 	}
-		
 }

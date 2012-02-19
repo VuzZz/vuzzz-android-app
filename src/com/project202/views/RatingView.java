@@ -1,6 +1,7 @@
 package com.project202.views;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,10 +12,15 @@ import com.project202.controller.GradeController;
 import com.project202.controller.RatingController;
 import com.project202.model.PrintedRating;
 import com.project202.model.Rating;
+import com.project202.model.ThemeName;
 
 @EViewGroup(R.layout.rating)
 public class RatingView extends LinearLayout {
-
+	
+	public interface OnRatingClickListener{
+		void onRatingClickListener(ThemeName themeName);
+	}
+	
 	@ViewById
 	TextView globalRating;
 	@ViewById
@@ -30,32 +36,74 @@ public class RatingView extends LinearLayout {
 	@ViewById
 	TextView leisureRating;
 	
+	OnRatingClickListener listener;
+	
 	public RatingView(Context context) {
 		super(context);
+	}
+
+	public void setOnRatingClickListener(OnRatingClickListener listener){
+		this.listener = listener;
 	}
 	
 	public void setValuesFromRating(Rating rating){
 		PrintedRating printedRating = RatingController.getPrintedRating(rating);
-		this.globalRating.setText(String.valueOf(printedRating.getGlobalGrade()));
-		this.globalRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getGlobalGrade()));
+		globalRating.setText(String.valueOf(printedRating.getGlobalGrade()));
+		globalRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getGlobalGrade()));
 		
-		this.cultureRating.setText(String.valueOf(printedRating.getCultureGrade()));
-		this.cultureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getCultureGrade()));
+		cultureRating.setText(String.valueOf(printedRating.getCultureGrade()));
+		cultureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getCultureGrade()));
+		cultureRating.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				listener.onRatingClickListener(ThemeName.CULTURE);
+			}
+		});
 		
-		this.natureRating.setText(String.valueOf(printedRating.getNatureGrade()));
-		this.natureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getNatureGrade()));
+		natureRating.setText(String.valueOf(printedRating.getNatureGrade()));
+		natureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getNatureGrade()));
+		natureRating.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				listener.onRatingClickListener(ThemeName.NATURE);
+			}
+		});
 		
-		this.transitRating.setText(String.valueOf(printedRating.getTransitGrade()));
-		this.transitRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getTransitGrade()));
+		transitRating.setText(String.valueOf(printedRating.getTransitGrade()));
+		transitRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getTransitGrade()));
+		transitRating.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				listener.onRatingClickListener(ThemeName.TRANSIT);
+			}
+		});
 		
-		this.institutionsRating.setText(String.valueOf(printedRating.getInstitutionsGrade()));
-		this.institutionsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getInstitutionsGrade()));
+		institutionsRating.setText(String.valueOf(printedRating.getInstitutionsGrade()));
+		institutionsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getInstitutionsGrade()));
+		institutionsRating.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				listener.onRatingClickListener(ThemeName.INSTITUTIONS);
+			}
+		});
 		
-		this.shopsRating.setText(String.valueOf(printedRating.getShopsGrade()));
-		this.shopsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getShopsGrade()));
+		shopsRating.setText(String.valueOf(printedRating.getShopsGrade()));
+		shopsRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getShopsGrade()));
+		shopsRating.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				listener.onRatingClickListener(ThemeName.SHOPS);
+			}
+		});
 		
-		this.leisureRating.setText(String.valueOf(printedRating.getLeisureGrade()));
-		this.leisureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getLeisureGrade()));
+		leisureRating.setText(String.valueOf(printedRating.getLeisureGrade()));
+		leisureRating.setBackgroundColor(GradeController.getColorForGrade(printedRating.getLeisureGrade()));
+		leisureRating.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				listener.onRatingClickListener(ThemeName.LEISURE);
+			}
+		});
 	}
 	
 }
