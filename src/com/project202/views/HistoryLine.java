@@ -1,11 +1,11 @@
 package com.project202.views;
 
+import static com.project202.DimenHelper.pixelSize;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -18,12 +18,6 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	private static final int DURATION = 500;
 
 	private static final Interpolator bounceInterpolator = new DecelerateInterpolator();
-
-	private static final float VERTICAL_SPACE = 5f;
-
-	private static final float LEFT_SPACE = 20f;
-
-	private static final float THICKNESS = 15f;
 
 	private Rating rating;
 
@@ -38,88 +32,106 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	private long animationStart;
 	
 	private boolean hidden = true;
-	
-	static {
-		paint.setTextSize(15);
-		paint.setStyle(Style.FILL);
-		paint.setAntiAlias(true);
-	}
 
+	private final float VERTICAL_SPACE;
+	
+	private final float HORIZONTAL_SPACE;
+
+	private final float LEFT_SPACE;
+
+	private final float THICKNESS;
+	
 	public HistoryLine(Context context) {
 		super(context);
+		setMinimumHeight((int)pixelSize(context, 75));
 		setWillNotDraw(false);
-		setMinimumHeight(80);
+		paint.setFakeBoldText(true);
+		paint.setTextSize(pixelSize(context, 15));
+		paint.setStyle(Style.FILL);
+		paint.setAntiAlias(true);
+		VERTICAL_SPACE = pixelSize(context, 12f);
+		LEFT_SPACE = pixelSize(context, 15f);
+		THICKNESS = pixelSize(context, 15f);
+		HORIZONTAL_SPACE = pixelSize(context, 15f);
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-		
 		canvas.drawColor(pair ? 0x11AAAAAA : 0xFFFFFFFF);
 		
 		if (hidden) {
 			return;
 		}
+		
+		if (rating == null) {
+			return;
+		}
 
+		// Animation
 		long now = System.currentTimeMillis();
 		long deltaTime = now - animationStart;
-		int width = getWidth();
-		float right_space;
-		if (deltaTime >= DURATION) {
-			right_space = 20;
-		} else {
+		float interpolation = 0;
+		if (deltaTime < DURATION) {
 			float percent = deltaTime / (float) DURATION;
-			float interpolation = bounceInterpolator.getInterpolation(percent);
-			right_space = width - interpolation * width + 20;
+			interpolation = bounceInterpolator.getInterpolation(percent);
 			postInvalidateDelayed(17);
 		}
 
-		float screenWidth = width - right_space - 20f;
-		if (rating != null) {
-			float offset = 0f;
-			int height = getHeight();
-			for (Theme theme : rating.getThemes()) {
-				float themeWidth = 0f;
-				if (theme.getNote()==0){
-					themeWidth = 1f;
-				} else {
-					themeWidth = theme.getNote() / maxRating * screenWidth;
-				}
-				Log.d("Tag", "theme:"+theme.getNote()+" "+maxRating+" "+screenWidth+" "+themeWidth);
-				paint.setColor(theme.getColor());
-				path.reset();
-				float left = LEFT_SPACE + offset;
-				path.moveTo(left, VERTICAL_SPACE + THICKNESS);
-				path.lineTo(left + THICKNESS, VERTICAL_SPACE);
-				path.lineTo(left + THICKNESS + themeWidth, VERTICAL_SPACE);
-				path.lineTo(left + THICKNESS + themeWidth, height - VERTICAL_SPACE - THICKNESS);
-				path.lineTo(left + themeWidth, height - VERTICAL_SPACE);
-				path.lineTo(left, height - VERTICAL_SPACE);
-				path.close();
-				canvas.drawPath(path, paint);
-				offset += themeWidth;
+		// Prepare Drawing
+		float left = HORIZONTAL_SPACE;
+		float top = VERTICAL_SPACE;
+		float width = getWidth()-HORIZONTAL_SPACE*2-THICKNESS;
+		float height = getHeight()-VERTICAL_SPACE*2-THICKNESS;
+		if (deltaTime < DURATION){
+			width = width*interpolation;
+		}
+		
+		// Drawing
+		float offset = 0f;
+		for (Theme theme : rating.getThemes()) {
+			float themeWidth = 0f;
+			if (theme.getNote()==0){
+				themeWidth = 1f;
+			} else {
+				themeWidth = theme.getNote() / maxRating * width;
 			}
-
+			
 			path.reset();
-			path.moveTo(LEFT_SPACE + 0, VERTICAL_SPACE + THICKNESS);
-			path.lineTo(LEFT_SPACE + THICKNESS, VERTICAL_SPACE);
-			path.lineTo(LEFT_SPACE + offset + THICKNESS, VERTICAL_SPACE);
-			path.lineTo(LEFT_SPACE + offset, VERTICAL_SPACE + THICKNESS);
-			path.lineTo(LEFT_SPACE + 0, VERTICAL_SPACE + THICKNESS);
+			float leftBase = left + offset;
+			path.moveTo(leftBase, 				top + THICKNESS);
+			path.lineTo(leftBase + THICKNESS, 	top);
+			path.lineTo(leftBase + THICKNESS + themeWidth, top);
+			path.lineTo(leftBase + THICKNESS + themeWidth, top + height);
+			path.lineTo(leftBase + themeWidth, 	top + height + THICKNESS);
+			path.lineTo(leftBase, 				top + height + THICKNESS);
 			path.close();
-			paint.setColor(0x33000000);
+			paint.setColor(theme.getColor());
 			canvas.drawPath(path, paint);
+			offset += themeWidth;
+		}
 
-			path.reset();
-			path.moveTo(LEFT_SPACE + offset + THICKNESS, VERTICAL_SPACE);
-			path.lineTo(LEFT_SPACE + offset + THICKNESS, height - VERTICAL_SPACE - THICKNESS);
-			path.lineTo(LEFT_SPACE + offset, height - VERTICAL_SPACE);
-			path.lineTo(LEFT_SPACE + offset, VERTICAL_SPACE + THICKNESS);
-			path.close();
-			paint.setColor(0x11000000);
-			canvas.drawPath(path, paint);
+		path.reset();
+		path.moveTo(left, 				top + THICKNESS);
+		path.lineTo(left + THICKNESS, 	top);
+		path.lineTo(left + offset + THICKNESS, top);
+		path.lineTo(left + offset, 		top + THICKNESS);
+		path.lineTo(left, 				top + THICKNESS);
+		path.close();
+		paint.setColor(0x33000000);
+		canvas.drawPath(path, paint);
 
-			paint.setColor(0xFFFFFFFF);
-			canvas.drawText("Name", LEFT_SPACE + VERTICAL_SPACE * 2, height / 2f + 10, paint);
+		path.reset();
+		path.moveTo(left + offset, 				top +THICKNESS);
+		path.lineTo(left + offset + THICKNESS, 	top);
+		path.lineTo(left + offset + THICKNESS, 	top + height );
+		path.lineTo(left + offset,				top + height + THICKNESS);
+		path.close();
+		paint.setColor(0x11000000);
+		canvas.drawPath(path, paint);
+
+		paint.setColor(0xFFFFFFFF);
+		if (rating.address != null){
+			canvas.drawText(rating.address, left + HORIZONTAL_SPACE, top + THICKNESS +  height/2 + 4, paint);
 		}
 	}
 
@@ -129,6 +141,10 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		invalidate();
 	}
 
+	public void playAnimation() {
+		onHistoryFocused();
+	}
+	
 	@Override
 	public void onHistoryFocused() {
 		hidden = false;
@@ -144,4 +160,5 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	public void onHistoryHidden() {
 		hidden = true;
 	}
+
 }

@@ -28,7 +28,7 @@ public class HistoryListAdapter extends BaseAdapter {
 	
 	@Pref
 	SettingsPreferences_ preferences;
-
+	
 	private List<Rating> ratings = new ArrayList<Rating>();
 	private float maxRating;
 

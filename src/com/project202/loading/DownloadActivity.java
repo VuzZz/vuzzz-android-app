@@ -89,7 +89,7 @@ public class DownloadActivity extends Activity implements TaskResultListener<Rat
 
 	private void startDownloadingRating() {
 		step = Step.DOWNLOADING;
-		task = new RatingDownloadTask<DownloadActivity>(this, latitudeE6, longitudeE6);
+		task = new RatingDownloadTask<DownloadActivity>(this, address, latitudeE6, longitudeE6);
 		task.execute();
 	}
 
