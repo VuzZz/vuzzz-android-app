@@ -10,6 +10,7 @@ import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.googlecode.androidannotations.annotations.res.DrawableRes;
+import com.project202.OnSettingsUpdatedListener;
 import com.project202.R;
 import com.project202.address.SettingsPreferences_;
 import com.project202.component.RatingButton;
@@ -18,7 +19,7 @@ import com.project202.model.ThemeName;
 import com.project202.model.Weighted;
 
 @EViewGroup(R.layout.rating)
-public class RatingView extends LinearLayout {
+public class RatingView extends LinearLayout implements OnSettingsUpdatedListener {
 	
 	public interface OnRatingClickListener{
 		void onRatingClickListener(ThemeName themeName);
@@ -31,6 +32,8 @@ public class RatingView extends LinearLayout {
 	
 	@ViewById(R.id.culture_rating)
 	RatingButton cultureRating;
+	
+	private Rating currentRating;
 	
 	@Pref
 	SettingsPreferences_ preferences;
@@ -122,6 +125,8 @@ public class RatingView extends LinearLayout {
 	}
 	
 	public void setValuesFromRating(Rating rating){
+		this.currentRating = rating;
+
 		globalRating.getRatingTextView().setText(Weighted.getWeightedMark(rating, preferences).toString());
 		
 		cultureRating.getRatingTextView().setText(rating.getThemeMark(ThemeName.CULTURE).toString());
@@ -173,4 +178,9 @@ public class RatingView extends LinearLayout {
 		});
 	}
 
+	@Override
+	public void onSettingsUpdated() {
+		setValuesFromRating(currentRating);
+	}
+	
 }

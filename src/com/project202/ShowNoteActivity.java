@@ -39,7 +39,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 
 @EActivity(R.layout.show_note)
 @NoTitle
-public class ShowNoteActivity extends Activity implements OnRatingClickListener {
+public class ShowNoteActivity extends Activity implements OnRatingClickListener, OnSettingsUpdatedListener {
 
 	@Extra("address")
 	String address;
@@ -71,6 +71,8 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 
 	private SimplePagerAdapter pagerAdapter;
 
+	private List<OnSettingsUpdatedListener> onSettingsUpdatedListeners = new ArrayList<OnSettingsUpdatedListener>();
+	
 	@AfterViews
 	public void afterViews() {
 
@@ -93,7 +95,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 		ratingView.setValuesFromRating(rating);
 		historyView.setRatings(loadRatingsFromFiles());
 		ratingDetailsView.setRating(rating);
+		settingsView.setOnSettingsUpdatedListener(this);
 
+		// Registering listeners
+		onSettingsUpdatedListeners.add(ratingView);
+		onSettingsUpdatedListeners.add(historyView);
+		onSettingsUpdatedListeners.add(ratingDetailsView);
+		
 		// Storing views
 		List<View> views = Arrays.<View> asList(historyView, ratingView, ratingDetailsView);
 
@@ -194,6 +202,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener 
 	@Click
 	void homeClicked() {
 		HomeHelper.goToHome(this);
+	}
+
+	
+	@Override
+	public void onSettingsUpdated() {
+		for(OnSettingsUpdatedListener l : onSettingsUpdatedListeners)
+			l.onSettingsUpdated();
 	}
 
 }
