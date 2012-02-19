@@ -1,86 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical" >
+    android:background="#fff" >
 
-    <TextView
-        android:id="@+id/culture_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/culture_theme_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <SeekBar
-        android:id="@+id/culture_weight"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="2" />
+        android:background="#fff"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+         >
 
-    <TextView
-        android:id="@+id/security_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/institutions_theme_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RelativeLayout
+            android:id="@+id/culture_settings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_item"
+            android:layout_marginBottom="@dimen/settings_item_margin"
+            android:background="@color/ad_yellow"
+            android:paddingTop="@dimen/settings_padding" >
 
-    <SeekBar
-        android:id="@+id/security_weight"
-        android:max="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/culture_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/settings_padding"
+                android:drawableLeft="@drawable/ic_rating_culture"
+                android:drawablePadding="@dimen/settings_drawable_padding"
+                android:text="@string/culture_theme_weight"
+                android:textColor="@android:color/white"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/leisure_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/leisure_theme_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <SeekBar
+                android:id="@+id/culture_weight"
+                android:layout_width="@dimen/settings_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/settings_margin"
+                android:max="2" />
 
-    <SeekBar
-        android:id="@+id/leisure_weight"
-        android:max="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/ad_dark_yellow" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/nature_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nature_theme_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RelativeLayout
+            android:id="@+id/security_settings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_item"
+            android:layout_below="@id/culture_settings"
+            android:layout_marginBottom="@dimen/settings_item_margin"
+            android:background="@color/ad_purple"
+            android:paddingTop="@dimen/settings_padding" >
 
-    <SeekBar
-        android:id="@+id/nature_weight"
-        android:max="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/security_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/settings_padding"
+                android:drawableLeft="@drawable/ic_rating_security"
+                android:drawablePadding="@dimen/settings_drawable_padding"
+                android:text="@string/institutions_theme_weight"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/shops_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/shops_theme_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <SeekBar
+                android:id="@+id/security_weight"
+                android:layout_width="@dimen/settings_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/settings_margin"
+                android:max="2" />
 
-    <SeekBar
-        android:id="@+id/shops_weight"
-        android:max="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/ad_dark_purple" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/transit_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/transit_theme_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RelativeLayout
+            android:id="@+id/leisure_settings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_item"
+            android:layout_below="@id/security_settings"
+            android:layout_marginBottom="@dimen/settings_item_margin"
+            android:background="@color/ad_red"
+            android:paddingTop="@dimen/settings_padding" >
 
-    <SeekBar
-        android:id="@+id/transit_weight"
-        android:max="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/leisure_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/settings_padding"
+                android:drawableLeft="@drawable/ic_rating_leasure"
+                android:drawablePadding="@dimen/settings_drawable_padding"
+                android:text="@string/leisure_theme_weight"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</LinearLayout>
+            <SeekBar
+                android:id="@+id/leisure_weight"
+                android:layout_width="@dimen/settings_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/settings_margin"
+                android:max="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/ad_dark_red" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/nature_settings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_item"
+            android:layout_below="@id/leisure_settings"
+            android:layout_marginBottom="@dimen/settings_item_margin"
+            android:background="@color/ad_green"
+            android:paddingTop="@dimen/settings_padding" >
+
+            <TextView
+                android:id="@+id/nature_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/settings_padding"
+                android:drawableLeft="@drawable/ic_rating_nature"
+                android:drawablePadding="@dimen/settings_drawable_padding"
+                android:text="@string/nature_theme_weight"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <SeekBar
+                android:id="@+id/nature_weight"
+                android:layout_width="@dimen/settings_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/settings_margin"
+                android:max="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/ad_dark_green" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/shops_settings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_item"
+            android:layout_below="@id/nature_settings"
+            android:layout_marginBottom="@dimen/settings_item_margin"
+            android:background="@color/ad_orange"
+            android:paddingTop="@dimen/settings_padding" >
+
+            <TextView
+                android:id="@+id/shops_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/settings_padding"
+                android:drawableLeft="@drawable/ic_rating_shop"
+                android:drawablePadding="@dimen/settings_drawable_padding"
+                android:text="@string/shops_theme_weight"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <SeekBar
+                android:id="@+id/shops_weight"
+                android:layout_width="@dimen/settings_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/settings_margin"
+                android:max="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/ad_dark_orange" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/transit_settings"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_item"
+            android:layout_below="@id/shops_settings"
+            android:layout_marginBottom="@dimen/settings_item_margin"
+            android:background="@color/ad_blue"
+            android:paddingTop="@dimen/settings_padding" >
+
+            <TextView
+                android:id="@+id/transit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/settings_padding"
+                android:drawableLeft="@drawable/ic_rating_transit"
+                android:drawablePadding="@dimen/settings_drawable_padding"
+                android:text="@string/transit_theme_weight"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <SeekBar
+                android:id="@+id/transit_weight"
+                android:layout_width="@dimen/settings_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/settings_margin"
+                android:max="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/ad_dark_blue" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>
