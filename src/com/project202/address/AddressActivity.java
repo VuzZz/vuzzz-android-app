@@ -291,6 +291,40 @@ public class AddressActivity extends MapActivity {
 		shouldMoveToMyLocationOnFirstFix = false;
 		addressOverlay.showAddressPopup(location);
 		mapController.animateTo(location);
+		findAddress(location);
+	}
+
+	@Background
+	void findAddress(GeoPoint location) {
+		try {
+			List<Address> addresses = geocoder.getFromLocation(location.getLatitudeE6() / 1E6, location.getLongitudeE6() / 1E6, 1);
+			if (addresses.size() > 0) {
+				Address address = addresses.get(0);
+				addressFound(address);
+			} else {
+				noAddressFromLocationFound();
+			}
+		} catch (IOException e) {
+			LogHelper.logException("Could not find address for location", e);
+			searchAddressFromLocationError();
+		}
+	}
+	
+	@UiThread
+	void addressFound(Address address) {
+		showAddressPopup(address);
+	}
+	
+	@UiThread
+	void searchAddressFromLocationError() {
+		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+		addressOverlay.hideAddressPopup();
+	}
+
+	@UiThread
+	void noAddressFromLocationFound() {
+		Toast.makeText(this, "Aucun résultat correspondant à l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+		addressOverlay.hideAddressPopup();
 	}
 
 	@Click
