@@ -2,6 +2,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <RelativeLayout
+        android:id="@+id/actionbar_compat"
+        style="@style/ActionBarCompat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_compat_height" >
+
+        <LinearLayout
+            android:id="@android:id/home"
+            style="@style/ActionBarCompatHomeItem"
+            android:layout_width="@dimen/actionbar_compat_button_home_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="Retour à la home"
+            android:gravity="left|center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/ic_ab_back_holo_light" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/ic_home" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loadingMenuView"
+            style="@style/ActionBarCompatProgressIndicator"
+            android:layout_width="@dimen/actionbar_compat_loading_width"
+            android:layout_marginLeft="@dimen/actionbar_compat_loading_padding"
+            android:layout_marginRight="@dimen/actionbar_compat_loading_padding"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/loading" />
+
+        <TextView
+            android:id="@+id/titleView"
+            style="@style/ActionBarCompatTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/loadingMenuView"
+            android:layout_toRightOf="@android:id/home" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/actionbar_compat"
+        android:scaleType="fitXY"
+        android:src="@drawable/actionbar_shadow" />
+
     <LinearLayout
         android:id="@+id/loading"
         android:layout_width="wrap_content"

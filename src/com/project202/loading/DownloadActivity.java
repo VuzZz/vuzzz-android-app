@@ -1,24 +1,27 @@
 package com.project202.loading;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
-import com.googlecode.androidannotations.annotations.OptionsItem;
-import com.googlecode.androidannotations.annotations.OptionsMenu;
+import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.UiThread;
+import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.HomeHelper;
 import com.project202.R;
 import com.project202.ShowNoteActivity_;
-import com.project202.actionbar.ActionBarActivity;
 import com.project202.model.Rating;
 
 @EActivity(R.layout.loading)
-@OptionsMenu(R.menu.download_menu)
-public class DownloadActivity extends ActionBarActivity implements TaskResultListener<Rating> {
+@NoTitle
+public class DownloadActivity extends Activity implements TaskResultListener<Rating> {
 
 	private enum Step {
 		DOWNLOADING, RETRY, DONE;
@@ -33,13 +36,13 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 			this.step = step;
 		}
 	}
-	
+
 	@Extra("address")
 	String address;
-	
+
 	@Extra("latitudeE6")
 	int latitudeE6;
-	
+
 	@Extra("longitudeE6")
 	int longitudeE6;
 
@@ -47,9 +50,11 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 
 	private Step step;
 
+	@ViewById
+	TextView titleView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setTitle(address);
 		super.onCreate(savedInstanceState);
 		NonConfigurationInstance instance = (NonConfigurationInstance) getLastNonConfigurationInstance();
 
@@ -57,16 +62,13 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 			step = instance.step;
 			task = instance.task;
 		}
-		
-		
-		showRefreshing();
 	}
 	
-	@UiThread(delay = 200)
-	void showRefreshing() {
-		getActionBarHelper().setRefreshActionItemState(true);
+	@AfterViews
+	void initLayout() {
+		titleView.setText(address);
 	}
-	
+
 	@Override
 	public Object onRetainNonConfigurationInstance() {
 		NonConfigurationInstance instance = new NonConfigurationInstance(task, step);
@@ -74,7 +76,7 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 		step = null;
 		return instance;
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -85,7 +87,7 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 			task.bindActivity(this);
 		}
 	}
-	
+
 	private void startDownloadingRating() {
 		step = Step.DOWNLOADING;
 		task = new RatingDownloadTask<DownloadActivity>(this, latitudeE6, longitudeE6);
@@ -100,7 +102,7 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 			task.unbindActivity();
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -108,7 +110,6 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 			task.destroy();
 		}
 	}
-
 
 	@Override
 	public void onTaskSuccess(Rating result) {
@@ -129,18 +130,18 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 	public void onDownloadProgress(DownloadProgress progress) {
 		// no progress update
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 
 		switch (id) {
-			case R.id.retry_dialog:
-				return createRetryDialog();
+		case R.id.retry_dialog:
+			return createRetryDialog();
 		}
 
 		return null;
 	}
-	
+
 	private Dialog createRetryDialog() {
 		return new AlertDialog.Builder(this) //
 				.setTitle(R.string.downloading_error_title) //
@@ -171,11 +172,10 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 				}) //
 				.create();
 	}
-	
-	@OptionsItem
-	void homeSelected() {
+
+	@Click
+	void homeClicked() {
 		HomeHelper.goToHome(this);
 	}
-
 
 }

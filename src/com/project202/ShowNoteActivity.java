@@ -1,31 +1,28 @@
 package com.project202;
 
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
-import com.googlecode.androidannotations.annotations.OptionsItem;
-import com.googlecode.androidannotations.annotations.OptionsMenu;
+import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
-import com.project202.actionbar.ActionBarActivity;
 import com.project202.adapter.SimplePagerAdapter;
-import com.project202.address.AddressActivity_;
 import com.project202.model.Criterion;
 import com.project202.model.Rating;
 import com.project202.model.Theme;
@@ -39,8 +36,8 @@ import com.project202.views.SettingsView;
 import com.viewpagerindicator.TitlePageIndicator;
 
 @EActivity(R.layout.show_note)
-@OptionsMenu(R.menu.show_note_menu)
-public class ShowNoteActivity extends ActionBarActivity implements OnRatingClickListener {
+@NoTitle
+public class ShowNoteActivity extends Activity implements OnRatingClickListener {
 
 	@Extra("address")
 	String address;
@@ -66,6 +63,9 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 
 	@ViewById
 	TitlePageIndicator titles;
+	
+	@ViewById
+	TextView titleView;
 
 	private SimplePagerAdapter pagerAdapter;
 
@@ -74,7 +74,7 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 
 		onHistoryFocusedListeners = new ArrayList<OnHistoryFocusedListener>();
 
-		setTitle(address);
+		titleView.setText(address);
 
 		// Creating ViewPager Views
 		RatingView_ ratingView = new RatingView_(this);
@@ -166,8 +166,8 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 		onHistoryFocusedListeners.add(convertView);
 	}
 
-	@OptionsItem
-	void menuSettingsSelected() {
+	@Click
+	void settingsButtonClicked() {
 		if (settingsView.getVisibility() == View.VISIBLE) {
 			settingsView.startAnimation(slideOutFromTop);
 			settingsView.setVisibility(View.GONE);
@@ -186,13 +186,13 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 	@Override
 	public void onBackPressed() {
 		if(settingsView.getVisibility() == View.VISIBLE)
-			menuSettingsSelected();
+			settingsButtonClicked();
 		else
 			super.onBackPressed();
 	}
 
-	@OptionsItem
-	void homeSelected() {
+	@Click
+	void homeClicked() {
 		HomeHelper.goToHome(this);
 	}
 
