@@ -1,6 +1,8 @@
 package com.project202.adapter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.view.View;
@@ -12,6 +14,7 @@ import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import com.project202.R;
 import com.project202.model.PrintedDetail;
+import com.project202.model.ThemeName;
 
 @EBean
 public class DetailsListAdapter extends BaseAdapter{
@@ -20,15 +23,27 @@ public class DetailsListAdapter extends BaseAdapter{
 	Context context;
 	
 	private List<PrintedDetail> details;
+	
+	private Map<ThemeName, Integer> themePositions;
 
 	public void setDetails(List<PrintedDetail> details){
 		this.details = details;
+		
+		for(int i=0;i < details.size(); i++){
+			PrintedDetail pd = details.get(i);
+			if(!pd.isCriterion())
+				themePositions.put(ThemeName.valueOf(pd.getName()), i);
+		}
 	}
 	
 	private class ViewHolder {
 		private TextView description;
 		private TextView name;
 		private TextView note;
+	}
+	
+	public DetailsListAdapter(){
+		this.themePositions = new HashMap<ThemeName, Integer>();
 	}
 	
 	@Override
@@ -84,6 +99,10 @@ public class DetailsListAdapter extends BaseAdapter{
 		holder.description.setText(details.get(position).getDescription());
 
 		return convertView;
+	}
+	
+	public int getThemeItemPosition(ThemeName themeName){
+		return themePositions.get(themeName);
 	}
 	
 }

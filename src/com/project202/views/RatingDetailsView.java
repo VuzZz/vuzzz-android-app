@@ -12,9 +12,11 @@ import com.project202.R;
 import com.project202.ShowNoteActivity;
 import com.project202.adapter.DetailsListAdapter;
 import com.project202.controller.RatingController;
+import com.project202.model.ThemeName;
+import com.project202.views.RatingView.OnRatingClickListener;
 
 @EViewGroup(R.layout.rating_details)
-public class RatingDetailsView extends LinearLayout {
+public class RatingDetailsView extends LinearLayout implements OnRatingClickListener{
 
 	@Bean
 	DetailsListAdapter adapter;
@@ -29,6 +31,12 @@ public class RatingDetailsView extends LinearLayout {
 	public void afterViews() {
 		adapter.setDetails(RatingController.getDetailsList(ShowNoteActivity.getTestPrintedRating()));
 		detailsList.setAdapter(adapter);
+	}
+
+	@Override
+	public void onRatingClickListener(ThemeName themeName) {
+		detailsList.setSelectionFromTop(adapter.getThemeItemPosition(themeName), 0);
+		
 	}
 
 }
