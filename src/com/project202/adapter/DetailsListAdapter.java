@@ -136,7 +136,7 @@ public class DetailsListAdapter extends BaseAdapter {
 	}
 
 	public int getThemeItemPosition(ThemeName themeName) {
-		return themePositions.get(themeName);
+		return themePositions.get(themeName.getName());
 	}
 
 }
