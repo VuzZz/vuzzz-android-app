@@ -8,6 +8,8 @@ public class Rating implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public List<Theme> themes;
+	
+	public String address;
 
 	public List<Theme> getThemes() {
 		return themes;

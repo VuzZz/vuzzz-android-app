@@ -26,9 +26,12 @@ public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>>
 	private Context context;
 	private ObjectMapper objectMapper;
 
-	public RatingDownloadTask(T activity, int latitudeE6, int longitudeE6) {
+	private final String address;
+
+	public RatingDownloadTask(T activity, String address, int latitudeE6, int longitudeE6) {
 		super(activity);
 		this.context = activity;
+		this.address = address;
 		this.latitudeE6 = latitudeE6;
 		this.longitudeE6 = longitudeE6;
 
@@ -57,6 +60,7 @@ public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>>
 		double longitude = longitudeE6 / (double) 1E6;
 
 		Rating rating = restClient.getRating(latitude, longitude);
+		rating.address = address;
 		
 		objectMapper.writeValue(context.openFileOutput(HISTO_FILE_PREFIX + new Date(), 0), rating);
 
