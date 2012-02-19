@@ -28,7 +28,7 @@ public class DetailsListAdapter extends BaseAdapter {
 
 	private List<RatingDetails> details = new ArrayList<RatingDetails>();
 
-	private Map<ThemeName, Integer> themePositions;
+	private Map<String, Integer> themePositions;
 
 	public void setRating(Rating rating) {
 
@@ -42,7 +42,7 @@ public class DetailsListAdapter extends BaseAdapter {
 		for (int i = 0; i < details.size(); i++) {
 			RatingDetails pd = details.get(i);
 			if (pd instanceof Theme)
-				themePositions.put(ThemeName.valueOf(pd.getName()), i);
+				themePositions.put(pd.getName(), i);
 		}
 
 		notifyDataSetChanged();
@@ -56,7 +56,7 @@ public class DetailsListAdapter extends BaseAdapter {
 	}
 
 	public DetailsListAdapter() {
-		this.themePositions = new HashMap<ThemeName, Integer>();
+		this.themePositions = new HashMap<String, Integer>();
 	}
 
 	@Override
