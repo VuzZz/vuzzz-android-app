@@ -1,7 +1,5 @@
 package com.project202.adapter;
 
-import com.project202.DimenHelper;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -9,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
+
+import com.project202.DimenHelper;
 
 public class CubeBackgroundDrawable extends Drawable {
 

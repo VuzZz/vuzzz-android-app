@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
+import com.project202.DimenHelper;
 import com.project202.model.Criterion;
 import com.project202.model.Rating;
 import com.project202.model.RatingDetails;
@@ -99,7 +100,7 @@ public class DetailsListAdapter extends BaseAdapter {
 						R.layout.row_details_criterion, null);
 			} else {
 				convertView = View.inflate(context, R.layout.row_details, null);
-				convertView.setMinimumHeight(70);
+				convertView.setMinimumHeight((int) DimenHelper.pixelSize(context, 70));
 				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(
 						context, ratingDetails.getColor()));
 			}
