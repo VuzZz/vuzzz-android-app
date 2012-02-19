@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -37,6 +38,7 @@ public class HistoryView extends LinearLayout implements OnSettingsUpdatedListen
 	}
 	
 	public void setRatings(List<Rating> ratings){
+		Log.i("TAG", "SET RATINGS "+ratings.size());
 		this.currentRatings = ratings;
 		adapter.setRatings(ratings);
 	}

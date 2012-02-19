@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -31,13 +32,11 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 
 	private long animationStart;
 	
-	private boolean hidden = true;
+	private boolean hidden = false;
 
 	private final float VERTICAL_SPACE;
 	
 	private final float HORIZONTAL_SPACE;
-
-	private final float LEFT_SPACE;
 
 	private final float THICKNESS;
 	
@@ -50,9 +49,9 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		paint.setStyle(Style.FILL);
 		paint.setAntiAlias(true);
 		VERTICAL_SPACE = pixelSize(context, 12f);
-		LEFT_SPACE = pixelSize(context, 15f);
 		THICKNESS = pixelSize(context, 15f);
 		HORIZONTAL_SPACE = pixelSize(context, 15f);
+		animationStart = System.currentTimeMillis();
 	}
 
 	@Override
