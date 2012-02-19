@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
@@ -93,9 +94,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		// Injecting content
 		ratingView.setOnRatingClickListener(this);
 		ratingView.setValuesFromRating(rating);
-		historyView.setRatings(loadRatingsFromFiles());
+		List<Rating> ratings = loadRatingsFromFiles();
+		historyView.setRatings(ratings);
 		ratingDetailsView.setRating(rating);
 		settingsView.setOnSettingsUpdatedListener(this);
+		
+		if(rating == null && !ratings.isEmpty())
+			rating = ratings.get(0);
 
 		// Registering listeners
 		onSettingsUpdatedListeners.add(ratingView);
@@ -155,6 +160,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		objectMapper.configure(SerializationConfig.Feature.AUTO_DETECT_GETTERS, false);
 		
 		List<Rating> ratings = new ArrayList<Rating>();
+		
+		Arrays.sort(historyFiles, new Comparator<File>() {
+			@Override
+			public int compare(File lhs, File rhs) {
+				return rhs.getName().compareTo(lhs.getName());
+			}
+		});
 		
 		for(File histFile : historyFiles){
 			try {
