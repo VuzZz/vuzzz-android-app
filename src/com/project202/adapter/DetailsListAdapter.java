@@ -138,5 +138,10 @@ public class DetailsListAdapter extends BaseAdapter {
 	public int getThemeItemPosition(ThemeName themeName) {
 		return themePositions.get(themeName.getName());
 	}
+	
+	@Override
+	public boolean isEnabled(int position) {
+		return false;
+	}
 
 }
