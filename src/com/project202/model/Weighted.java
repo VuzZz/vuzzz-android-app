@@ -5,6 +5,15 @@ import com.project202.address.SettingsPreferences_;
 
 @EBean
 public class Weighted {
+	
+	public static Float getWeightedMarkSum(Rating rating){
+		float sum = 0f;
+		for(Theme t : rating.getThemes()){
+			sum += t.getNote();
+		}
+		return sum;
+	}
+	
 
 	public static Float getWeightedMark(Rating rating, SettingsPreferences_ preferences){
 		float sum = 0f;
