@@ -164,7 +164,7 @@ public class AddressActivity extends MapActivity {
 			}
 		};
 
-		addressOverlay = new AddressOverlay(this);
+		addressOverlay = new AddressOverlay(this, mapView);
 
 		searchOverlay = new SearchOverlay(this);
 
@@ -312,7 +312,7 @@ public class AddressActivity extends MapActivity {
 	
 	@UiThread
 	void addressFound(Address address) {
-		showAddressPopup(address);
+		addressOverlay.setAddress(address);
 	}
 	
 	@UiThread
