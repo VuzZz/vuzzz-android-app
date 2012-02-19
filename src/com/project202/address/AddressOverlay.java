@@ -6,6 +6,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.location.Address;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -68,12 +69,12 @@ public class AddressOverlay extends Overlay {
 		Projection projection = mapView.getProjection();
 		projection.toPixels(addressLocation, addressPoint);
 
-		String firstString = "Veuillez patienter...";
-		String secondString = "Téléchargement de la position.";
+		String firstString = "Veuillez patienter";
+		String secondString = "Téléchargement de la position...";
 
 		if (address != null) {
-			firstString = address.address;
-			secondString = address.postalCodeAndCity;
+			firstString = address.getAddressLine(0);
+			secondString = address.getAddressLine(1);
 		}
 
 		float firstStringSize = textPaint.measureText(firstString);

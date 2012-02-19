@@ -1,10 +1,14 @@
 package com.project202.address;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -27,11 +31,13 @@ import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Background;
 import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.SystemService;
+import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.AboutDialogHelper;
 import com.project202.LogHelper;
@@ -71,8 +77,14 @@ public class AddressActivity extends MapActivity {
 
 	private boolean shouldMoveToMyLocationOnFirstFix;
 
+	private Geocoder geocoder;
+
+	private SearchOverlay searchOverlay;
+
 	@AfterViews
 	void initLayout() {
+		geocoder = new Geocoder(this);
+
 		addressEditText.addTextChangedListener(new AbstractTextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -115,11 +127,16 @@ public class AddressActivity extends MapActivity {
 					GeoPoint addressLocation = addressOverlay.getAddressLocation();
 					noteAddress(addressLocation);
 				} else {
-					Projection projection = mapView.getProjection();
-					GeoPoint location = projection.fromPixels((int) x, (int) y);
-					boolean myLocationTapped = myLocationOverlay.onTap(location, mapView);
-					if (!myLocationTapped) {
-						addressOverlay.hideAddressPopup();
+					Address tappedAddress = searchOverlay.onSingleTapUp(x, y);
+					if (tappedAddress != null) {
+						showAddressPopup(tappedAddress);
+					} else {
+						Projection projection = mapView.getProjection();
+						GeoPoint location = projection.fromPixels((int) x, (int) y);
+						boolean myLocationTapped = myLocationOverlay.onTap(location, mapView);
+						if (!myLocationTapped) {
+							addressOverlay.hideAddressPopup();
+						}
 					}
 				}
 				return true;
@@ -137,7 +154,10 @@ public class AddressActivity extends MapActivity {
 
 		addressOverlay = new AddressOverlay();
 
+		searchOverlay = new SearchOverlay(mapView);
+
 		mapOverlays.add(myLocationOverlay);
+		mapOverlays.add(searchOverlay);
 		mapOverlays.add(addressOverlay);
 		mapOverlays.add(gestureOverlay);
 
@@ -177,9 +197,71 @@ public class AddressActivity extends MapActivity {
 		addressOverlay.hideAddressPopup();
 		inputMethodManager.hideSoftInputFromWindow(addressEditText.getWindowToken(), 0);
 		String address = addressEditText.getText().toString();
-		Toast.makeText(this, "MOCK Point for " + address, Toast.LENGTH_SHORT).show();
-		GeoPoint mockLocation = new GeoPoint(48831320, 2356224);
-		showAddressPopup(mockLocation);
+		findAddressLocations(address);
+	}
+
+	@Background
+	void findAddressLocations(String address) {
+		try {
+			List<Address> addresses = geocoder.getFromLocationName(address, 8);
+
+			if (addresses.size() == 0) {
+				noAddressFound();
+			} else {
+				addressesFound(addresses);
+			}
+		} catch (IOException e) {
+			LogHelper.logException("Could not retrieve addresses for " + address, e);
+			searchAddressError();
+		}
+	}
+
+	@UiThread
+	void searchAddressError() {
+		Toast.makeText(this, "Impossible de déterminer l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+	}
+	
+	@UiThread
+	void noAddressFound() {
+		Toast.makeText(this, "Aucun résultat correspondant à l'adresse, merci de réessayer", Toast.LENGTH_LONG).show();
+	}
+
+	@UiThread
+	void addressesFound(List<Address> addresses) {
+
+		List<GeoPoint> geopoints = new ArrayList<GeoPoint>();
+
+		int minLat = Integer.MAX_VALUE;
+		int maxLat = Integer.MIN_VALUE;
+		int minLon = Integer.MAX_VALUE;
+		int maxLon = Integer.MIN_VALUE;
+		for (Address address : addresses) {
+			GeoPoint geoPoint = new GeoPoint((int) (address.getLatitude() * 1E6), (int) (address.getLongitude() * 1E6));
+			geopoints.add(geoPoint);
+
+			int lat = geoPoint.getLatitudeE6();
+			int lon = geoPoint.getLongitudeE6();
+
+			maxLat = Math.max(lat, maxLat);
+			minLat = Math.min(lat, minLat);
+			maxLon = Math.max(lon, maxLon);
+			minLon = Math.min(lon, minLon);
+		}
+
+		double fitFactor = 1.5;
+		mapController.zoomToSpan((int) (Math.abs(maxLat - minLat) * fitFactor), (int) (Math.abs(maxLon - minLon) * fitFactor));
+		mapController.animateTo(new GeoPoint((maxLat + minLat) / 2, (maxLon + minLon) / 2));
+
+		searchOverlay.setAddresses(addresses, geopoints);
+
+	}
+
+	private void showAddressPopup(Address address) {
+		GeoPoint location = new GeoPoint((int) (address.getLatitude() * 1E6), (int) (address.getLongitude() * 1E6));
+		shouldMoveToMyLocationOnFirstFix = false;
+		addressOverlay.showAddressPopup(location);
+		addressOverlay.setAddress(address);
+		mapController.animateTo(location);
 	}
 
 	private void showAddressPopup(GeoPoint location) {
