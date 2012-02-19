@@ -178,5 +178,13 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 		ratingDetailsView.onRatingClickListener(themeName);
 		viewPager.setCurrentItem(2);
 	}
+	
+	@Override
+	public void onBackPressed() {
+		if(settingsView.getVisibility() == View.VISIBLE)
+			menuSettingsSelected();
+		else
+			super.onBackPressed();
+	}
 
 }
