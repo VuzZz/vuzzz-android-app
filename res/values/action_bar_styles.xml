@@ -16,11 +16,7 @@
 
 <resources>
 
-    <style name="AppTheme" parent="android:style/Theme.Light">
-        <item name="android:windowTitleSize">@dimen/actionbar_compat_height</item>
-        <item name="android:windowTitleBackgroundStyle">@style/ActionBarCompat</item>
-        <item name="android:windowContentOverlay">@drawable/actionbar_shadow</item>
-
+    <style name="AppTheme" parent="android:style/Theme.Light.NoTitleBar">
         <!-- for programmatic instantiation -->
         <item name="actionbarCompatTitleStyle">@style/ActionBarCompatTitle</item>
         <item name="actionbarCompatItemStyle">@style/ActionBarCompatItem</item>
