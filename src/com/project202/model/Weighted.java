@@ -6,7 +6,7 @@ import com.project202.address.SettingsPreferences_;
 @EBean
 public class Weighted {
 	
-	public static Float getWeightedMarkSum(Rating rating){
+	public static Float getMarkSum(Rating rating){
 		float sum = 0f;
 		for(Theme t : rating.getThemes()){
 			sum += t.getNote();
@@ -21,7 +21,7 @@ public class Weighted {
 		
 		for(Theme t : rating.getThemes()){
 			float w = getMultiplicator(t.name, preferences);
-			sum += t.getNote();
+			sum += t.getNote()*w;
 			weights += w;
 		}
 		
@@ -50,11 +50,11 @@ public class Weighted {
 	private static float getMultiplicator(int preferenceWeight){
 		switch(preferenceWeight){
 		case 0:
-			return 0.5f;
-		case 1:
 			return 1;
-		case 2:
+		case 1:
 			return 2;
+		case 2:
+			return 3;
 		default:
 			throw new UnsupportedOperationException();
 		}

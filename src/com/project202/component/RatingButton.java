@@ -50,6 +50,10 @@ public class RatingButton extends RelativeLayout {
 	public void setPicto(Drawable drawable) {
 		themeTextView.setCompoundDrawables(drawable, null, null, null);
 	}
+	
+	public void setTextSize(float size) {
+		ratingTextView.setTextSize(size);
+	}
 
 	public LinearLayout getFooterLayout() {
 		return footerLayout;

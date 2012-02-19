@@ -7,19 +7,28 @@
         android:id="@+id/rating_button_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:shadowColor="#44000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1.5"
         android:textColor="@android:color/white"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/rating_button_rate"
         android:layout_alignBottom="@id/rating_button_rate"
+        android:layout_toRightOf="@id/rating_button_rate"
+        android:shadowColor="#44000000"  
+        android:shadowRadius="1.5"  
+        android:shadowDx="1"  
+        android:shadowDy="1"
         android:text="@string/note_max"
         android:textColor="@android:color/white"
-        android:textSize="10dp" />
+        android:textSize="10dp"/>
 
     <LinearLayout
         android:id="@+id/rating_button_footer"
@@ -36,9 +45,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
+            android:shadowColor="#44000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1.5"
             android:textColor="@android:color/white"
             android:textSize="12dp" />
-
     </LinearLayout>
 
 </RelativeLayout>
