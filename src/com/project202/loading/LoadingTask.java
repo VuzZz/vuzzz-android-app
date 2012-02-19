@@ -1,10 +1,10 @@
 package com.project202.loading;
 
-import com.project202.LogHelper;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.project202.LogHelper;
 
 /**
  * 

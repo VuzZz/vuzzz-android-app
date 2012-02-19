@@ -2,12 +2,12 @@ package com.project202.adapter;
 
 import java.util.List;
 
-import com.viewpagerindicator.TitleProvider;
-
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import com.viewpagerindicator.TitleProvider;
 
 /**
  * Simple {@link PagerAdapter} implementation that doesn't handle recycle of
