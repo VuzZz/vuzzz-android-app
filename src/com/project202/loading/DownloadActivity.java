@@ -4,12 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
+import com.googlecode.androidannotations.annotations.OptionsItem;
 import com.googlecode.androidannotations.annotations.OptionsMenu;
 import com.googlecode.androidannotations.annotations.UiThread;
+import com.project202.HomeHelper;
 import com.project202.R;
 import com.project202.ShowNoteActivity_;
 import com.project202.actionbar.ActionBarActivity;
@@ -169,6 +170,11 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 					}
 				}) //
 				.create();
+	}
+	
+	@OptionsItem
+	void homeSelected() {
+		HomeHelper.goToHome(this);
 	}
 
 

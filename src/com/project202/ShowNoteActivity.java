@@ -1,11 +1,14 @@
 package com.project202;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -22,6 +25,7 @@ import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.project202.actionbar.ActionBarActivity;
 import com.project202.adapter.SimplePagerAdapter;
+import com.project202.address.AddressActivity_;
 import com.project202.model.Criterion;
 import com.project202.model.Rating;
 import com.project202.model.Theme;
@@ -40,7 +44,7 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 
 	@Extra("address")
 	String address;
-	
+
 	@Extra("rating")
 	Rating rating;
 
@@ -59,7 +63,7 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 	private List<OnHistoryFocusedListener> onHistoryFocusedListeners;
 
 	private RatingDetailsView_ ratingDetailsView;
-	
+
 	@ViewById
 	TitlePageIndicator titles;
 
@@ -67,9 +71,9 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 
 	@AfterViews
 	public void afterViews() {
-		
+
 		onHistoryFocusedListeners = new ArrayList<OnHistoryFocusedListener>();
-		
+
 		setTitle(address);
 
 		// Creating ViewPager Views
@@ -95,16 +99,16 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 
 		// Initializing ViewPager
 		viewPager.setAdapter(pagerAdapter);
-		
+
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
-				if (position==0){
-					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
+				if (position == 0) {
+					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners) {
 						listener.onHistoryFocused();
 					}
 				} else {
-					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners){
+					for (OnHistoryFocusedListener listener : onHistoryFocusedListeners) {
 						listener.onHistoryHidden();
 					}
 				}
@@ -123,7 +127,7 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 		});
 
 		titles.setViewPager(viewPager);
-		
+
 		viewPager.setCurrentItem(1);
 	}
 
@@ -157,7 +161,7 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 
 		return new Rating(themes);
 	}
-	
+
 	public void addOnSettingsFocusedHandler(OnHistoryFocusedListener convertView) {
 		onHistoryFocusedListeners.add(convertView);
 	}
@@ -177,6 +181,11 @@ public class ShowNoteActivity extends ActionBarActivity implements OnRatingClick
 	public void onRatingClickListener(ThemeName themeName) {
 		ratingDetailsView.onRatingClickListener(themeName);
 		viewPager.setCurrentItem(2);
+	}
+
+	@OptionsItem
+	void homeSelected() {
+		HomeHelper.goToHome(this);
 	}
 
 }
