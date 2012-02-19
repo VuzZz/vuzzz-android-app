@@ -8,6 +8,7 @@ import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.project202.OnRatingSwitchedListener;
 import com.project202.OnSettingsUpdatedListener;
 import com.project202.adapter.DetailsListAdapter;
 import com.project202.model.Rating;
@@ -16,7 +17,7 @@ import com.project202.views.RatingView.OnRatingClickListener;
 import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating_details)
-public class RatingDetailsView extends LinearLayout implements OnRatingClickListener, OnSettingsUpdatedListener {
+public class RatingDetailsView extends LinearLayout implements OnRatingClickListener, OnSettingsUpdatedListener, OnRatingSwitchedListener {
 
 	@Bean
 	DetailsListAdapter adapter;
@@ -48,6 +49,11 @@ public class RatingDetailsView extends LinearLayout implements OnRatingClickList
 	@Override
 	public void onSettingsUpdated() {
 		adapter.setRating(currentRating);
+	}
+
+	@Override
+	public void onRatingSwitched(Rating rating) {
+		setRating(rating);
 	}
 
 }

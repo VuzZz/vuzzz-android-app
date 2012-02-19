@@ -61,7 +61,6 @@ public class SettingsView extends LinearLayout {
 		natureWeight.setProgress(settingsPreferences.natureWeight().get());
 		shopsWeight.setProgress(settingsPreferences.shopsWeight().get());
 		transitWeight.setProgress(settingsPreferences.transitWeight().get());
-		
 		setProgressChangeListeners();
 	}
 	

@@ -55,8 +55,7 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 
 	@Override
 	public void draw(Canvas canvas) {
-		canvas.drawColor(pair ? 0x11AAAAAA : 0xFFFFFFFF);
-		
+		canvas.drawColor(pair ? 0x11AAAAAA : 0x33FFFFFF);
 		if (hidden) {
 			return;
 		}
@@ -157,6 +156,10 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 	@Override
 	public void onHistoryHidden() {
 		hidden = true;
+	}
+	
+	public Rating getRating() {
+		return rating;
 	}
 
 }
