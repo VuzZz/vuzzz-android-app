@@ -132,7 +132,8 @@ public class AddressOverlay extends Overlay {
 		if (addressLocation == null) {
 			return false;
 		}
-		return address != null && panel.contains(x, y);
+//		return address != null && panel.contains(x, y);
+		return panel.contains(x, y);
 	}
 
 	public GeoPoint getAddressLocation() {

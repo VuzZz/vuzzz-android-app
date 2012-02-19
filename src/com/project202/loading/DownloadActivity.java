@@ -49,6 +49,7 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setTitle(address);
 		super.onCreate(savedInstanceState);
 		NonConfigurationInstance instance = (NonConfigurationInstance) getLastNonConfigurationInstance();
 
@@ -57,7 +58,6 @@ public class DownloadActivity extends ActionBarActivity implements TaskResultLis
 			task = instance.task;
 		}
 		
-		setTitle(address);
 		
 		showRefreshing();
 	}
