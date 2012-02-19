@@ -1,6 +1,7 @@
 package com.project202;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Background;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
@@ -28,6 +30,7 @@ import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.project202.adapter.SimplePagerAdapter;
+import com.project202.loading.RatingDownloadTask;
 import com.project202.model.Rating;
 import com.project202.model.ThemeName;
 import com.project202.views.HistoryView_;
@@ -151,7 +154,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	private List<Rating> loadRatingsFromFiles() {
 		File directory = getFilesDir();
-		File[] historyFiles = directory.listFiles();
+		File[] historyFiles = directory.listFiles(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String filename) {
+				return filename.startsWith(RatingDownloadTask.HISTO_FILE_PREFIX);
+			}
+		});
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);

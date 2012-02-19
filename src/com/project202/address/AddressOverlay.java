@@ -61,6 +61,7 @@ public class AddressOverlay extends Overlay {
 	}
 
 	public void showAddressPopup(GeoPoint location) {
+		this.address = null;
 		this.addressLocation = location;
 	}
 
@@ -135,7 +136,7 @@ public class AddressOverlay extends Overlay {
 
 			// Draw \/
 			path.reset();
-			int halfInnerSpace = 0; // INNER_SPACE / 4;
+			int halfInnerSpace = 0;
 			path.moveTo(baseX, baseY - halfInnerSpace);
 			path.lineTo(baseX - INNER_SPACE / 2, baseY - INNER_SPACE - PADDING2);
 			path.lineTo(baseX + INNER_SPACE / 2, baseY - INNER_SPACE - PADDING2);
