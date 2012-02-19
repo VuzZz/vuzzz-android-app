@@ -5,12 +5,17 @@ import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EViewGroup;
+import com.googlecode.androidannotations.annotations.ItemSelect;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.project202.OnSettingsUpdatedListener;
 import com.project202.adapter.HistoryListAdapter;
@@ -27,18 +32,26 @@ public class HistoryView extends LinearLayout implements OnSettingsUpdatedListen
 	
 	@ViewById
 	protected ListView historyList;
+
+	private final OnRatingSelectedListener onRatingSelectedListener;
 	
-	public HistoryView(Context context) {
+	public HistoryView(Context context, OnRatingSelectedListener onRatingSelectedListener) {
 		super(context);
+		this.onRatingSelectedListener = onRatingSelectedListener;
 	}
 
 	@AfterViews
 	public void afterViews(){
 		historyList.setAdapter(adapter);
+		historyList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				onRatingSelectedListener.onRatingSelectedListener((Rating)adapter.getItem(arg2));
+			}
+		});
 	}
 	
 	public void setRatings(List<Rating> ratings){
-		Log.i("TAG", "SET RATINGS "+ratings.size());
 		this.currentRatings = ratings;
 		adapter.setRatings(ratings);
 	}

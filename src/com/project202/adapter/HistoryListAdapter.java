@@ -35,7 +35,7 @@ public class HistoryListAdapter extends BaseAdapter {
 	public void setRatings(List<Rating> ratings) {
 		float maxMark = Float.MIN_VALUE;
 		for (Rating rating : ratings) {
-			float mark = Weighted.getWeightedMarkSum(rating);
+			float mark = Weighted.getMarkSum(rating);
 			if (mark > maxMark) {
 				maxMark = mark;
 			}

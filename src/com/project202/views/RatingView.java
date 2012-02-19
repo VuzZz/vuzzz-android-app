@@ -13,6 +13,7 @@ import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.DrawableRes;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
+import com.project202.OnRatingSwitchedListener;
 import com.project202.OnSettingsUpdatedListener;
 import com.project202.address.SettingsPreferences_;
 import com.project202.component.RatingButton;
@@ -22,7 +23,7 @@ import com.project202.model.Weighted;
 import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating)
-public class RatingView extends LinearLayout implements OnSettingsUpdatedListener {
+public class RatingView extends LinearLayout implements OnSettingsUpdatedListener, OnRatingSwitchedListener {
 
 	public interface OnRatingClickListener {
 		void onRatingClickListener(ThemeName themeName);
@@ -193,6 +194,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 
 	@Override
 	public void onSettingsUpdated() {
+		onRatingFocused();
 		setValuesFromRating(currentRating);
 	}
 
@@ -237,6 +239,12 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 	
 	public SettingsPreferences_ getPreferences() {
 		return preferences;
+	}
+
+	@Override
+	public void onRatingSwitched(Rating rating) {
+		this.currentRating = rating;
+		setValuesFromRating(currentRating);
 	}
 
 }

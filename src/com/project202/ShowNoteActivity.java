@@ -36,6 +36,7 @@ import com.project202.model.ThemeName;
 import com.project202.model.Weighted;
 import com.project202.views.HistoryView_;
 import com.project202.views.OnHistoryFocusedListener;
+import com.project202.views.OnRatingSelectedListener;
 import com.project202.views.RatingDetailsView_;
 import com.project202.views.RatingView.OnRatingClickListener;
 import com.project202.views.RatingView_;
@@ -45,7 +46,7 @@ import com.vuzzz.android.R;
 
 @EActivity(R.layout.show_note)
 @NoTitle
-public class ShowNoteActivity extends Activity implements OnRatingClickListener, OnSettingsUpdatedListener {
+public class ShowNoteActivity extends Activity implements OnRatingClickListener, OnSettingsUpdatedListener, OnRatingSelectedListener {
 
 	@Extra("rating")
 	Rating rating;
@@ -80,6 +81,8 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	private SimplePagerAdapter pagerAdapter;
 
+	private List<OnRatingSwitchedListener> onRatingSwitchedListener = new ArrayList<OnRatingSwitchedListener>();
+
 	private List<OnSettingsUpdatedListener> onSettingsUpdatedListeners = new ArrayList<OnSettingsUpdatedListener>();
 
 	private RatingView_ ratingView;
@@ -91,7 +94,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 		ratingView = new RatingView_(this);
 		ratingDetailsView = new RatingDetailsView_(this);
-		final HistoryView_ historyView = new HistoryView_(this);
+		final HistoryView_ historyView = new HistoryView_(this, this);
 
 		// Inflating layouts
 		ratingView.onFinishInflate();
@@ -102,6 +105,8 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		onSettingsUpdatedListeners.add(ratingView);
 		onSettingsUpdatedListeners.add(historyView);
 		onSettingsUpdatedListeners.add(ratingDetailsView);
+		onRatingSwitchedListener.add(ratingView);
+		onRatingSwitchedListener.add(ratingDetailsView);
 
 		// Injecting content
 		ratingView.setOnRatingClickListener(this);
@@ -165,10 +170,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 		titleView.setText(rating.address);
 
-		if (ratingNull)
+		if (ratingNull) {
+
 			viewPager.setCurrentItem(0);
-		else
+		} else {
 			viewPager.setCurrentItem(1);
+
+		}
 
 	}
 
@@ -255,6 +263,15 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	void shareButtonClicked() {
 		final String format = "Une adresse où il fait bon vivre : [%s] a obtenu %s/10 http://vuzzz.com/geo?q=%s,%s";
 		shareManager.share(String.format(format, rating.address, String.format("%.1f", Weighted.getWeightedMark(rating, ratingView.getPreferences())), Double.toString(rating.latitude), Double.toString(rating.longitude)));
+
+	}
+
+	@Override
+	public void onRatingSelectedListener(Rating rating) {
+		for (OnRatingSwitchedListener l : onRatingSwitchedListener) {
+			l.onRatingSwitched(rating);
+		}
+		viewPager.setCurrentItem(1, true);
 	}
 
 }
