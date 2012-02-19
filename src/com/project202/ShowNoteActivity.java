@@ -15,6 +15,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
@@ -79,7 +80,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	private SimplePagerAdapter pagerAdapter;
 
 	private List<OnSettingsUpdatedListener> onSettingsUpdatedListeners = new ArrayList<OnSettingsUpdatedListener>();
-	
+
 	@AfterViews
 	public void afterViews() {
 
@@ -88,7 +89,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 		titleView.setText(address);
 
 		// Creating ViewPager Views
-		RatingView_ ratingView = new RatingView_(this);
+		final RatingView_ ratingView = new RatingView_(this);
 		ratingDetailsView = new RatingDetailsView_(this);
 		final HistoryView_ historyView = new HistoryView_(this);
 
@@ -128,6 +129,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 						listener.onHistoryHidden();
 					}
 				}
+				
+				if (position == 1) {
+					ratingView.onRatingFocused();
+				} else {
+					ratingView.onRatingHidden();
+				}
+				
 				titles.onPageSelected(position);
 			}
 			
@@ -159,6 +167,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 			viewPager.setCurrentItem(0);
 		else
 			viewPager.setCurrentItem(1);
+		
 	}
 
 	private List<Rating> loadRatingsFromFiles() {

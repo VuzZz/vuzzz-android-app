@@ -23,6 +23,8 @@ public class RatingButton extends RelativeLayout {
 	@ViewById(R.id.rating_button_footer)
 	protected LinearLayout footerLayout;
 
+	private Float aMark;
+
 	public RatingButton(Context context) {
 		super(context);
 	}
@@ -32,13 +34,19 @@ public class RatingButton extends RelativeLayout {
 	}
 
 	public void setMark(Float aMark) {
-		ratingTextView.setText(String.format("%.1f", aMark));
+		this.aMark = aMark;
+	}
+
+	public void updateMarkDisplay(float percent) {
+		if (aMark != null) {
+			ratingTextView.setText(String.format("%.1f", aMark * percent));
+		}
 	}
 
 	public void setTheme(String theme) {
 		themeTextView.setText(theme);
 	}
-	
+
 	public void setPicto(Drawable drawable) {
 		themeTextView.setCompoundDrawables(drawable, null, null, null);
 	}

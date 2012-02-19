@@ -16,14 +16,14 @@ import com.project202.views.RatingView.OnRatingClickListener;
 import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating_details)
-public class RatingDetailsView extends LinearLayout implements OnRatingClickListener, OnSettingsUpdatedListener{
+public class RatingDetailsView extends LinearLayout implements OnRatingClickListener, OnSettingsUpdatedListener {
 
 	@Bean
 	DetailsListAdapter adapter;
-	
+
 	@ViewById
 	ListView detailsList;
-	
+
 	Rating currentRating;
 
 	public RatingDetailsView(Context context) {
@@ -39,8 +39,8 @@ public class RatingDetailsView extends LinearLayout implements OnRatingClickList
 	public void onRatingClickListener(ThemeName themeName) {
 		detailsList.setSelectionFromTop(adapter.getThemeItemPosition(themeName), 0);
 	}
-	
-	public void setRating(Rating rating){
+
+	public void setRating(Rating rating) {
 		this.currentRating = rating;
 		adapter.setRating(rating);
 	}
@@ -49,6 +49,5 @@ public class RatingDetailsView extends LinearLayout implements OnRatingClickList
 	public void onSettingsUpdated() {
 		adapter.setRating(currentRating);
 	}
-	
 
 }

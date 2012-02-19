@@ -3,10 +3,13 @@ package com.project202.views;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EViewGroup;
+import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.DrawableRes;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
@@ -20,36 +23,40 @@ import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating)
 public class RatingView extends LinearLayout implements OnSettingsUpdatedListener {
-	
-	public interface OnRatingClickListener{
+
+	public interface OnRatingClickListener {
 		void onRatingClickListener(ThemeName themeName);
 	}
 
 	private static final int PICTO_WIDTH = 25;
+	
+	private static final Interpolator interpolator = new DecelerateInterpolator();
 
 	@ViewById(R.id.global_rating)
 	RatingButton globalRating;
-	
+
 	@ViewById(R.id.culture_rating)
 	RatingButton cultureRating;
-	
+
 	private Rating currentRating;
-	
+
+	private long animationStart;
+
 	@Pref
 	SettingsPreferences_ preferences;
-	
+
 	@ViewById(R.id.nature_rating)
 	RatingButton natureRating;
-	
+
 	@ViewById(R.id.transit_rating)
 	RatingButton transitRating;
-	
+
 	@ViewById(R.id.institutions_rating)
 	RatingButton securityRating;
-	
+
 	@ViewById(R.id.shops_rating)
 	RatingButton shopsRating;
-	
+
 	@ViewById(R.id.leisure_rating)
 	RatingButton leisureRating;
 
@@ -70,19 +77,19 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 
 	@DrawableRes(R.drawable.ic_rating_shop)
 	Drawable shopsPicto;
-	
+
 	OnRatingClickListener listener;
-	
+
 	public RatingView(Context context) {
 		super(context);
 	}
-	
+
 	@AfterViews
 	void afterViews() {
 		globalRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		globalRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
 		globalRating.setTheme("NOTE GLOBALE");
-		
+
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
 		cultureRating.setTheme(ThemeName.CULTURE.getName());
@@ -94,7 +101,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 		natureRating.setTheme(ThemeName.NATURE.getName());
 		naturePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
 		natureRating.setPicto(naturePicto);
-		
+
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
 		transitRating.setTheme(ThemeName.TRANSIT.getName());
@@ -112,7 +119,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 		securityRating.setTheme(ThemeName.SECURITY.getName());
 		securityPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
 		securityRating.setPicto(securityPicto);
-		
+
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
 		shopsRating.setTheme(ThemeName.SHOPS.getName());
@@ -120,15 +127,15 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 		shopsRating.setPicto(shopsPicto);
 	}
 
-	public void setOnRatingClickListener(OnRatingClickListener listener){
+	public void setOnRatingClickListener(OnRatingClickListener listener) {
 		this.listener = listener;
 	}
-	
-	public void setValuesFromRating(Rating rating){
+
+	public void setValuesFromRating(Rating rating) {
 		this.currentRating = rating;
 
 		globalRating.setMark(Weighted.getWeightedMark(rating, preferences));
-		
+
 		cultureRating.setMark(rating.getThemeMark(ThemeName.CULTURE));
 		cultureRating.setOnClickListener(new OnClickListener() {
 			@Override
@@ -136,7 +143,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 				listener.onRatingClickListener(ThemeName.CULTURE);
 			}
 		});
-		
+
 		natureRating.setMark(rating.getThemeMark(ThemeName.NATURE));
 		natureRating.setOnClickListener(new OnClickListener() {
 			@Override
@@ -144,7 +151,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 				listener.onRatingClickListener(ThemeName.NATURE);
 			}
 		});
-		
+
 		transitRating.setMark(rating.getThemeMark(ThemeName.TRANSIT));
 		transitRating.setOnClickListener(new OnClickListener() {
 			@Override
@@ -152,7 +159,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 				listener.onRatingClickListener(ThemeName.TRANSIT);
 			}
 		});
-		
+
 		securityRating.setMark(rating.getThemeMark(ThemeName.SECURITY));
 		securityRating.setOnClickListener(new OnClickListener() {
 			@Override
@@ -160,7 +167,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 				listener.onRatingClickListener(ThemeName.SECURITY);
 			}
 		});
-		
+
 		shopsRating.setMark(rating.getThemeMark(ThemeName.SHOPS));
 		shopsRating.setOnClickListener(new OnClickListener() {
 			@Override
@@ -168,7 +175,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 				listener.onRatingClickListener(ThemeName.SHOPS);
 			}
 		});
-		
+
 		leisureRating.setMark(rating.getThemeMark(ThemeName.LEISURE));
 		leisureRating.setOnClickListener(new OnClickListener() {
 			@Override
@@ -182,5 +189,44 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 	public void onSettingsUpdated() {
 		setValuesFromRating(currentRating);
 	}
+
+	public void onRatingHidden() {
+		globalRating.updateMarkDisplay(0);
+		cultureRating.updateMarkDisplay(0);
+		natureRating.updateMarkDisplay(0);
+		transitRating.updateMarkDisplay(0);
+		securityRating.updateMarkDisplay(0);
+		shopsRating.updateMarkDisplay(0);
+		leisureRating.updateMarkDisplay(0);
+	}
+
+	public void onRatingFocused() {
+		animationStart = System.currentTimeMillis();
+		updateViews();
+	}
 	
+	@UiThread(delay = 40)
+	void updateDelayed() {
+		updateViews();
+	}
+
+	void updateViews() {
+		final float animationDuration = 1000f;
+		long elapsedTime = System.currentTimeMillis() - animationStart;
+		float percent;
+		if (elapsedTime <= animationDuration) {
+			percent = interpolator.getInterpolation(elapsedTime / animationDuration);
+			updateDelayed();
+		} else {
+			percent = 1;
+		}
+		globalRating.updateMarkDisplay(percent);
+		cultureRating.updateMarkDisplay(percent);
+		natureRating.updateMarkDisplay(percent);
+		transitRating.updateMarkDisplay(percent);
+		securityRating.updateMarkDisplay(percent);
+		shopsRating.updateMarkDisplay(percent);
+		leisureRating.updateMarkDisplay(percent);
+	}
+
 }
