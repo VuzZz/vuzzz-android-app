@@ -37,9 +37,11 @@ public class AddressOverlay extends Overlay {
 	private final RectF panel = new RectF();
 
 	private Address address = null;
+	private final MapView mapView;
 
-	public AddressOverlay(Context context) {
+	public AddressOverlay(Context context, MapView mapView) {
 
+		this.mapView = mapView;
 		FONT_SIZE = DimenHelper.pixelSize(context, 16f);
 		INNER_SPACE = DimenHelper.pixelSize(context, 20f);
 		RADIUS = DimenHelper.pixelSize(context, 8f);
@@ -61,12 +63,15 @@ public class AddressOverlay extends Overlay {
 	}
 
 	public void showAddressPopup(GeoPoint location) {
+		mapView.invalidate();
 		this.address = null;
 		this.addressLocation = location;
+		
 	}
 
 	public void hideAddressPopup() {
 		addressLocation = null;
+		mapView.invalidate();
 	}
 
 	@Override
@@ -170,6 +175,7 @@ public class AddressOverlay extends Overlay {
 	}
 
 	public void setAddress(Address address) {
+		mapView.invalidate();
 		this.address = address;
 	}
 
