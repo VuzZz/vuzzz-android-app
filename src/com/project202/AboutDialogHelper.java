@@ -23,7 +23,7 @@ import com.vuzzz.android.R;
 @EBean
 public class AboutDialogHelper {
 	
-	private static final Uri MARKET_URI = Uri.parse("market://details?id=com.project202");
+	private static final Uri MARKET_URI = Uri.parse("market://details?id=com.vuzzz.android");
 
 	@RootContext
 	Context context;
