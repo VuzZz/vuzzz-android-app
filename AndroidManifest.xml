@@ -23,10 +23,10 @@
             android:required="true" />
 
         <activity
-            android:name="com.project202.loading.DownloadActivity_"
+            android:name="com.vuzzz.android.loading.DownloadActivity_"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.project202.address.AddressActivity_"
+            android:name="com.vuzzz.android.address.AddressActivity_"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -62,8 +62,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.project202.ShowNoteActivity_"
-            android:label="@string/app_name" > <!-- <intent-filter android:priority="0" > -->
+            android:name="com.vuzzz.android.ShowNoteActivity_"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+
+            <!-- <intent-filter android:priority="0" > -->
             <!-- <action android:name="android.intent.action.VIEW" /> -->
             <!-- <category android:name="android.intent.category.DEFAULT" /> -->
             <!-- <category android:name="android.intent.category.BROWSABLE" /> -->

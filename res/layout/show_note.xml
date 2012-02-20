@@ -79,13 +79,13 @@
         android:layout_below="@id/titles" >
     </android.support.v4.view.ViewPager>
 
-    <com.project202.views.SettingsView_
+    <com.vuzzz.android.views.SettingsView_
         android:id="@+id/settingsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/actionbar_compat"
         android:visibility="gone" >
-    </com.project202.views.SettingsView_>
+    </com.vuzzz.android.views.SettingsView_>
 
     <ImageView
         android:layout_width="match_parent"
