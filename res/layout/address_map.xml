@@ -92,7 +92,7 @@
             android:contentDescription="Adresse"
             android:gravity="center_vertical"
             android:paddingLeft="35dp"
-            android:text="Adresse"
+            android:text="@string/search_address"
             android:textColor="#7f7f7f"
             android:textSize="18dp" />
     </RelativeLayout>

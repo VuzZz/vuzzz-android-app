@@ -29,5 +29,6 @@
     <string name="share_project">Partager VuzZz</string>
     <string name="share_project_content">"Tu connais VuzZz ? Génial pour connaître la qualité de vie d'un lieu ! Et c'est dispo sur mobile : http://www.vuzzz.com"</string>
  	<string name="note_max">/10</string>
+ 	<string name="search_address">"&#8220;Place d'italie&#8221;"</string>
 
 </resources>
