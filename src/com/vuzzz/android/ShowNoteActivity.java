@@ -15,6 +15,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
@@ -43,7 +44,7 @@ import com.vuzzz.android.views.RatingView.OnRatingClickListener;
 import com.vuzzz.android.views.RatingView_;
 import com.vuzzz.android.views.SettingsView;
 
-@EActivity(R.layout.show_note)
+@EActivity
 @NoTitle
 public class ShowNoteActivity extends Activity implements OnRatingClickListener, OnSettingsUpdatedListener, OnRatingSelectedListener {
 
@@ -78,6 +79,9 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	@Bean
 	ShareManager shareManager;
 
+	@ViewById
+	View actionBar;
+
 	private SimplePagerAdapter pagerAdapter;
 
 	private List<OnRatingSwitchedListener> onRatingSwitchedListener = new ArrayList<OnRatingSwitchedListener>();
@@ -85,6 +89,18 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	private List<OnSettingsUpdatedListener> onSettingsUpdatedListeners = new ArrayList<OnSettingsUpdatedListener>();
 
 	private RatingView_ ratingView;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		if (Config.MUI) {
+			setContentView(R.layout.show_note_mui);
+		} else {
+			setContentView(R.layout.show_note);
+		}
+
+	}
 
 	@AfterViews
 	public void afterViews() {

@@ -43,13 +43,14 @@ import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.vuzzz.android.AboutDialogHelper;
+import com.vuzzz.android.Config;
 import com.vuzzz.android.LogHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
 import com.vuzzz.android.loading.DownloadActivity_;
 import com.vuzzz.android.loading.RatingDownloadTask;
 
-@EActivity(R.layout.address_map)
+@EActivity
 @NoTitle
 public class AddressActivity extends MapActivity {
 
@@ -73,6 +74,9 @@ public class AddressActivity extends MapActivity {
 
 	@ViewById
 	View loadingMenuView;
+
+	@ViewById
+	View actionBar;
 
 	@SystemService
 	InputMethodManager inputMethodManager;
@@ -98,9 +102,22 @@ public class AddressActivity extends MapActivity {
 	private boolean hasHistory;
 
 	private boolean loading;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		if (Config.MUI) {
+			setContentView(R.layout.address_map_mui);
+		} else {
+			setContentView(R.layout.address_map);
+		}
+		
+	}
 
 	@AfterViews
 	void initLayout() {
+
 		geocoder = new Geocoder(this);
 
 		addressEditText.addTextChangedListener(new AbstractTextWatcher() {

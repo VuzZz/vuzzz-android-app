@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -13,12 +14,13 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.vuzzz.android.Config;
 import com.vuzzz.android.HomeHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
 import com.vuzzz.android.model.Rating;
 
-@EActivity(R.layout.loading)
+@EActivity
 @NoTitle
 public class DownloadActivity extends Activity implements TaskResultListener<Rating> {
 
@@ -52,9 +54,19 @@ public class DownloadActivity extends Activity implements TaskResultListener<Rat
 	@ViewById
 	TextView titleView;
 
+	@ViewById
+	View actionBar;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		if (Config.MUI) {
+			setContentView(R.layout.loading_mui);
+		} else {
+			setContentView(R.layout.loading);
+		}
+
 		NonConfigurationInstance instance = (NonConfigurationInstance) getLastNonConfigurationInstance();
 
 		if (instance != null) {
@@ -62,7 +74,7 @@ public class DownloadActivity extends Activity implements TaskResultListener<Rat
 			task = instance.task;
 		}
 	}
-	
+
 	@AfterViews
 	void initLayout() {
 		titleView.setText(address);

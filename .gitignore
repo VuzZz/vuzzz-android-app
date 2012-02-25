@@ -5,3 +5,4 @@ apt_generated
 .classpath
 .factorypath
 *.apk
+.DS_store

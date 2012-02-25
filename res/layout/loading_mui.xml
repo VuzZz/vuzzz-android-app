@@ -3,14 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <include layout="@layout/loading_action_bar" />
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_compat_height"
+        android:layout_alignParentBottom="true"
+        layout="@layout/loading_action_bar" />
 
     <include
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/actionBar"
+        android:layout_above="@id/actionBar"
         layout="@layout/loading_content" />
 
-    <include layout="@layout/action_bar_shadow" />
+    <include layout="@layout/action_bar_shadow_mui" />
 
 </RelativeLayout>
