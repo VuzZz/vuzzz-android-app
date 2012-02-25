@@ -1,11 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Legend -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:paddingBottom="0dp" >
+
+            <com.vuzzz.android.component.LegendItem_
+                android:id="@+id/legendCulture"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <com.vuzzz.android.component.LegendItem_
+                android:id="@+id/legendLeisure"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <com.vuzzz.android.component.LegendItem_
+                android:id="@+id/legendNature"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:paddingTop="0dp" >
+
+            <com.vuzzz.android.component.LegendItem_
+                android:id="@+id/legendSecurity"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <com.vuzzz.android.component.LegendItem_
+                android:id="@+id/legendShops"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <com.vuzzz.android.component.LegendItem_
+                android:id="@+id/legendTransit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/history_list"
-        android:divider="#00000000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
-    
+        android:layout_height="match_parent"
+        android:divider="#00000000" />
+
 </merge>

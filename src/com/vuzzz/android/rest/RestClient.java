@@ -6,7 +6,7 @@ import com.googlecode.androidannotations.annotations.rest.Rest;
 import com.googlecode.androidannotations.api.rest.MediaType;
 import com.vuzzz.android.model.Rating;
 
-@Rest("http://www.bluepyth.fr:9000")
+@Rest("http://128.129.130.17:9000")
 public interface RestClient {
 	@Get("/rating?latitude={latitude}&longitude={longitude}")
 	@Accept(MediaType.APPLICATION_JSON)

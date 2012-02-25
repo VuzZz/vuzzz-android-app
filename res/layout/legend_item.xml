@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <com.vuzzz.android.views.LegendView
+        android:id="@+id/legendView"
+        android:layout_gravity="center_vertical"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/legendText"
+        android:layout_gravity="center_vertical"
+        android:text="Temporary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+</merge>
+	       

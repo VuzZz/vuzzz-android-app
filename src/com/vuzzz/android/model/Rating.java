@@ -92,4 +92,12 @@ public class Rating implements Serializable {
 		}
 		return 0f;
 	}
+
+	public float getGlobalMark() {
+		float mark = 0;
+		for (Theme t : themes) {
+			mark += t.getNote();
+		}
+		return mark/(float)themes.size();
+	}
 }
