@@ -11,6 +11,7 @@ public class Theme implements Serializable, RatingDetails{
 	public String description;
 	public float note;
 	public List<Criterion> criteria;
+	public boolean relevant;
 
 	public Theme(){}
 	
@@ -69,6 +70,14 @@ public class Theme implements Serializable, RatingDetails{
 	@Override
 	public float getCoefficient() {
 		throw new UnsupportedOperationException("Hey what's up dude ?");
+	}
+	
+	public boolean isRelevant() {
+		return relevant;
+	}
+	
+	public void setRelevant(boolean relevant) {
+		this.relevant = relevant;
 	}
 
 }
