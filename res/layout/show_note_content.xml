@@ -4,10 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <!-- android:text="Les notes attribuées dépendent de la couverture des données mises à disposition par la mairie de Paris." -->
+
+    <TextView
+        android:id="@+id/warningText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#a3b7b5"
+        android:capitalize="characters"
+        android:gravity="center"
+        android:shadowColor="#44000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1.5"
+        android:text="LES NOTES ATTRIBUÉES DÉPENDENT DE LA COUVERTURE DES DONNÉES MISES À DISPOSITION PAR LA MAIRIE DE PARIS."
+        android:textColor="@android:color/white"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
     <com.viewpagerindicator.TitlePageIndicator
         android:id="@+id/titles"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/warningText"
         android:padding="10dip"
         app:selectedBold="true"
         app:selectedColor="#FF000000"

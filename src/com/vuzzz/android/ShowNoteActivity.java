@@ -1,5 +1,7 @@
 package com.vuzzz.android;
 
+import static android.view.View.GONE;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.NoTitle;
+import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -67,6 +70,9 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	@AnimationRes
 	Animation slideOutFromTop;
 
+	@ViewById
+	View warningText;
+
 	@ViewById(R.id.view_pager)
 	protected ViewPager viewPager;
 
@@ -79,6 +85,9 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@ViewById
 	TextView titleView;
+
+	@AnimationRes
+	Animation slideOutToTop;
 
 	@Bean
 	ShareManager shareManager;
@@ -201,6 +210,18 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 		}
 
+		hideWarningAfterDelay();
+	}
+
+	@UiThread(delay = 5000)
+	public void hideWarningAfterDelay() {
+		warningText.startAnimation(slideOutToTop);
+		slideOutToTop.setAnimationListener(new AbstractAnimationListener() {
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				warningText.setVisibility(GONE);
+			}
+		});
 	}
 
 	private List<Rating> loadRatingsFromFiles() {
