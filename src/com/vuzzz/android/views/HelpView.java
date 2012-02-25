@@ -36,21 +36,27 @@ public class HelpView extends FrameLayout {
 
 	@HtmlRes
 	Spanned aboutContent;
+	
+	@HtmlRes
+	Spanned vuzzzCommon;
+	
+	@HtmlRes
+	Spanned vuzzzHelpMui;
 
+	@ViewById
+	TextView commonHelpText;
+	
 	@ViewById
 	TextView helpText;
+	
+	@ViewById
+	TextView helpMuiText;
 
 	@ViewById
-	View shareVuzzButton;
+	View helpContent;
 
 	@ViewById
-	View androidMarketButton;
-
-	@ViewById
-	View shareVuzzzQrCode;
-
-	@ViewById
-	View shareVuzzzUrl;
+	View helpMuiContent;
 
 	public HelpView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -66,15 +72,19 @@ public class HelpView extends FrameLayout {
 
 	@AfterViews
 	void initLayout() {
-		helpText.setText(aboutContent);
-		helpText.setMovementMethod(LinkMovementMethod.getInstance());
-		helpText.setLinkTextColor(Color.RED);
+		
+		commonHelpText.setText(vuzzzCommon);
 
 		if (VuzZzConfig.MUI) {
-			shareVuzzzQrCode.setVisibility(VISIBLE);
-			shareVuzzzUrl.setVisibility(VISIBLE);
-			shareVuzzButton.setVisibility(GONE);
-			androidMarketButton.setVisibility(GONE);
+			helpMuiContent.setVisibility(VISIBLE);
+			helpContent.setVisibility(GONE);
+			
+			helpMuiText.setText(vuzzzHelpMui);
+			
+		} else {
+			helpText.setText(aboutContent);
+			helpText.setMovementMethod(LinkMovementMethod.getInstance());
+			helpText.setLinkTextColor(Color.parseColor("#33B5E5"));
 		}
 	}
 
