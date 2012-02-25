@@ -4,3 +4,4 @@ apt_generated
 .apt_generated
 .classpath
 .factorypath
+*.apk
