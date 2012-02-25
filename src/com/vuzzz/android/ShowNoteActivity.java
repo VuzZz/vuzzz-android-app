@@ -98,7 +98,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (Config.MUI) {
+		if (VuzZzConfig.MUI) {
 			setContentView(R.layout.show_note_mui);
 		} else {
 			setContentView(R.layout.show_note);
@@ -109,7 +109,7 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	@AfterViews
 	public void afterViews() {
 
-		if (Config.MUI) {
+		if (VuzZzConfig.MUI) {
 			shareButton.setVisibility(View.GONE);
 		}
 

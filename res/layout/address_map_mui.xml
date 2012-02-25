@@ -4,11 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        layout="@layout/address_map_content" />
+        android:layout_weight="1" >
+
+        <include layout="@layout/address_map_content" />
+
+        <com.vuzzz.android.views.HelpView_
+            android:id="@+id/helpView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <include layout="@layout/address_map_action_bar" />
 

@@ -1,38 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:fillViewport="true" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:text="Aide"
-        android:textSize="30dp" />
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-    <TextView
-        android:id="@+id/helpText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:textColor="@android:color/black"
-        android:textSize="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Aide"
+            android:textSize="30dp" />
 
-    <Button
-        android:id="@+id/shareVuzzButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:text="@string/share_project" />
+        <TextView
+            android:id="@+id/helpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="18dp" />
 
-    <Button
-        android:id="@+id/androidMarketButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rate_android_market" />
+        <Button
+            android:id="@+id/shareVuzzButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/share_project" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/androidMarketButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rate_android_market" />
+
+        <ImageView
+            android:id="@+id/shareVuzzzQrCode"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="QRCode de l&apos;URL de VuzZz sur l&apos;Android Market"
+            android:paddingBottom="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/share_vuzzz"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/shareVuzzzUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="http://market.android.com/details?id=com.vuzzz.android"
+            android:textSize="18dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</ScrollView>

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.googlecode.androidannotations.annotations.res.HtmlRes;
 import com.googlecode.androidannotations.annotations.res.StringRes;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShareManager;
+import com.vuzzz.android.VuzZzConfig;
 
 @EViewGroup(R.layout.help)
 public class HelpView extends FrameLayout {
@@ -34,9 +36,21 @@ public class HelpView extends FrameLayout {
 
 	@HtmlRes
 	Spanned aboutContent;
-	
+
 	@ViewById
 	TextView helpText;
+
+	@ViewById
+	View shareVuzzButton;
+
+	@ViewById
+	View androidMarketButton;
+
+	@ViewById
+	View shareVuzzzQrCode;
+
+	@ViewById
+	View shareVuzzzUrl;
 
 	public HelpView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -55,6 +69,13 @@ public class HelpView extends FrameLayout {
 		helpText.setText(aboutContent);
 		helpText.setMovementMethod(LinkMovementMethod.getInstance());
 		helpText.setLinkTextColor(Color.RED);
+
+		if (VuzZzConfig.MUI) {
+			shareVuzzzQrCode.setVisibility(VISIBLE);
+			shareVuzzzUrl.setVisibility(VISIBLE);
+			shareVuzzButton.setVisibility(GONE);
+			androidMarketButton.setVisibility(GONE);
+		}
 	}
 
 	@Click

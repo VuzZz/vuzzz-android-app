@@ -61,5 +61,5 @@
         android:contentDescription="Paramètres"
         android:scaleType="center"
         android:src="@drawable/ic_menu_help_holo_light" />
-
+    
 </LinearLayout>

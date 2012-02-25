@@ -1,6 +1,6 @@
 package com.vuzzz.android;
 
-import static com.vuzzz.android.Config.LOG_TO_CONSOLE;
+import static com.vuzzz.android.VuzZzConfig.LOG_TO_CONSOLE;
 import static java.lang.System.currentTimeMillis;
 import android.util.Log;
 

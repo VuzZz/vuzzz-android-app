@@ -43,7 +43,7 @@ import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.vuzzz.android.AbstractAnimationListener;
-import com.vuzzz.android.Config;
+import com.vuzzz.android.VuzZzConfig;
 import com.vuzzz.android.LogHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
@@ -114,7 +114,7 @@ public class AddressActivity extends MapActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (Config.MUI) {
+		if (VuzZzConfig.MUI) {
 			setContentView(R.layout.address_map_mui);
 		} else {
 			setContentView(R.layout.address_map);

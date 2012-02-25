@@ -14,7 +14,7 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.ViewById;
-import com.vuzzz.android.Config;
+import com.vuzzz.android.VuzZzConfig;
 import com.vuzzz.android.HomeHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
@@ -61,7 +61,7 @@ public class DownloadActivity extends Activity implements TaskResultListener<Rat
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (Config.MUI) {
+		if (VuzZzConfig.MUI) {
 			setContentView(R.layout.loading_mui);
 		} else {
 			setContentView(R.layout.loading);

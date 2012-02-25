@@ -16,13 +16,7 @@
 
 <resources>
 
-    <style name="AppTheme" parent="android:style/Theme.Light.NoTitleBar">
-        <!-- for programmatic instantiation -->
-        <item name="actionbarCompatTitleStyle">@style/ActionBarCompatTitle</item>
-        <item name="actionbarCompatItemStyle">@style/ActionBarCompatItem</item>
-        <item name="actionbarCompatItemHomeStyle">@style/ActionBarCompatHomeItem</item>
-        <item name="actionbarCompatProgressIndicatorStyle">@style/ActionBarCompatProgressIndicator</item>
-    </style>
+    <style name="AppTheme" parent="android:style/Theme.Light.NoTitleBar" />
 
     <style name="ActionBarCompat">
         <item name="android:background">#eee</item>

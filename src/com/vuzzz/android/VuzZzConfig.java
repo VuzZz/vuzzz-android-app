@@ -1,6 +1,6 @@
 package com.vuzzz.android;
 
-public abstract class Config {
+public abstract class VuzZzConfig {
 	
 	public static final boolean RELEASE = true;
 	
@@ -8,7 +8,7 @@ public abstract class Config {
 	
 	public static final boolean MUI = true;
 	
-	private Config() {
+	private VuzZzConfig() {
 	}
 	
 }
