@@ -30,7 +30,8 @@
  	<string name="search_address">"&#8220;Place d'italie&#8221;"</string>
  	<string name="vuzzz_help_mui">"<![CDATA[<b>VuzZz</b> est disponible sur l'<b>Android Market</b><br /><b><font color="#33B5E5">http://market.android.com/details?id=com.vuzzz.android</font></b>.<br />Plus d'informations sur <b><font color="#33B5E5">vuzzz.com</font></b>]]>"</string>
  	<string name="vuzzzCommon">"<![CDATA[Les notes attribuées dépendent de la <b>couverture des données</b> mises à disposition par la <b>Mairie de Paris</b>, dans le cadre de sa politique <b>Open Data</b>.<br /><br />
- 	    <b>VuzZz</b> est une application créée en 48h par <b>Pierre-Yves Ricau</b>, <b>Romain Sertelon</b>, <b>Alexandre Thomas</b> et <b>Yoan Zapata</b> lors du Global Android DevCamp 2012.
+ 	    <b>VuzZz</b> est une application créée en 48h par <b>Pierre-Yves Ricau</b>, <b>Romain Sertelon</b>, <b>Alexandre Thomas</b> et <b>Joan Zapata</b> lors du Global Android DevCamp 2012.
  	    ]]>"</string>
+ 	<string name="about_vuzzz">À propos</string>
 
 </resources>

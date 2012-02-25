@@ -16,7 +16,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="À propos"
+            android:textStyle="bold"
+        	android:shadowColor="#44000000"
+	        android:shadowDx="1"
+	        android:shadowDy="1"
+	        android:shadowRadius="1.5"
+            android:text="@string/about_vuzzz"
             android:textSize="30dp" />
 
         <TextView
@@ -27,34 +32,46 @@
             android:paddingBottom="10dp"
             android:textSize="18dp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/helpContent"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="fill_parent">
 
             <TextView
                 android:id="@+id/helpText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_above="@+id/shareVuzzButton"
                 android:gravity="center"
                 android:paddingBottom="10dp"
                 android:textSize="18dp" />
 
-            <Button
-                android:id="@+id/shareVuzzButton"
-                android:layout_width="wrap_content"
+            <LinearLayout 
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/share_project" />
-
-            <Button
-                android:id="@+id/androidMarketButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/rate_android_market" />
-        </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                
+	            <Button
+	                android:id="@+id/shareVuzzButton"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:paddingBottom="10dp"
+	                android:layout_weight="1"
+	                android:text="@string/share_project" />
+	
+	            <Button
+	                android:id="@+id/androidMarketButton"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:paddingBottom="10dp"
+	                android:layout_weight="1"
+	                android:text="@string/rate_android_market" />
+                
+            </LinearLayout>
+           
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/helpMuiContent"
