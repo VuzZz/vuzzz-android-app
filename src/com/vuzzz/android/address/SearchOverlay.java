@@ -133,7 +133,7 @@ public class SearchOverlay extends Overlay {
 		this.addresses = addresses;
 		this.geopoints = geopoints;
 		hitRects = new ArrayList<RectF>(addresses.size());
-		for (GeoPoint geopoint : geopoints) {
+		for (int i = 0; i < geopoints.size(); i++) {
 			hitRects.add(new RectF());
 		}
 	}
