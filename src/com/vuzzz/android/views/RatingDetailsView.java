@@ -13,8 +13,8 @@ import com.vuzzz.android.OnSettingsUpdatedListener;
 import com.vuzzz.android.R;
 import com.vuzzz.android.adapter.DetailsListAdapter;
 import com.vuzzz.android.model.Rating;
-import com.vuzzz.android.model.ThemeName;
 import com.vuzzz.android.views.RatingView.OnRatingClickListener;
+import com.vuzzz.android.views.RatingView.ThemeNameOrAll;
 
 @EViewGroup(R.layout.rating_details)
 public class RatingDetailsView extends FrameLayout implements OnRatingClickListener, OnSettingsUpdatedListener, OnRatingSwitchedListener {
@@ -37,8 +37,13 @@ public class RatingDetailsView extends FrameLayout implements OnRatingClickListe
 	}
 
 	@Override
-	public void onRatingClickListener(ThemeName themeName) {
-		detailsList.setSelectionFromTop(adapter.getThemeItemPosition(themeName), 0);
+	public void onRatingClickListener(ThemeNameOrAll themeNameOrAll) {
+		final int NO_Y_DISTANCE = 0;
+		if (themeNameOrAll.isAll()) {
+			detailsList.setSelectionFromTop(0, NO_Y_DISTANCE);
+		} else {
+			detailsList.setSelectionFromTop(adapter.getThemeItemPosition(themeNameOrAll.asThemeName()), NO_Y_DISTANCE);
+		}
 	}
 
 	public void setRating(Rating rating) {

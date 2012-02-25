@@ -42,6 +42,7 @@ import com.vuzzz.android.views.OnHistoryFocusedListener;
 import com.vuzzz.android.views.OnRatingSelectedListener;
 import com.vuzzz.android.views.RatingDetailsView_;
 import com.vuzzz.android.views.RatingView.OnRatingClickListener;
+import com.vuzzz.android.views.RatingView.ThemeNameOrAll;
 import com.vuzzz.android.views.RatingView_;
 import com.vuzzz.android.views.SettingsView;
 
@@ -296,8 +297,8 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	}
 
 	@Override
-	public void onRatingClickListener(ThemeName themeName) {
-		ratingDetailsView.onRatingClickListener(themeName);
+	public void onRatingClickListener(ThemeNameOrAll themeNameOrAll) {
+		ratingDetailsView.onRatingClickListener(themeNameOrAll);
 		viewPager.setCurrentItem(2);
 	}
 

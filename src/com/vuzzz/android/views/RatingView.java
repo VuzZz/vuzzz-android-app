@@ -1,5 +1,7 @@
 package com.vuzzz.android.views;
 
+import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.all;
+import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.themeName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
@@ -26,7 +29,36 @@ import com.vuzzz.android.model.Weighted;
 public class RatingView extends FrameLayout implements OnSettingsUpdatedListener, OnRatingSwitchedListener {
 
 	public interface OnRatingClickListener {
-		void onRatingClickListener(ThemeName themeName);
+		void onRatingClickListener(ThemeNameOrAll themeNameOrAll);
+	}
+
+	public static class ThemeNameOrAll {
+
+		public static ThemeNameOrAll all() {
+			return new ThemeNameOrAll(null);
+		}
+
+		public static ThemeNameOrAll themeName(ThemeName themeName) {
+			if (themeName == null) {
+				throw new IllegalArgumentException("themeName should not be null");
+			}
+			return new ThemeNameOrAll(themeName);
+		}
+
+		private final ThemeName themeName;
+
+		private ThemeNameOrAll(ThemeName themeName) {
+			this.themeName = themeName;
+		}
+		
+		public ThemeName asThemeName() {
+			return themeName;
+		}
+		
+		public boolean isAll() {
+			return themeName == null;
+		}
+
 	}
 
 	private static final int PICTO_WIDTH = 25;
@@ -147,7 +179,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		cultureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.CULTURE);
+				listener.onRatingClickListener(themeName(ThemeName.CULTURE));
 			}
 		});
 
@@ -155,7 +187,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		natureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.NATURE);
+				listener.onRatingClickListener(themeName(ThemeName.NATURE));
 			}
 		});
 
@@ -163,7 +195,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		transitRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.TRANSIT);
+				listener.onRatingClickListener(themeName(ThemeName.TRANSIT));
 			}
 		});
 
@@ -171,7 +203,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		securityRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.SECURITY);
+				listener.onRatingClickListener(themeName(ThemeName.SECURITY));
 			}
 		});
 
@@ -179,7 +211,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		shopsRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.SHOPS);
+				listener.onRatingClickListener(themeName(ThemeName.SHOPS));
 			}
 		});
 
@@ -187,9 +219,14 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		leisureRating.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				listener.onRatingClickListener(ThemeName.LEISURE);
+				listener.onRatingClickListener(themeName(ThemeName.LEISURE));
 			}
 		});
+	}
+
+	@Click
+	void globalRatingClicked() {
+		listener.onRatingClickListener(all());
 	}
 
 	@Override
