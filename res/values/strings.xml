@@ -22,7 +22,6 @@
     <string name="downloading_error_title">Erreur</string>
     <string name="error_information_message">Les informations n\'ont pu être téléchargées</string>
     <string name="share_with">Partager via</string>
-    <string name="about">A propos</string>
     <string name="about_content" formatted="false" >"<![CDATA[L'équipe <b>VuzZz</b> a besoin de vous !<br /><br />N'hésitez pas à nous aider en nous donnant une (bonne) note sur l'<b>Android Market</b>, et en <b>partageant</b> l'application avec vos amis.<br /><br />Pour en savoir plus : <a href="http://www.vuzzz.com">VuzZz.com</a>.]]>"</string>
     <string name="about_ok">Cool !</string>
     <string name="rate_android_market">Android Market</string>

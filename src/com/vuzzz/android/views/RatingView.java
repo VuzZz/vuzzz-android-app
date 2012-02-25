@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EViewGroup;
@@ -23,14 +23,14 @@ import com.vuzzz.android.model.ThemeName;
 import com.vuzzz.android.model.Weighted;
 
 @EViewGroup(R.layout.rating)
-public class RatingView extends LinearLayout implements OnSettingsUpdatedListener, OnRatingSwitchedListener {
+public class RatingView extends FrameLayout implements OnSettingsUpdatedListener, OnRatingSwitchedListener {
 
 	public interface OnRatingClickListener {
 		void onRatingClickListener(ThemeName themeName);
 	}
 
 	private static final int PICTO_WIDTH = 25;
-	
+
 	private static final Interpolator interpolator = new DecelerateInterpolator();
 
 	@ViewById(R.id.global_rating)
@@ -81,7 +81,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 
 	@DrawableRes(R.drawable.ic_rating_global)
 	Drawable globalPicto;
-	
+
 	OnRatingClickListener listener;
 
 	public RatingView(Context context) {
@@ -212,7 +212,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 		animationStart = System.currentTimeMillis();
 		updateViews();
 	}
-	
+
 	@UiThread(delay = 40)
 	void updateDelayed() {
 		updateViews();
@@ -236,7 +236,7 @@ public class RatingView extends LinearLayout implements OnSettingsUpdatedListene
 		shopsRating.updateMarkDisplay(percent);
 		leisureRating.updateMarkDisplay(percent);
 	}
-	
+
 	public SettingsPreferences_ getPreferences() {
 		return preferences;
 	}

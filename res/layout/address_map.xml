@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <include layout="@layout/mapview" />
-    
-    <include layout="@layout/address_map_action_bar"/>
+    <include layout="@layout/address_map_content" />
+
+    <include layout="@layout/address_map_action_bar" />
 
 </RelativeLayout>

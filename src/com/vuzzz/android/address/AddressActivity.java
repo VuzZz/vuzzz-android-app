@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Criteria;
@@ -19,6 +18,7 @@ import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -35,20 +35,21 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Background;
-import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.NoTitle;
 import com.googlecode.androidannotations.annotations.SystemService;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
-import com.vuzzz.android.AboutDialogHelper;
+import com.googlecode.androidannotations.annotations.res.AnimationRes;
+import com.vuzzz.android.AbstractAnimationListener;
 import com.vuzzz.android.Config;
 import com.vuzzz.android.LogHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
 import com.vuzzz.android.loading.DownloadActivity_;
 import com.vuzzz.android.loading.RatingDownloadTask;
+import com.vuzzz.android.views.HelpView;
 
 @EActivity
 @NoTitle
@@ -78,11 +79,17 @@ public class AddressActivity extends MapActivity {
 	@ViewById
 	View actionBar;
 
+	@ViewById
+	HelpView helpView;
+
+	@AnimationRes
+	Animation slideInFromBottom;
+
+	@AnimationRes
+	Animation slideOutFromTop;
+
 	@SystemService
 	InputMethodManager inputMethodManager;
-
-	@Bean
-	AboutDialogHelper aboutDialogHelper;
 
 	@SystemService
 	LocationManager locationManager;
@@ -102,17 +109,17 @@ public class AddressActivity extends MapActivity {
 	private boolean hasHistory;
 
 	private boolean loading;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		if (Config.MUI) {
 			setContentView(R.layout.address_map_mui);
 		} else {
 			setContentView(R.layout.address_map);
 		}
-		
+
 	}
 
 	@AfterViews
@@ -279,6 +286,9 @@ public class AddressActivity extends MapActivity {
 
 	@Click
 	void searchButtonClicked() {
+		if (helpView.getVisibility() == View.VISIBLE) {
+			hideHelp();
+		}
 		if (loading) {
 			Toast.makeText(this, "Vous êtes déjà en train de rechercher une adresse", Toast.LENGTH_SHORT).show();
 			return;
@@ -302,7 +312,22 @@ public class AddressActivity extends MapActivity {
 	@Click
 	void historyButtonClicked() {
 		if (hasHistory) {
-			ShowNoteActivity_.intent(this).firstView(0).start();
+			if (helpView.getVisibility() == View.VISIBLE) {
+				hideHelp();
+				slideOutFromTop.setAnimationListener(new AbstractAnimationListener() {
+					@Override
+					public void onAnimationEnd(Animation animation) {
+						ShowNoteActivity_.intent(AddressActivity.this).start();
+					}
+				});
+			} else {
+				ShowNoteActivity_.intent(this).start();
+			}
+		} else {
+			if (helpView.getVisibility() == View.VISIBLE) {
+				hideHelp();
+			}
+			Toast.makeText(this, "Historique vide", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -418,6 +443,9 @@ public class AddressActivity extends MapActivity {
 
 	@Click
 	void locationButtonClicked() {
+		if (helpView.getVisibility() == View.VISIBLE) {
+			hideHelp();
+		}
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			moveToMyLocation();
 		} else {
@@ -507,16 +535,21 @@ public class AddressActivity extends MapActivity {
 
 	@Click
 	void homeClicked() {
-		showDialog(R.id.about_dialog);
-	}
-
-	@Override
-	protected Dialog onCreateDialog(int id, Bundle args) {
-		switch (id) {
-		case R.id.about_dialog:
-			return aboutDialogHelper.createAboutDialog();
-		default:
-			return null;
+		if (helpView.getVisibility() == View.VISIBLE) {
+			hideHelp();
+		} else {
+			showHelp();
 		}
 	}
+
+	private void hideHelp() {
+		helpView.startAnimation(slideOutFromTop);
+		helpView.setVisibility(View.GONE);
+	}
+
+	private void showHelp() {
+		helpView.startAnimation(slideInFromBottom);
+		helpView.setVisibility(View.VISIBLE);
+	}
+
 }

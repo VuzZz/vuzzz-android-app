@@ -2,7 +2,7 @@ package com.vuzzz.android.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.SeekBar;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -17,7 +17,7 @@ import com.vuzzz.android.address.AbstractSeekBarChangeListener;
 import com.vuzzz.android.address.SettingsPreferences_;
 
 @EViewGroup(R.layout.settings)
-public class SettingsView extends LinearLayout {
+public class SettingsView extends FrameLayout {
 
 	Context context;
 

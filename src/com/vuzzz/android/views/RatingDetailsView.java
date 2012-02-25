@@ -1,7 +1,7 @@
 package com.vuzzz.android.views;
 
 import android.content.Context;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -17,7 +17,7 @@ import com.vuzzz.android.model.ThemeName;
 import com.vuzzz.android.views.RatingView.OnRatingClickListener;
 
 @EViewGroup(R.layout.rating_details)
-public class RatingDetailsView extends LinearLayout implements OnRatingClickListener, OnSettingsUpdatedListener, OnRatingSwitchedListener {
+public class RatingDetailsView extends FrameLayout implements OnRatingClickListener, OnSettingsUpdatedListener, OnRatingSwitchedListener {
 
 	@Bean
 	DetailsListAdapter adapter;

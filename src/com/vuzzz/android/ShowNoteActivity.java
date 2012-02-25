@@ -36,6 +36,7 @@ import com.vuzzz.android.loading.RatingDownloadTask;
 import com.vuzzz.android.model.Rating;
 import com.vuzzz.android.model.ThemeName;
 import com.vuzzz.android.model.Weighted;
+import com.vuzzz.android.views.HelpView;
 import com.vuzzz.android.views.HistoryView_;
 import com.vuzzz.android.views.OnHistoryFocusedListener;
 import com.vuzzz.android.views.OnRatingSelectedListener;
@@ -51,11 +52,11 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	@Extra("rating")
 	Rating rating;
 
-	@Extra("firstView")
-	Integer firstView;
-
 	@ViewById
 	SettingsView settingsView;
+
+	@ViewById
+	HelpView helpView;
 
 	@AnimationRes
 	Animation slideInFromBottom;
@@ -241,12 +242,45 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	@Click
 	void settingsButtonClicked() {
 		if (settingsView.getVisibility() == View.VISIBLE) {
-			settingsView.startAnimation(slideOutFromTop);
-			settingsView.setVisibility(View.GONE);
+			hideSettings();
 		} else {
-			settingsView.startAnimation(slideInFromBottom);
-			settingsView.setVisibility(View.VISIBLE);
+			showSettings();
+			if (helpView.getVisibility() == View.VISIBLE) {
+				hideHelp();
+			}
 		}
+	}
+
+	private void hideSettings() {
+		settingsView.startAnimation(slideOutFromTop);
+		settingsView.setVisibility(View.GONE);
+	}
+
+	private void showSettings() {
+		settingsView.startAnimation(slideInFromBottom);
+		settingsView.setVisibility(View.VISIBLE);
+	}
+
+	@Click
+	void helpButtonClicked() {
+		if (helpView.getVisibility() == View.VISIBLE) {
+			hideHelp();
+		} else {
+			showHelp();
+			if (settingsView.getVisibility() == View.VISIBLE) {
+				hideSettings();
+			}
+		}
+	}
+
+	private void hideHelp() {
+		helpView.startAnimation(slideOutFromTop);
+		helpView.setVisibility(View.GONE);
+	}
+
+	private void showHelp() {
+		helpView.startAnimation(slideInFromBottom);
+		helpView.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -257,10 +291,13 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@Override
 	public void onBackPressed() {
-		if (settingsView.getVisibility() == View.VISIBLE)
+		if (settingsView.getVisibility() == View.VISIBLE) {
 			settingsButtonClicked();
-		else
+		} else if (helpView.getVisibility() == View.VISIBLE) {
+			helpButtonClicked();
+		} else {
 			super.onBackPressed();
+		}
 	}
 
 	@Click

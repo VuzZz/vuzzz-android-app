@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        layout="@layout/mapview" />
+        layout="@layout/address_map_content" />
 
     <include layout="@layout/address_map_action_bar" />
 

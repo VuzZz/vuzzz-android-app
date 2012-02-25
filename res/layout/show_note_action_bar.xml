@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionBar"
     style="@style/ActionBarCompat"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/actionbar_compat_height" >
+    android:layout_height="@dimen/actionbar_compat_height"
+    orientation="vertical" >
 
     <LinearLayout
         android:id="@android:id/home"
         style="@style/ActionBarCompatHomeItem"
         android:layout_width="@dimen/actionbar_compat_button_home_width"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:contentDescription="Retour à la home"
         android:gravity="left|center_vertical"
         android:orientation="horizontal" >
@@ -28,32 +28,38 @@
             android:src="@drawable/ic_home" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/settingsButton"
-        style="@style/ActionBarCompatItem"
-        android:layout_width="@dimen/actionbar_compat_button_width"
+    <TextView
+        android:id="@+id/titleView"
+        style="@style/ActionBarCompatTitle"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:contentDescription="Paramètres"
-        android:scaleType="center"
-        android:src="@drawable/ic_menu_settings_holo_light" />
+        android:layout_weight="1" />
 
     <ImageButton
         android:id="@+id/shareButton"
         style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/settingsButton"
         android:contentDescription="Partager"
         android:scaleType="center"
         android:src="@drawable/ic_menu_share" />
 
-    <TextView
-        android:id="@+id/titleView"
-        style="@style/ActionBarCompatTitle"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/settingsButton"
+        style="@style/ActionBarCompatItem"
+        android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/shareButton"
-        android:layout_toRightOf="@android:id/home" />
+        android:contentDescription="Paramètres"
+        android:scaleType="center"
+        android:src="@drawable/ic_menu_settings_holo_light" />
 
-</RelativeLayout>
+    <ImageButton
+        android:id="@+id/helpButton"
+        style="@style/ActionBarCompatItem"
+        android:layout_width="@dimen/actionbar_compat_button_width"
+        android:layout_height="match_parent"
+        android:contentDescription="Paramètres"
+        android:scaleType="center"
+        android:src="@drawable/ic_menu_help_holo_light" />
+
+</LinearLayout>

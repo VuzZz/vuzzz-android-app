@@ -2,6 +2,5 @@
 <resources>
 
     <item name="retry_dialog" type="id"/>
-    <item name="about_dialog" type="id"/>
 
 </resources>

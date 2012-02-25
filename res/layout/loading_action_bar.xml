@@ -1,15 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/actionBar"
     style="@style/ActionBarCompat"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/actionbar_compat_height" >
+    android:layout_height="@dimen/actionbar_compat_height"
+    android:orientation="horizontal" >
 
     <LinearLayout
         android:id="@android:id/home"
         style="@style/ActionBarCompatHomeItem"
         android:layout_width="@dimen/actionbar_compat_button_home_width"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:contentDescription="Retour à la home"
         android:gravity="left|center_vertical"
         android:orientation="horizontal" >
@@ -27,23 +27,21 @@
             android:src="@drawable/ic_home" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/titleView"
+        style="@style/ActionBarCompatTitle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
     <ProgressBar
         android:id="@+id/loadingMenuView"
         style="@style/ActionBarCompatProgressIndicator"
         android:layout_width="@dimen/actionbar_compat_loading_width"
         android:layout_height="@dimen/actionbar_compat_loading_width"
-        android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/actionbar_compat_loading_padding"
         android:layout_marginRight="@dimen/actionbar_compat_loading_padding"
         android:layout_marginTop="@dimen/actionbar_compat_loading_padding"
         android:contentDescription="@string/loading" />
 
-    <TextView
-        android:id="@+id/titleView"
-        style="@style/ActionBarCompatTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/loadingMenuView"
-        android:layout_toRightOf="@android:id/home" />
-
-</RelativeLayout>
+</LinearLayout>
