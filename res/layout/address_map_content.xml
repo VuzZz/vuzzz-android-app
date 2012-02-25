@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mapView"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:apiKey="@string/maps_api_key"
-    android:clickable="true"
-    android:enabled="true" />
+    android:layout_height="match_parent" >
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:apiKey="@string/maps_api_key"
+        android:clickable="true"
+        android:enabled="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:shadowColor="#fff"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:textSize="20dp"
+        android:text="VuzZz.com"
+        android:textColor="#ee8e8e8e" />
+
+</RelativeLayout>

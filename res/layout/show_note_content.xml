@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!-- android:text="Les notes attribuées dépendent de la couverture des données mises à disposition par la mairie de Paris." -->
-
     <TextView
         android:id="@+id/warningText"
         android:layout_width="match_parent"
