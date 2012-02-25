@@ -56,6 +56,9 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 	SettingsView settingsView;
 
 	@ViewById
+	View shareButton;
+
+	@ViewById
 	HelpView helpView;
 
 	@AnimationRes
@@ -105,6 +108,10 @@ public class ShowNoteActivity extends Activity implements OnRatingClickListener,
 
 	@AfterViews
 	public void afterViews() {
+
+		if (Config.MUI) {
+			shareButton.setVisibility(View.GONE);
+		}
 
 		onHistoryFocusedListeners = new ArrayList<OnHistoryFocusedListener>();
 
