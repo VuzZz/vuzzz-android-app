@@ -1,6 +1,5 @@
 package com.vuzzz.android.loading;
 
-import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -18,8 +17,6 @@ import com.vuzzz.android.rest.RestClient_;
 
 public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>> extends LoadingTask<T, Rating> {
 
-	public final static String HISTO_FILE_PREFIX = "histo_file_";
-	
 	private final long latitudeE6;
 	private final long longitudeE6;
 	private RestClient_ restClient;
@@ -64,7 +61,9 @@ public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>>
 		rating.latitude = latitude;
 		rating.longitude = longitude;
 		
-		objectMapper.writeValue(context.openFileOutput(HISTO_FILE_PREFIX + new Date(), 0), rating);
+		objectMapper.writeValue(Rating.newRatingFile(context), rating);
+		
+		Rating.checkMaxHistory(context);
 
 		return rating;
 	}

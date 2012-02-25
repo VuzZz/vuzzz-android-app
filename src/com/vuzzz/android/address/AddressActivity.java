@@ -1,7 +1,6 @@
 package com.vuzzz.android.address;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +42,12 @@ import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.vuzzz.android.AbstractAnimationListener;
-import com.vuzzz.android.VuzZzConfig;
 import com.vuzzz.android.LogHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
+import com.vuzzz.android.VuzZzConfig;
 import com.vuzzz.android.loading.DownloadActivity_;
-import com.vuzzz.android.loading.RatingDownloadTask;
+import com.vuzzz.android.model.Rating;
 import com.vuzzz.android.views.HelpView;
 
 @EActivity
@@ -459,14 +458,7 @@ public class AddressActivity extends MapActivity {
 		super.onResume();
 		myLocationOverlay.enableMyLocation();
 
-		File directory = getFilesDir();
-		File[] historyFiles = directory.listFiles(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File dir, String filename) {
-				return filename.startsWith(RatingDownloadTask.HISTO_FILE_PREFIX);
-			}
-		});
+		File[] historyFiles = Rating.listHistoryFiles(this);
 
 		if (historyFiles.length > 0) {
 			hasHistory = true;
