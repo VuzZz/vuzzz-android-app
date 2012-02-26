@@ -45,11 +45,27 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 
 	private final float THICKNESS;
 
+	private final float ADDRESS_SPACE;
+
 	private final float OVERALL_SCORE_X_OFFSET;
+
+	private final float NOTE_TEXT_SHADOW_OFFSET;
+
+	private final float ADDRESS_TEXT_SHADOW_OFFSET;
 
 	public HistoryLine(Context context) {
 		super(context);
-		setMinimumHeight((int) pixelSize(context, 75));
+
+		VERTICAL_SPACE = pixelSize(context, 12f);
+		THICKNESS = pixelSize(context, 15f);
+		ADDRESS_SPACE = pixelSize(context, 15f);
+		HORIZONTAL_SPACE = pixelSize(context, 15f);
+		RIGHT_SPACE = pixelSize(context, 35f);
+		OVERALL_SCORE_X_OFFSET = pixelSize(context, 5f);
+		NOTE_TEXT_SHADOW_OFFSET = pixelSize(context, 1f);
+		ADDRESS_TEXT_SHADOW_OFFSET = pixelSize(context, 0.5f);
+
+		setMinimumHeight((int) (pixelSize(context, 75) + ADDRESS_SPACE));
 		setWillNotDraw(false);
 		paint.setFakeBoldText(true);
 		paint.setTextSize(pixelSize(context, 15));
@@ -61,11 +77,6 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		scorePaint.setStyle(Style.FILL);
 		scorePaint.setAntiAlias(true);
 
-		VERTICAL_SPACE = pixelSize(context, 12f);
-		THICKNESS = pixelSize(context, 15f);
-		HORIZONTAL_SPACE = pixelSize(context, 15f);
-		RIGHT_SPACE = pixelSize(context, 35f);
-		OVERALL_SCORE_X_OFFSET = pixelSize(context, 5f);
 		animationStart = System.currentTimeMillis();
 	}
 
@@ -94,7 +105,7 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		float left = HORIZONTAL_SPACE;
 		float top = VERTICAL_SPACE;
 		float width = getWidth() - HORIZONTAL_SPACE * 2 - RIGHT_SPACE - THICKNESS;
-		float height = getHeight() - VERTICAL_SPACE * 2 - THICKNESS;
+		float height = getHeight() - VERTICAL_SPACE * 2 - THICKNESS - ADDRESS_SPACE;
 		if (deltaTime < DURATION) {
 			width = width * interpolation;
 		}
@@ -143,15 +154,18 @@ public class HistoryLine extends View implements OnHistoryFocusedListener {
 		canvas.drawPath(path, paint);
 
 		paint.setColor(0x88000000);
-		canvas.drawText(rating.address, left + HORIZONTAL_SPACE + 1, top + THICKNESS + height / 2 + 5, paint);
-		paint.setColor(0xFFFFFFFF);
-		canvas.drawText(rating.address, left + HORIZONTAL_SPACE, top + THICKNESS + height / 2 + 4, paint);
+		float leftAddress = left + HORIZONTAL_SPACE;
+		float topAddress = top + THICKNESS + height + ADDRESS_SPACE;
+		canvas.drawText(rating.address, leftAddress + ADDRESS_TEXT_SHADOW_OFFSET, topAddress + ADDRESS_TEXT_SHADOW_OFFSET, paint);
+		paint.setColor(0xffa3b7b5);
+		canvas.drawText(rating.address, leftAddress, topAddress, paint);
 
-		
 		scorePaint.setColor(0x88000000);
-		canvas.drawText(note, left + offset + HORIZONTAL_SPACE + OVERALL_SCORE_X_OFFSET + 1, top + THICKNESS + height / 2, scorePaint);
+		float leftNote = left + offset + HORIZONTAL_SPACE + OVERALL_SCORE_X_OFFSET;
+		float topNote = top + THICKNESS + height / 2;
+		canvas.drawText(note, leftNote + NOTE_TEXT_SHADOW_OFFSET, topNote + NOTE_TEXT_SHADOW_OFFSET, scorePaint);
 		scorePaint.setColor(0xFFa3b7b5);
-		canvas.drawText(note, left + offset + HORIZONTAL_SPACE + OVERALL_SCORE_X_OFFSET, top + THICKNESS + height / 2 - 1, scorePaint);
+		canvas.drawText(note, leftNote, topNote, scorePaint);
 
 	}
 
