@@ -8,9 +8,9 @@
 
     <LinearLayout
         android:id="@android:id/home"
-        style="@style/ActionBarCompatHomeItem"
         android:layout_width="@dimen/actionbar_compat_button_home_width"
         android:layout_height="match_parent"
+        android:background="@drawable/item_background_holo_light"
         android:contentDescription="Retour à la home"
         android:gravity="left|center_vertical"
         android:orientation="horizontal" >
@@ -37,29 +37,29 @@
 
     <ImageButton
         android:id="@+id/shareButton"
-        style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
+        android:background="@drawable/item_background_holo_light"
         android:contentDescription="Partager"
         android:scaleType="center"
-        android:src="@drawable/ic_menu_share" />
+        android:src="@drawable/ic_menu_share_holo_light" />
 
     <ImageButton
         android:id="@+id/settingsButton"
-        style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
+        android:background="@drawable/item_background_holo_light"
         android:contentDescription="Paramètres"
         android:scaleType="center"
         android:src="@drawable/ic_menu_settings_holo_light" />
 
     <ImageButton
         android:id="@+id/helpButton"
-        style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
+        android:background="@drawable/item_background_holo_light"
         android:contentDescription="Paramètres"
         android:scaleType="center"
         android:src="@drawable/ic_menu_help_holo_light" />
-    
+
 </LinearLayout>

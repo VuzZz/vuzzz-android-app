@@ -7,9 +7,9 @@
 
     <LinearLayout
         android:id="@android:id/home"
-        style="@style/ActionBarCompatHomeItem"
         android:layout_width="@dimen/actionbar_compat_button_home_width"
         android:layout_height="match_parent"
+        android:background="@drawable/item_background_holo_light"
         android:contentDescription="Retour à la home"
         android:gravity="left|center_vertical"
         android:orientation="horizontal" >
