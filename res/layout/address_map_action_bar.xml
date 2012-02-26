@@ -7,30 +7,30 @@
 
     <ImageButton
         android:id="@android:id/home"
-        style="@style/ActionBarCompatHomeItem"
         android:layout_width="@dimen/actionbar_compat_button_home_width"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
+        android:background="@drawable/item_background_holo_dark"
         android:contentDescription="A propos"
         android:scaleType="center"
         android:src="@drawable/ic_home" />
 
     <ImageButton
         android:id="@+id/historyButton"
-        style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:background="@drawable/item_background_holo_dark"
         android:contentDescription="Historique"
         android:scaleType="center"
         android:src="@drawable/ic_menu_recent_history" />
 
     <ImageButton
         android:id="@+id/searchButton"
-        style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/historyButton"
+        android:background="@drawable/item_background_holo_dark"
         android:contentDescription="Chercher"
         android:scaleType="center"
         android:src="@drawable/ic_menu_play_clip"
@@ -38,33 +38,33 @@
 
     <ProgressBar
         android:id="@+id/loadingMenuView"
-        style="@style/ActionBarCompatProgressIndicator"
         android:layout_width="@dimen/actionbar_compat_loading_width"
         android:layout_height="@dimen/actionbar_compat_loading_width"
         android:layout_marginLeft="@dimen/actionbar_compat_loading_padding"
         android:layout_marginRight="@dimen/actionbar_compat_loading_padding"
         android:layout_marginTop="@dimen/actionbar_compat_loading_padding"
         android:layout_toLeftOf="@id/searchButton"
+        android:background="@drawable/item_background_holo_dark"
         android:contentDescription="@string/loading"
         android:visibility="gone" />
 
     <ImageButton
         android:id="@+id/locationButton"
-        style="@style/ActionBarCompatItem"
         android:layout_width="@dimen/actionbar_compat_button_width"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/loadingMenuView"
+        android:background="@drawable/item_background_holo_dark"
         android:contentDescription="Ma position"
         android:scaleType="center"
         android:src="@drawable/ic_menu_mylocation" />
 
     <EditText
         android:id="@+id/addressEditText"
-        style="@android:style/Theme.Light"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/locationButton"
         android:layout_toRightOf="@android:id/home"
+        android:background="@drawable/edit_text_holo_dark"
         android:contentDescription="Adresse"
         android:imeOptions="actionSearch"
         android:inputType="text"
