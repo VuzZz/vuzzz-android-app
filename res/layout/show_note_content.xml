@@ -8,20 +8,18 @@
         android:id="@+id/warningText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#a3b7b5"
+        android:background="#ff4b58"
         android:capitalize="characters"
-        android:gravity="center"
         android:shadowColor="#44000000"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="1.5"
         android:text="LES NOTES ATTRIBUÉES DÉPENDENT DE LA COUVERTURE DES DONNÉES MISES À DISPOSITION PAR LA MAIRIE DE PARIS."
         android:textColor="@android:color/white"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:padding="2dp"
+         />
 
     <com.viewpagerindicator.TitlePageIndicator
         android:id="@+id/titles"

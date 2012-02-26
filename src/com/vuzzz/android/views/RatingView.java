@@ -14,6 +14,7 @@ import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
+import com.googlecode.androidannotations.annotations.res.DimensionRes;
 import com.googlecode.androidannotations.annotations.res.DrawableRes;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.vuzzz.android.OnRatingSwitchedListener;
@@ -60,8 +61,6 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		}
 
 	}
-
-	private static final int PICTO_WIDTH = 25;
 
 	private static final Interpolator interpolator = new DecelerateInterpolator();
 
@@ -113,6 +112,9 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 
 	@DrawableRes(R.drawable.ic_rating_global)
 	Drawable globalPicto;
+	
+	@DimensionRes(R.dimen.rating_picto)
+	Float pictoWidth;
 
 	OnRatingClickListener listener;
 
@@ -122,47 +124,50 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 
 	@AfterViews
 	void afterViews() {
+		
+		int width = pictoWidth.intValue();
+		
 		globalRating.setBackgroundColor(0xFFa3b7b5);
 		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
 		globalRating.setTextSize(40);
-		globalPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		globalPicto.setBounds(0, 0, width, width);
 		globalRating.setPicto(globalPicto);
 		globalRating.setTheme("NOTE GLOBALE");
 
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
 		cultureRating.setTheme(ThemeName.CULTURE.getName());
-		culturePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		culturePicto.setBounds(0, 0, width, width);
 		cultureRating.setPicto(culturePicto);
 
 		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
 		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
 		natureRating.setTheme(ThemeName.NATURE.getName());
-		naturePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		naturePicto.setBounds(0, 0, width, width);
 		natureRating.setPicto(naturePicto);
 
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
 		transitRating.setTheme(ThemeName.TRANSIT.getName());
-		transitPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		transitPicto.setBounds(0, 0, width, width);
 		transitRating.setPicto(transitPicto);
 
 		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
 		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
 		leisureRating.setTheme(ThemeName.LEISURE.getName());
-		leisurePicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		leisurePicto.setBounds(0, 0, width, width);
 		leisureRating.setPicto(leisurePicto);
 
 		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
 		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
 		securityRating.setTheme(ThemeName.SECURITY.getName());
-		securityPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		securityPicto.setBounds(0, 0, width, width);
 		securityRating.setPicto(securityPicto);
 
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
 		shopsRating.setTheme(ThemeName.SHOPS.getName());
-		shopsPicto.setBounds(0, 0, PICTO_WIDTH, PICTO_WIDTH);
+		shopsPicto.setBounds(0, 0, width, width);
 		shopsRating.setPicto(shopsPicto);
 	}
 
