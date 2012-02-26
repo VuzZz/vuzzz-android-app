@@ -97,40 +97,32 @@ public class DetailsListAdapter extends BaseAdapter {
 
 		if (convertView == null) {
 			if (ratingDetails instanceof Criterion) {
-				convertView = View.inflate(context,
-						R.layout.row_details_criterion, null);
+				convertView = View.inflate(context, R.layout.row_details_criterion, null);
 			} else {
 				convertView = View.inflate(context, R.layout.row_details, null);
 				convertView.setMinimumHeight((int) DimenHelper.pixelSize(context, 70));
-				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(
-						context, ratingDetails.getColor()));
+				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(context, ratingDetails.getColor()));
 			}
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.detail_name);
-			holder.note = (TextView) convertView
-					.findViewById(R.id.detail_grade);
-			holder.description = (TextView) convertView
-					.findViewById(R.id.detail_description);
-			holder.coefficient = (TextView) convertView
-					.findViewById(R.id.detail_coeff);
+			holder.note = (TextView) convertView.findViewById(R.id.detail_grade);
+			holder.description = (TextView) convertView.findViewById(R.id.detail_description);
+			holder.coefficient = (TextView) convertView.findViewById(R.id.detail_coeff);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 			if (!(ratingDetails instanceof Criterion)) {
-				((CubeBackgroundDrawable) convertView.getBackground())
-						.setColor(ratingDetails.getColor());
+				((CubeBackgroundDrawable) convertView.getBackground()).setColor(ratingDetails.getColor());
 			}
 		}
 
 		holder.name.setText(details.get(position).getName());
-		holder.note.setText(String.format("%.1f", details.get(position)
-				.getNote()));
+		holder.note.setText(String.format("%.1f", details.get(position).getNote()));
 		if (holder.description != null) {
 			holder.description.setText(details.get(position).getDescription());
 		}
 		if (holder.coefficient != null) {
-			holder.coefficient.setText("Coef."
-					+ details.get(position).getCoefficient());
+			holder.coefficient.setText("Coef." + details.get(position).getCoefficient());
 
 		}
 
@@ -140,7 +132,7 @@ public class DetailsListAdapter extends BaseAdapter {
 	public int getThemeItemPosition(ThemeName themeName) {
 		return themePositions.get(themeName.getName());
 	}
-	
+
 	@Override
 	public boolean isEnabled(int position) {
 		return false;
