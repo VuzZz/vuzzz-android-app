@@ -23,14 +23,13 @@
     <string name="share_with">Partager via</string>
     <string name="about_content" formatted="false" >"<![CDATA[N'hésitez pas à nous aider en nous donnant une (bonne) note sur l'<b>Android Market</b>, et en <b>partageant</b> l'application avec vos amis.<br /><br />Pour en savoir plus : <b><a href="http://www.vuzzz.com">VuzZz.com</a></b>.]]>"</string>
     <string name="about_ok">Cool !</string>
-    <string name="rate_android_market">Android Market</string>
-    <string name="share_project">Partager VuzZz</string>
+    <string name="rate_android_market">Market</string>
+    <string name="share_project">Partager</string>
     <string name="share_project_content">"Tu connais VuzZz ? Génial pour connaître la qualité de vie d'un lieu ! Et c'est dispo sur mobile : http://www.vuzzz.com"</string>
  	<string name="note_max">/10</string>
  	<string name="search_address">"&#8220;Place d'italie&#8221;"</string>
  	<string name="vuzzz_help_mui">"<![CDATA[<b>VuzZz</b> est disponible sur l'<b>Android Market</b><br /><font color="#33B5E5">http://<b>goo.gl/V5mtG</b></font><br /><br />Plus d'informations sur <b><font color="#33B5E5">vuzzz.com</font></b>]]>"</string>
- 	<string name="vuzzzCommon">"<![CDATA[Les notes attribuées dépendent de la <b>couverture des données</b> mises à disposition par la <b>Mairie de Paris</b>, dans le cadre de sa politique <b>Open Data</b>.<br /><br /><b>VuzZz</b> est une application créée en 48h par <b>Pierre-Yves Ricau</b>, <b>Romain Sertelon</b>, <b>Alexandre Thomas</b> et <b>Joan Zapata</b> lors du Global Android DevCamp 2012.
- 	    ]]>"</string>
+ 	<string name="vuzzzCommon">"<![CDATA[Les notes attribuées dépendent de la <b>couverture des données</b> mises à disposition par la <b>Mairie de Paris</b>, dans le cadre de sa politique <b>Open Data</b>.<br /><br /><b>VuzZz</b> est une application créée en 48h par <b>Pierre-Yves Ricau</b>, <b>Romain Sertelon</b>, <b>Alexandre Thomas</b> et <b>Joan Zapata</b> lors du Global Android DevCamp 2012.]]>"</string>
  	<string name="about_vuzzz">À propos</string>
 
 </resources>

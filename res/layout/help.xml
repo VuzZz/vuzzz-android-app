@@ -41,11 +41,23 @@
             android:paddingBottom="10dp"
             android:textSize="18dp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/helpContent"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/helpText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/shareButtons"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="18dp" />
+            
             <LinearLayout
                 android:id="@+id/shareButtons"
                 android:layout_width="fill_parent"
@@ -76,17 +88,7 @@
                     android:text="@string/rate_android_market"
                     android:textSize="18dp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/helpText"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/shareButtons"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="18dp" />
-        </RelativeLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/helpMuiContent"
