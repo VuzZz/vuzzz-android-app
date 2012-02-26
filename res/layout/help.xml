@@ -8,27 +8,36 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="5dp" >
+        android:orientation="vertical" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
+            android:background="@color/ad_blue"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
             android:shadowColor="#44000000"
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="1.5"
             android:text="@string/about_vuzzz"
+            android:textColor="@android:color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/ad_dark_blue" />
 
         <TextView
             android:id="@+id/commonHelpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:paddingBottom="10dp"
             android:textSize="18dp" />
 
@@ -73,7 +82,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/shareButtons"
-                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:paddingBottom="10dp"
                 android:textSize="18dp" />
         </RelativeLayout>
@@ -82,7 +92,6 @@
             android:id="@+id/helpMuiContent"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone" >
 
@@ -90,13 +99,16 @@
                 android:id="@+id/helpMuiText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:paddingBottom="10dp"
                 android:textSize="18dp" />
 
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:contentDescription="QRCode de l&apos;URL de VuzZz sur l&apos;Android Market"
                 android:paddingBottom="10dp"
                 android:scaleType="fitCenter"
