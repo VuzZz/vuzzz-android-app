@@ -85,7 +85,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 	@ViewById(R.id.transit_rating)
 	RatingButton transitRating;
 
-	@ViewById(R.id.institutions_rating)
+	@ViewById(R.id.security_rating)
 	RatingButton securityRating;
 
 	@ViewById(R.id.shops_rating)
@@ -178,100 +178,100 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 	}
 
 	// Click Events	
-	@Click(R.id.global_rating)
-	void onGlobalRatingClick() {
+	@Click
+	void globalRatingClicked() {
 		listener.onRatingClickListener(all());
 		globalRating.setBackgroundColor(0xFFa3b7b5);
 		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
 	}
 	
-	@Click(R.id.culture_rating)
-	public void onCultureRatingClick(View v){
+	@Click
+	public void cultureRatingClicked(View v){
 		listener.onRatingClickListener(themeName(ThemeName.CULTURE));
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
 	}
 	
-	@Click(R.id.nature_rating)
-	public void onNatureRatingClick(View v){
+	@Click
+	public void natureRatingClicked(View v){
 		listener.onRatingClickListener(themeName(ThemeName.NATURE));
 		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
 		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
 	}
 	
-	@Click(R.id.transit_rating)
-	public void onTransitRatingClick(View v){
+	@Click
+	public void transitRatingClicked(View v){
 		listener.onRatingClickListener(themeName(ThemeName.TRANSIT));
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
 	}
 	
-	@Click(R.id.institutions_rating)
-	public void onSecurityRatingClick(View v){
+	@Click
+	public void securityRatingClicked(View v){
 		listener.onRatingClickListener(themeName(ThemeName.SECURITY));
 		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
 		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
 	}
 	
-	@Click(R.id.shops_rating)
-	public void onShopsRatingClick(View v){
+	@Click
+	public void shopsRatingClicked(View v){
 		listener.onRatingClickListener(themeName(ThemeName.SHOPS));
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
 	}
 	
-	@Click(R.id.leisure_rating)
-	public void onLeisureRatingClick(View v){
+	@Click
+	public void leisureRatingClicked(View v){
 		listener.onRatingClickListener(themeName(ThemeName.LEISURE));
 		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
 		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
 	}
 
 	// Touch Events
-	@Touch(R.id.global_rating)
-	public boolean onGlobalRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean globalRatingTouched(MotionEvent evt){
 		globalRating.setBackgroundColor(0x99a3b7b5);
 		globalRating.getFooterLayout().setBackgroundColor(0x997fa39f);
 		return false;
 	}
 	
-	@Touch(R.id.culture_rating)
-	public boolean onCultureRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean cultureRatingTouched(MotionEvent evt){
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getPressedLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getPressedDarkColor());
 		return false;
 	}
 	
-	@Touch(R.id.nature_rating)
-	public boolean onNatureRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean natureRatingTouched(MotionEvent evt){
 		natureRating.setBackgroundColor(ThemeName.NATURE.getPressedLightColor());
 		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getPressedDarkColor());
 		return false;
 	}
 	
-	@Touch(R.id.transit_rating)
-	public boolean onTransitRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean transitRatingTouched(MotionEvent evt){
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getPressedLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getPressedDarkColor());
 		return false;
 	}
 	
-	@Touch(R.id.institutions_rating)
-	public boolean onSecurityRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean securityRatingTouched(MotionEvent evt){
 		securityRating.setBackgroundColor(ThemeName.SECURITY.getPressedLightColor());
 		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getPressedDarkColor());
 		return false;
 	}
 	
-	@Touch(R.id.shops_rating)
-	public boolean onShopsRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean shopsRatingTouched(MotionEvent evt){
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getPressedLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getPressedDarkColor());
 		return false;
 	}
 	
-	@Touch(R.id.leisure_rating)
-	public boolean onLeisureRatingTouch(MotionEvent evt){
+	@Touch
+	public boolean leisureRatingTouched(MotionEvent evt){
 		leisureRating.setBackgroundColor(ThemeName.LEISURE.getPressedLightColor());
 		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getPressedDarkColor());
 		return false;

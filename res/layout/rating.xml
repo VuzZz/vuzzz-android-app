@@ -58,7 +58,7 @@
             android:layout_weight="1.0"/>
 
         <com.vuzzz.android.component.RatingButton_
-            android:id="@+id/institutions_rating"
+            android:id="@+id/security_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginBottom="5dp"
