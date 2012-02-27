@@ -4,6 +4,7 @@ import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.all;
 import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.themeName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EViewGroup;
+import com.googlecode.androidannotations.annotations.Touch;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.DimensionRes;
@@ -175,58 +177,102 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		this.listener = listener;
 	}
 
+	// Click Events	
+	@Click(R.id.culture_rating)
+	public void onCultureRatingClick(View v){
+		listener.onRatingClickListener(themeName(ThemeName.CULTURE));
+		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
+		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
+	}
+	
+	@Click(R.id.nature_rating)
+	public void onNatureRatingClick(View v){
+		listener.onRatingClickListener(themeName(ThemeName.NATURE));
+		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
+		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
+	}
+	
+	@Click(R.id.transit_rating)
+	public void onTransitRatingClick(View v){
+		listener.onRatingClickListener(themeName(ThemeName.TRANSIT));
+		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
+		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
+	}
+	
+	@Click(R.id.institutions_rating)
+	public void onSecurityRatingClick(View v){
+		listener.onRatingClickListener(themeName(ThemeName.SECURITY));
+		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
+		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
+	}
+	
+	@Click(R.id.shops_rating)
+	public void onShopsRatingClick(View v){
+		listener.onRatingClickListener(themeName(ThemeName.SHOPS));
+		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
+		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
+	}
+	
+	@Click(R.id.leisure_rating)
+	public void onLeisureRatingClick(View v){
+		listener.onRatingClickListener(themeName(ThemeName.LEISURE));
+		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
+		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
+	}
+	
+	// Touch Events
+	@Touch(R.id.culture_rating)
+	public boolean onCultureRatingTouch(MotionEvent evt){
+		cultureRating.setBackgroundColor(ThemeName.CULTURE.getPressedLightColor());
+		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getPressedDarkColor());
+		return false;
+	}
+	
+	@Touch(R.id.nature_rating)
+	public boolean onNatureRatingTouch(MotionEvent evt){
+		natureRating.setBackgroundColor(ThemeName.NATURE.getPressedLightColor());
+		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getPressedDarkColor());
+		return false;
+	}
+	
+	@Touch(R.id.transit_rating)
+	public boolean onTransitRatingTouch(MotionEvent evt){
+		transitRating.setBackgroundColor(ThemeName.TRANSIT.getPressedLightColor());
+		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getPressedDarkColor());
+		return false;
+	}
+	
+	@Touch(R.id.institutions_rating)
+	public boolean onSecurityRatingTouch(MotionEvent evt){
+		securityRating.setBackgroundColor(ThemeName.SECURITY.getPressedLightColor());
+		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getPressedDarkColor());
+		return false;
+	}
+	
+	@Touch(R.id.shops_rating)
+	public boolean onShopsRatingTouch(MotionEvent evt){
+		shopsRating.setBackgroundColor(ThemeName.SHOPS.getPressedLightColor());
+		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getPressedDarkColor());
+		return false;
+	}
+	
+	@Touch(R.id.leisure_rating)
+	public boolean onLeisureRatingTouch(MotionEvent evt){
+		leisureRating.setBackgroundColor(ThemeName.LEISURE.getPressedLightColor());
+		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getPressedDarkColor());
+		return false;
+	}
+
 	public void setValuesFromRating(Rating rating) {
 		this.currentRating = rating;
 
 		globalRating.setMark(Weighted.getWeightedMark(rating, preferences));
-
 		cultureRating.setMark(rating.getThemeMark(ThemeName.CULTURE));
-		cultureRating.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onRatingClickListener(themeName(ThemeName.CULTURE));
-			}
-		});
-
 		natureRating.setMark(rating.getThemeMark(ThemeName.NATURE));
-		natureRating.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onRatingClickListener(themeName(ThemeName.NATURE));
-			}
-		});
-
 		transitRating.setMark(rating.getThemeMark(ThemeName.TRANSIT));
-		transitRating.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onRatingClickListener(themeName(ThemeName.TRANSIT));
-			}
-		});
-
 		securityRating.setMark(rating.getThemeMark(ThemeName.SECURITY));
-		securityRating.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onRatingClickListener(themeName(ThemeName.SECURITY));
-			}
-		});
-
 		shopsRating.setMark(rating.getThemeMark(ThemeName.SHOPS));
-		shopsRating.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onRatingClickListener(themeName(ThemeName.SHOPS));
-			}
-		});
-
 		leisureRating.setMark(rating.getThemeMark(ThemeName.LEISURE));
-		leisureRating.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				listener.onRatingClickListener(themeName(ThemeName.LEISURE));
-			}
-		});
 	}
 
 	@Click
