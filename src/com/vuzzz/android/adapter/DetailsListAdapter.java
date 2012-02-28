@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
+import com.googlecode.androidannotations.annotations.res.ColorRes;
 import com.vuzzz.android.DimenHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.model.Criterion;
@@ -24,8 +25,19 @@ import com.vuzzz.android.model.ThemeName;
 @EBean
 public class DetailsListAdapter extends BaseAdapter {
 
+	private static final int CRITERION_ROW_TYPE = 0;
+	private static final int CRITERION_ROW_DISABLED_TYPE = 1;
+	private static final int THEME_ROW_TYPE = 2;
+	private static final int THEME_ROW_DISABLED_TYPE = 3;
+
 	@RootContext
 	Context context;
+
+	@ColorRes(R.color.gray)
+	int grayColor;
+
+	@ColorRes(R.color.white)
+	int whiteColor;
 
 	private List<RatingDetails> details = new ArrayList<RatingDetails>();
 
@@ -68,15 +80,25 @@ public class DetailsListAdapter extends BaseAdapter {
 
 	@Override
 	public int getViewTypeCount() {
-		return 2;
+		return 4;
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		if (details.get(position) instanceof Criterion)
-			return 1;
-		else
-			return 0;
+		RatingDetails row = details.get(position);
+		if (row instanceof Criterion) {
+			if (((Criterion) row).isRelevant()) {
+				return CRITERION_ROW_TYPE;
+			} else {
+				return CRITERION_ROW_DISABLED_TYPE;
+			}
+		} else {
+			if (((Theme) row).isRelevant()) {
+				return THEME_ROW_TYPE;
+			} else {
+				return THEME_ROW_DISABLED_TYPE;
+			}
+		}
 	}
 
 	@Override
@@ -96,12 +118,19 @@ public class DetailsListAdapter extends BaseAdapter {
 		RatingDetails ratingDetails = details.get(position);
 
 		if (convertView == null) {
-			if (ratingDetails instanceof Criterion) {
+			switch (getItemViewType(position)) {
+			case THEME_ROW_TYPE:
+				convertView = createThemeRowView(ratingDetails, R.layout.row_details);
+				break;
+			case THEME_ROW_DISABLED_TYPE:
+				convertView = createThemeRowView(ratingDetails, R.layout.row_details_disabled);
+				break;
+			case CRITERION_ROW_TYPE:
 				convertView = View.inflate(context, R.layout.row_details_criterion, null);
-			} else {
-				convertView = View.inflate(context, R.layout.row_details, null);
-				convertView.setMinimumHeight((int) DimenHelper.pixelSize(context, 70));
-				convertView.setBackgroundDrawable(new CubeBackgroundDrawable(context, ratingDetails.getColor()));
+				break;
+			case CRITERION_ROW_DISABLED_TYPE:
+				convertView = View.inflate(context, R.layout.row_details_criterion_disabled, null);
+				break;
 			}
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView.findViewById(R.id.detail_name);
@@ -111,21 +140,32 @@ public class DetailsListAdapter extends BaseAdapter {
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
-			if (!(ratingDetails instanceof Criterion)) {
+			switch (getItemViewType(position)) {
+			case THEME_ROW_DISABLED_TYPE:
+			case THEME_ROW_TYPE:
 				((CubeBackgroundDrawable) convertView.getBackground()).setColor(ratingDetails.getColor());
 			}
 		}
 
 		holder.name.setText(details.get(position).getName());
-		holder.note.setText(String.format("%.1f", details.get(position).getNote()));
+		if (holder.note != null) {
+			holder.note.setText(String.format("%.1f", details.get(position).getNote()));
+		}
 		if (holder.description != null) {
 			holder.description.setText(details.get(position).getDescription());
 		}
 		if (holder.coefficient != null) {
 			holder.coefficient.setText("Coef." + details.get(position).getCoefficient());
-
 		}
 
+		return convertView;
+	}
+
+	private View createThemeRowView(RatingDetails ratingDetails, int layout) {
+		View convertView;
+		convertView = View.inflate(context, layout, null);
+		convertView.setMinimumHeight((int) DimenHelper.pixelSize(context, 70));
+		convertView.setBackgroundDrawable(new CubeBackgroundDrawable(context, ratingDetails.getColor()));
 		return convertView;
 	}
 

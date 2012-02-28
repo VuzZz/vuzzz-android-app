@@ -85,6 +85,14 @@ public class Rating implements Serializable {
 		this.themes = themes;
 	}
 
+	public Theme getTheme(ThemeName themeName) {
+		for (Theme t : themes) {
+			if (t.getThemeName().equals(themeName))
+				return t;
+		}
+		return null;
+	}
+
 	public Float getThemeMark(ThemeName themeName) {
 		for (Theme t : themes) {
 			if (t.getThemeName().equals(themeName))

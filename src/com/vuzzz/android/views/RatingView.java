@@ -53,11 +53,11 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		private ThemeNameOrAll(ThemeName themeName) {
 			this.themeName = themeName;
 		}
-		
+
 		public ThemeName asThemeName() {
 			return themeName;
 		}
-		
+
 		public boolean isAll() {
 			return themeName == null;
 		}
@@ -114,7 +114,7 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 
 	@DrawableRes(R.drawable.ic_rating_global)
 	Drawable globalPicto;
-	
+
 	@DimensionRes(R.dimen.rating_picto)
 	Float pictoWidth;
 
@@ -126,9 +126,9 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 
 	@AfterViews
 	void afterViews() {
-		
+
 		int width = pictoWidth.intValue();
-		
+
 		globalRating.setBackgroundColor(0xFFa3b7b5);
 		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
 		globalRating.setTextSize(40);
@@ -177,51 +177,51 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		this.listener = listener;
 	}
 
-	// Click Events	
+	// Click Events
 	@Click
 	void globalRatingClicked() {
 		listener.onRatingClickListener(all());
 		globalRating.setBackgroundColor(0xFFa3b7b5);
 		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
 	}
-	
+
 	@Click
-	public void cultureRatingClicked(View v){
+	public void cultureRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.CULTURE));
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
 	}
-	
+
 	@Click
-	public void natureRatingClicked(View v){
+	public void natureRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.NATURE));
 		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
 		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
 	}
-	
+
 	@Click
-	public void transitRatingClicked(View v){
+	public void transitRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.TRANSIT));
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
 	}
-	
+
 	@Click
-	public void securityRatingClicked(View v){
+	public void securityRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.SECURITY));
 		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
 		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
 	}
-	
+
 	@Click
-	public void shopsRatingClicked(View v){
+	public void shopsRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.SHOPS));
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
 	}
-	
+
 	@Click
-	public void leisureRatingClicked(View v){
+	public void leisureRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.LEISURE));
 		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
 		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
@@ -229,49 +229,49 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 
 	// Touch Events
 	@Touch
-	public boolean globalRatingTouched(MotionEvent evt){
+	public boolean globalRatingTouched(MotionEvent evt) {
 		globalRating.setBackgroundColor(0x99a3b7b5);
 		globalRating.getFooterLayout().setBackgroundColor(0x997fa39f);
 		return false;
 	}
-	
+
 	@Touch
-	public boolean cultureRatingTouched(MotionEvent evt){
+	public boolean cultureRatingTouched(MotionEvent evt) {
 		cultureRating.setBackgroundColor(ThemeName.CULTURE.getPressedLightColor());
 		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getPressedDarkColor());
 		return false;
 	}
-	
+
 	@Touch
-	public boolean natureRatingTouched(MotionEvent evt){
+	public boolean natureRatingTouched(MotionEvent evt) {
 		natureRating.setBackgroundColor(ThemeName.NATURE.getPressedLightColor());
 		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getPressedDarkColor());
 		return false;
 	}
-	
+
 	@Touch
-	public boolean transitRatingTouched(MotionEvent evt){
+	public boolean transitRatingTouched(MotionEvent evt) {
 		transitRating.setBackgroundColor(ThemeName.TRANSIT.getPressedLightColor());
 		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getPressedDarkColor());
 		return false;
 	}
-	
+
 	@Touch
-	public boolean securityRatingTouched(MotionEvent evt){
+	public boolean securityRatingTouched(MotionEvent evt) {
 		securityRating.setBackgroundColor(ThemeName.SECURITY.getPressedLightColor());
 		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getPressedDarkColor());
 		return false;
 	}
-	
+
 	@Touch
-	public boolean shopsRatingTouched(MotionEvent evt){
+	public boolean shopsRatingTouched(MotionEvent evt) {
 		shopsRating.setBackgroundColor(ThemeName.SHOPS.getPressedLightColor());
 		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getPressedDarkColor());
 		return false;
 	}
-	
+
 	@Touch
-	public boolean leisureRatingTouched(MotionEvent evt){
+	public boolean leisureRatingTouched(MotionEvent evt) {
 		leisureRating.setBackgroundColor(ThemeName.LEISURE.getPressedLightColor());
 		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getPressedDarkColor());
 		return false;
@@ -281,10 +281,18 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		this.currentRating = rating;
 
 		globalRating.setMark(Weighted.getWeightedMark(rating, preferences));
-		cultureRating.setMark(rating.getThemeMark(ThemeName.CULTURE));
+		if (rating.getTheme(ThemeName.CULTURE).isRelevant()) {
+			cultureRating.setMark(rating.getThemeMark(ThemeName.CULTURE));
+		} else {
+			cultureRating.setDisabled();
+		}
 		natureRating.setMark(rating.getThemeMark(ThemeName.NATURE));
 		transitRating.setMark(rating.getThemeMark(ThemeName.TRANSIT));
-		securityRating.setMark(rating.getThemeMark(ThemeName.SECURITY));
+		if (rating.getTheme(ThemeName.SECURITY).isRelevant()) {
+			securityRating.setMark(rating.getThemeMark(ThemeName.SECURITY));
+		} else {
+			securityRating.setDisabled();
+		}
 		shopsRating.setMark(rating.getThemeMark(ThemeName.SHOPS));
 		leisureRating.setMark(rating.getThemeMark(ThemeName.LEISURE));
 	}

@@ -18,6 +18,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/rating_button_max_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/rating_button_rate"
