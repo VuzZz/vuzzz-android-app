@@ -1,6 +1,7 @@
 package com.vuzzz.android.views;
 
 import static com.vuzzz.android.model.ThemeName.CULTURE;
+import static com.vuzzz.android.model.ThemeName.GLOBAL;
 import static com.vuzzz.android.model.ThemeName.LEISURE;
 import static com.vuzzz.android.model.ThemeName.NATURE;
 import static com.vuzzz.android.model.ThemeName.SECURITY;
@@ -10,7 +11,6 @@ import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.all;
 import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.themeName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -19,10 +19,8 @@ import android.widget.FrameLayout;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EViewGroup;
-import com.googlecode.androidannotations.annotations.Touch;
 import com.googlecode.androidannotations.annotations.UiThread;
 import com.googlecode.androidannotations.annotations.ViewById;
-import com.googlecode.androidannotations.annotations.res.DimensionRes;
 import com.googlecode.androidannotations.annotations.res.DrawableRes;
 import com.googlecode.androidannotations.annotations.sharedpreferences.Pref;
 import com.vuzzz.android.OnRatingSwitchedListener;
@@ -121,9 +119,6 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 	@DrawableRes(R.drawable.ic_rating_global)
 	Drawable globalPicto;
 
-	@DimensionRes(R.dimen.rating_picto)
-	Float pictoWidth;
-
 	OnRatingClickListener listener;
 
 	public RatingView(Context context) {
@@ -133,49 +128,26 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 	@AfterViews
 	void afterViews() {
 
-		int width = pictoWidth.intValue();
-
-		globalRating.setBackgroundColor(0xFFa3b7b5);
-		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
 		globalRating.setTextSize(40);
-		globalPicto.setBounds(0, 0, width, width);
 		globalRating.setPicto(globalPicto);
-		globalRating.setTheme("NOTE GLOBALE");
+		globalRating.setTheme(GLOBAL);
 
-		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
-		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
-		cultureRating.setTheme(ThemeName.CULTURE.getName());
-		culturePicto.setBounds(0, 0, width, width);
+		cultureRating.setTheme(CULTURE);
 		cultureRating.setPicto(culturePicto);
 
-		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
-		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
-		natureRating.setTheme(ThemeName.NATURE.getName());
-		naturePicto.setBounds(0, 0, width, width);
+		natureRating.setTheme(NATURE);
 		natureRating.setPicto(naturePicto);
 
-		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
-		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
-		transitRating.setTheme(ThemeName.TRANSIT.getName());
-		transitPicto.setBounds(0, 0, width, width);
+		transitRating.setTheme(TRANSIT);
 		transitRating.setPicto(transitPicto);
 
-		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
-		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
-		leisureRating.setTheme(ThemeName.LEISURE.getName());
-		leisurePicto.setBounds(0, 0, width, width);
+		leisureRating.setTheme(LEISURE);
 		leisureRating.setPicto(leisurePicto);
 
-		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
-		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
-		securityRating.setTheme(ThemeName.SECURITY.getName());
-		securityPicto.setBounds(0, 0, width, width);
+		securityRating.setTheme(ThemeName.SECURITY);
 		securityRating.setPicto(securityPicto);
 
-		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
-		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
-		shopsRating.setTheme(ThemeName.SHOPS.getName());
-		shopsPicto.setBounds(0, 0, width, width);
+		shopsRating.setTheme(ThemeName.SHOPS);
 		shopsRating.setPicto(shopsPicto);
 	}
 
@@ -187,100 +159,36 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 	@Click
 	void globalRatingClicked() {
 		listener.onRatingClickListener(all());
-		globalRating.setBackgroundColor(0xFFa3b7b5);
-		globalRating.getFooterLayout().setBackgroundColor(0xFF7fa39f);
 	}
 
 	@Click
 	public void cultureRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.CULTURE));
-		cultureRating.setBackgroundColor(ThemeName.CULTURE.getLightColor());
-		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getDarkColor());
 	}
 
 	@Click
 	public void natureRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.NATURE));
-		natureRating.setBackgroundColor(ThemeName.NATURE.getLightColor());
-		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getDarkColor());
 	}
 
 	@Click
 	public void transitRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.TRANSIT));
-		transitRating.setBackgroundColor(ThemeName.TRANSIT.getLightColor());
-		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getDarkColor());
 	}
 
 	@Click
 	public void securityRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.SECURITY));
-		securityRating.setBackgroundColor(ThemeName.SECURITY.getLightColor());
-		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getDarkColor());
 	}
 
 	@Click
 	public void shopsRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.SHOPS));
-		shopsRating.setBackgroundColor(ThemeName.SHOPS.getLightColor());
-		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getDarkColor());
 	}
 
 	@Click
 	public void leisureRatingClicked(View v) {
 		listener.onRatingClickListener(themeName(ThemeName.LEISURE));
-		leisureRating.setBackgroundColor(ThemeName.LEISURE.getLightColor());
-		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getDarkColor());
-	}
-
-	// Touch Events
-	@Touch
-	public boolean globalRatingTouched(MotionEvent evt) {
-		globalRating.setBackgroundColor(0x99a3b7b5);
-		globalRating.getFooterLayout().setBackgroundColor(0x997fa39f);
-		return false;
-	}
-
-	@Touch
-	public boolean cultureRatingTouched(MotionEvent evt) {
-		cultureRating.setBackgroundColor(ThemeName.CULTURE.getPressedLightColor());
-		cultureRating.getFooterLayout().setBackgroundColor(ThemeName.CULTURE.getPressedDarkColor());
-		return false;
-	}
-
-	@Touch
-	public boolean natureRatingTouched(MotionEvent evt) {
-		natureRating.setBackgroundColor(ThemeName.NATURE.getPressedLightColor());
-		natureRating.getFooterLayout().setBackgroundColor(ThemeName.NATURE.getPressedDarkColor());
-		return false;
-	}
-
-	@Touch
-	public boolean transitRatingTouched(MotionEvent evt) {
-		transitRating.setBackgroundColor(ThemeName.TRANSIT.getPressedLightColor());
-		transitRating.getFooterLayout().setBackgroundColor(ThemeName.TRANSIT.getPressedDarkColor());
-		return false;
-	}
-
-	@Touch
-	public boolean securityRatingTouched(MotionEvent evt) {
-		securityRating.setBackgroundColor(ThemeName.SECURITY.getPressedLightColor());
-		securityRating.getFooterLayout().setBackgroundColor(ThemeName.SECURITY.getPressedDarkColor());
-		return false;
-	}
-
-	@Touch
-	public boolean shopsRatingTouched(MotionEvent evt) {
-		shopsRating.setBackgroundColor(ThemeName.SHOPS.getPressedLightColor());
-		shopsRating.getFooterLayout().setBackgroundColor(ThemeName.SHOPS.getPressedDarkColor());
-		return false;
-	}
-
-	@Touch
-	public boolean leisureRatingTouched(MotionEvent evt) {
-		leisureRating.setBackgroundColor(ThemeName.LEISURE.getPressedLightColor());
-		leisureRating.getFooterLayout().setBackgroundColor(ThemeName.LEISURE.getPressedDarkColor());
-		return false;
 	}
 
 	public void setValuesFromRating(Rating rating) {
