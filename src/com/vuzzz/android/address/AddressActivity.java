@@ -416,7 +416,7 @@ public class AddressActivity extends MapActivity {
 
 	@UiThread
 	protected void outsideAreaAddressFound() {
-		Toast.makeText(this, "L'adresse que vous avez indiquée est en dehors de la ville concernée.", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "L'adresse que vous avez indiqu√©e est en dehors de la ville concern√©e.", Toast.LENGTH_LONG).show();
 		loading = false;
 		updateLoading();
 	}
