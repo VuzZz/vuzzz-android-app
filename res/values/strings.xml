@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">VuzZz</string>
+    <string name="app_name">VuzZz Nantes</string>
+<!--     <string name="app_name">VuzZz Paris</string> -->
+
     <string name="my_position">Ma position</string>
     <string name="enter_address">Entrez une adresse</string>
     <string name="settings_title">Paramètres</string>
@@ -29,7 +31,7 @@
  	<string name="note_max">/10</string>
  	<string name="search_address">"&#8220;Place d'italie&#8221;"</string>
  	<string name="vuzzz_help_mui">"<![CDATA[<b>VuzZz</b> est disponible sur l'<b>Android Market</b><br /><font color="#33B5E5">http://<b>goo.gl/V5mtG</b></font><br /><br />Plus d'informations sur <b><font color="#33B5E5">vuzzz.com</font></b>]]>"</string>
- 	<string name="vuzzzCommon">"<![CDATA[Les notes attribuées dépendent de la <b>couverture des données</b> mises à disposition par la <b>Mairie de Paris</b>, dans le cadre de sa politique <b>Open Data</b>.<br /><br /><b>VuzZz</b> est une application créée en 48h par <b>Pierre-Yves Ricau</b>, <b>Romain Sertelon</b>, <b>Alexandre Thomas</b> et <b>Joan Zapata</b> lors du Global Android DevCamp 2012.]]>"</string>
+ 	<string name="vuzzzCommon">"<![CDATA[Les notes attribuées dépendent de la <b>couverture des données</b> mises à disposition par différents organismes tels que la <b>Mairie de Paris</b> ou la <b>Ville de Nantes</b>, dans le cadre de leur politique <b>Open Data</b>.<br /><br /><b>VuzZz</b> est une application créée initialement en 48h par <b>Pierre-Yves Ricau</b>, <b>Romain Sertelon</b>, <b>Alexandre Thomas</b> et <b>Joan Zapata</b> lors du Global Android DevCamp 2012.]]>"</string>
  	<string name="about_vuzzz">À propos</string>
  	<string name="nc">N/C</string>
 
