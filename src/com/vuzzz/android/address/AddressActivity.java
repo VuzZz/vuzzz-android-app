@@ -43,6 +43,7 @@ import com.googlecode.androidannotations.annotations.ViewById;
 import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.vuzzz.android.AbstractAnimationListener;
 import com.vuzzz.android.LogHelper;
+import com.vuzzz.android.MapHelper;
 import com.vuzzz.android.R;
 import com.vuzzz.android.ShowNoteActivity_;
 import com.vuzzz.android.VuzZzConfig;
@@ -155,7 +156,12 @@ public class AddressActivity extends MapActivity {
 			public void onLongPress(MotionEvent e) {
 				Projection projection = mapView.getProjection();
 				GeoPoint location = projection.fromPixels((int) e.getX(), (int) e.getY());
-				showAddressPopup(location);
+
+				if (MapHelper.isInRestrictedArea(location)) {
+					showAddressPopup(location);
+				} else {
+					mapView.getController().animateTo(MapHelper.getRestrictedAreaCenter());
+				}
 			}
 
 			@Override
@@ -204,8 +210,10 @@ public class AddressActivity extends MapActivity {
 		mapOverlays.add(addressOverlay);
 		mapOverlays.add(gestureOverlay);
 
+		// Default position
 		mapController = mapView.getController();
-		mapController.setZoom(18);
+		mapController.setZoom(MapHelper.MAX_ZOOM);
+		mapController.animateTo(MapHelper.getRestrictedAreaCenter());
 
 		/*
 		 * Init location
@@ -220,13 +228,18 @@ public class AddressActivity extends MapActivity {
 				int lastKnownLatitude = (int) (lastKnownLocation.getLatitude() * 1E6);
 				int lastKnownLongitude = (int) (lastKnownLocation.getLongitude() * 1E6);
 				GeoPoint initGeoPoint = new GeoPoint(lastKnownLatitude, lastKnownLongitude);
-				mapController.animateTo(initGeoPoint);
+				if (MapHelper.isInRestrictedArea(initGeoPoint)) {
+					mapController.animateTo(initGeoPoint);
+				} else {
+					mapController.animateTo(MapHelper.getRestrictedAreaCenter());
+				}
 			}
 		}
 
 		moveToMyLocationOnFirstFix();
 
 		handleVuzZzIntent();
+
 	}
 
 	@Override
@@ -373,7 +386,12 @@ public class AddressActivity extends MapActivity {
 		int maxLon = Integer.MIN_VALUE;
 		for (Address address : addresses) {
 			GeoPoint geoPoint = new GeoPoint((int) (address.getLatitude() * 1E6), (int) (address.getLongitude() * 1E6));
-			geopoints.add(geoPoint);
+
+			if (MapHelper.isInRestrictedArea(geoPoint)) {
+				geopoints.add(geoPoint);
+			} else {
+				mapView.getController().animateTo(MapHelper.getRestrictedAreaCenter());
+			}
 
 			int lat = geoPoint.getLatitudeE6();
 			int lon = geoPoint.getLongitudeE6();
@@ -384,12 +402,23 @@ public class AddressActivity extends MapActivity {
 			minLon = Math.min(lon, minLon);
 		}
 
-		double fitFactor = 1.5;
-		mapController.zoomToSpan((int) (Math.abs(maxLat - minLat) * fitFactor), (int) (Math.abs(maxLon - minLon) * fitFactor));
-		mapController.animateTo(new GeoPoint((maxLat + minLat) / 2, (maxLon + minLon) / 2));
+		if (geopoints.isEmpty()) {
+			outsideAreaAddressFound();
+		} else {
+			double fitFactor = 1.5;
+			mapController.zoomToSpan((int) (Math.abs(maxLat - minLat) * fitFactor), (int) (Math.abs(maxLon - minLon) * fitFactor));
+			mapController.animateTo(new GeoPoint((maxLat + minLat) / 2, (maxLon + minLon) / 2));
 
-		searchOverlay.setAddresses(addresses, geopoints);
+			searchOverlay.setAddresses(addresses, geopoints);
+		}
 
+	}
+
+	@UiThread
+	protected void outsideAreaAddressFound() {
+		Toast.makeText(this, "L'adresse que vous avez indiquée est en dehors de la ville concernée.", Toast.LENGTH_LONG).show();
+		loading = false;
+		updateLoading();
 	}
 
 	private void showAddressPopup(Address address) {

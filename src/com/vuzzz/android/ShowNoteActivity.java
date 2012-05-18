@@ -34,7 +34,6 @@ import com.googlecode.androidannotations.annotations.res.AnimationRes;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.vuzzz.android.adapter.SimplePagerAdapter;
 import com.vuzzz.android.model.Rating;
-import com.vuzzz.android.model.ThemeName;
 import com.vuzzz.android.model.Weighted;
 import com.vuzzz.android.views.HelpView;
 import com.vuzzz.android.views.HistoryView_;
