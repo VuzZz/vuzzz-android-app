@@ -10,7 +10,6 @@ public class Criterion implements Serializable, RatingDetails {
 	public String description;
 	public float note;
 	public float coefficient;
-	public boolean relevant;
 	
 	public Criterion(){};
 
@@ -47,11 +46,4 @@ public class Criterion implements Serializable, RatingDetails {
 		this.coefficient = coefficient;
 	}
 	
-	public boolean isRelevant() {
-		return relevant;
-	}
-	
-	public void setRelevant(boolean relevant) {
-		this.relevant = relevant;
-	}
 }

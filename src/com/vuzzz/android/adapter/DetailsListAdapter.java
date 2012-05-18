@@ -26,9 +26,8 @@ import com.vuzzz.android.model.ThemeName;
 public class DetailsListAdapter extends BaseAdapter {
 
 	private static final int CRITERION_ROW_TYPE = 0;
-	private static final int CRITERION_ROW_DISABLED_TYPE = 1;
-	private static final int THEME_ROW_TYPE = 2;
-	private static final int THEME_ROW_DISABLED_TYPE = 3;
+	private static final int THEME_ROW_TYPE = 1;
+	private static final int THEME_ROW_DISABLED_TYPE = 2;
 
 	@RootContext
 	Context context;
@@ -87,11 +86,7 @@ public class DetailsListAdapter extends BaseAdapter {
 	public int getItemViewType(int position) {
 		RatingDetails row = details.get(position);
 		if (row instanceof Criterion) {
-			if (((Criterion) row).isRelevant()) {
 				return CRITERION_ROW_TYPE;
-			} else {
-				return CRITERION_ROW_DISABLED_TYPE;
-			}
 		} else {
 			if (((Theme) row).isRelevant()) {
 				return THEME_ROW_TYPE;
@@ -127,9 +122,6 @@ public class DetailsListAdapter extends BaseAdapter {
 				break;
 			case CRITERION_ROW_TYPE:
 				convertView = View.inflate(context, R.layout.row_details_criterion, null);
-				break;
-			case CRITERION_ROW_DISABLED_TYPE:
-				convertView = View.inflate(context, R.layout.row_details_criterion_disabled, null);
 				break;
 			}
 			holder = new ViewHolder();

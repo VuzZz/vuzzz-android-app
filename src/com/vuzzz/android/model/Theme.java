@@ -11,7 +11,6 @@ public class Theme implements Serializable, RatingDetails{
 	public String description;
 	public float note;
 	public List<Criterion> criteria;
-	public boolean relevant;
 
 	public Theme(){}
 	
@@ -73,11 +72,7 @@ public class Theme implements Serializable, RatingDetails{
 	}
 	
 	public boolean isRelevant() {
-		return relevant;
+		return criteria.size() > 0;
 	}
 	
-	public void setRelevant(boolean relevant) {
-		this.relevant = relevant;
-	}
-
 }

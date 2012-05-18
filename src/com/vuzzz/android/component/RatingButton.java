@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.googlecode.androidannotations.annotations.EViewGroup;
 import com.googlecode.androidannotations.annotations.ViewById;
-import com.googlecode.androidannotations.annotations.res.DrawableRes;
 import com.vuzzz.android.R;
 
 @EViewGroup(R.layout.rating_button)
@@ -28,9 +27,6 @@ public class RatingButton extends RelativeLayout {
 	@ViewById(R.id.rating_button_footer)
 	protected LinearLayout footerLayout;
 	
-	@DrawableRes(R.drawable.details_row_disabled)
-	protected Drawable themeDisabled;
-
 	private Float aMark;
 
 	public RatingButton(Context context) {

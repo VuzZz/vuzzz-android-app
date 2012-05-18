@@ -1,5 +1,11 @@
 package com.vuzzz.android.views;
 
+import static com.vuzzz.android.model.ThemeName.CULTURE;
+import static com.vuzzz.android.model.ThemeName.LEISURE;
+import static com.vuzzz.android.model.ThemeName.NATURE;
+import static com.vuzzz.android.model.ThemeName.SECURITY;
+import static com.vuzzz.android.model.ThemeName.SHOPS;
+import static com.vuzzz.android.model.ThemeName.TRANSIT;
 import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.all;
 import static com.vuzzz.android.views.RatingView.ThemeNameOrAll.themeName;
 import android.content.Context;
@@ -281,20 +287,37 @@ public class RatingView extends FrameLayout implements OnSettingsUpdatedListener
 		this.currentRating = rating;
 
 		globalRating.setMark(Weighted.getWeightedMark(rating, preferences));
-		if (rating.getTheme(ThemeName.CULTURE).isRelevant()) {
-			cultureRating.setMark(rating.getThemeMark(ThemeName.CULTURE));
+		
+		if (rating.getTheme(CULTURE).isRelevant()) {
+			cultureRating.setMark(rating.getThemeMark(CULTURE));
 		} else {
 			cultureRating.setDisabled();
 		}
-		natureRating.setMark(rating.getThemeMark(ThemeName.NATURE));
-		transitRating.setMark(rating.getThemeMark(ThemeName.TRANSIT));
-		if (rating.getTheme(ThemeName.SECURITY).isRelevant()) {
-			securityRating.setMark(rating.getThemeMark(ThemeName.SECURITY));
+		if (rating.getTheme(NATURE).isRelevant()) {
+			natureRating.setMark(rating.getThemeMark(NATURE));
+		} else {
+			natureRating.setDisabled();
+		}
+		if (rating.getTheme(TRANSIT).isRelevant()) {
+			transitRating.setMark(rating.getThemeMark(TRANSIT));
+		} else {
+			transitRating.setDisabled();
+		}
+		if (rating.getTheme(SECURITY).isRelevant()) {
+			securityRating.setMark(rating.getThemeMark(SECURITY));
 		} else {
 			securityRating.setDisabled();
 		}
-		shopsRating.setMark(rating.getThemeMark(ThemeName.SHOPS));
-		leisureRating.setMark(rating.getThemeMark(ThemeName.LEISURE));
+		if (rating.getTheme(SHOPS).isRelevant()) {
+			shopsRating.setMark(rating.getThemeMark(SHOPS));
+		} else {
+			shopsRating.setDisabled();
+		}
+		if (rating.getTheme(LEISURE).isRelevant()) {
+			leisureRating.setMark(rating.getThemeMark(LEISURE));
+		} else {
+			leisureRating.setDisabled();
+		}
 	}
 
 	@Override
