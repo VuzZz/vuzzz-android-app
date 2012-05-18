@@ -76,14 +76,6 @@ public class RatingButton extends RelativeLayout {
 		ratingTextView.setTextSize(size);
 	}
 
-	public LinearLayout getFooterLayout() {
-		return footerLayout;
-	}
-
-	public void setFooterLayout(LinearLayout footerLayout) {
-		this.footerLayout = footerLayout;
-	}
-	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -91,24 +83,21 @@ public class RatingButton extends RelativeLayout {
 			turnInPresseState();
 			break;
 		case MotionEvent.ACTION_UP:
-			turnInDefaultState();
-			break;
 		case MotionEvent.ACTION_CANCEL:
 			turnInDefaultState();
 			break;
-		
 		}
 		return super.onTouchEvent(event);
 	}
 	
 	private void turnInPresseState() {
 		setBackgroundColor(theme.getPressedDarkColor());
-		getFooterLayout().setBackgroundColor(theme.getPressedLightColor());
+		footerLayout.setBackgroundColor(theme.getPressedLightColor());
 	}
 	
 	private void turnInDefaultState() {
 		setBackgroundColor(theme.getDarkColor());
-		getFooterLayout().setBackgroundColor(theme.getLightColor());
+		footerLayout.setBackgroundColor(theme.getLightColor());
 	}
 
 }
