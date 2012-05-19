@@ -6,3 +6,7 @@ apt_generated
 .factorypath
 *.apk
 .DS_store
+target
+.classpath
+.project
+.settings
