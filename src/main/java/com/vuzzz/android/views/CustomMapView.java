@@ -21,11 +21,11 @@ public class CustomMapView extends MapView {
 		if (event.getAction() == MotionEvent.ACTION_UP) {
 			if (getZoomLevel() < MAX_ZOOM) {
 				getController().setZoom(MAX_ZOOM);
-				getController().setCenter(MapHelper.getRestrictedAreaCenter());
+				getController().setCenter(MapHelper.getRestrictedAreaCenter(getContext()));
 			}
 
-			if (!MapHelper.isInRestrictedArea(getMapCenter())) {
-				final GeoPoint nearestPoint = MapHelper.findTheNearestRestrictedAreaPoint(getMapCenter());
+			if (!MapHelper.isInRestrictedArea(getContext(), getMapCenter())) {
+				final GeoPoint nearestPoint = MapHelper.findTheNearestRestrictedAreaPoint(getContext(), getMapCenter());
 				getController().setCenter(nearestPoint);
 			}
 		}

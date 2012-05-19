@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="MAX_LAT">${max.lat}</string>
+    <string name="MIN_LAT">${min.lat}</string>
+    <string name="MAX_LON">${max.lon}</string>
+    <string name="MIN_LON">${min.lon}</string>
+    <string name="CENTER_LAT">${center.lat}</string>
+    <string name="CENTER_LON">${center.lon}</string>
+
+</resources>

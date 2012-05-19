@@ -157,10 +157,11 @@ public class AddressActivity extends MapActivity {
 				Projection projection = mapView.getProjection();
 				GeoPoint location = projection.fromPixels((int) e.getX(), (int) e.getY());
 
-				if (MapHelper.isInRestrictedArea(location)) {
+				
+				if (MapHelper.isInRestrictedArea(getApplicationContext(), location)) {
 					showAddressPopup(location);
 				} else {
-					mapView.getController().animateTo(MapHelper.getRestrictedAreaCenter());
+					mapView.getController().animateTo(MapHelper.getRestrictedAreaCenter(getApplicationContext()));
 				}
 			}
 
@@ -213,7 +214,7 @@ public class AddressActivity extends MapActivity {
 		// Default position
 		mapController = mapView.getController();
 		mapController.setZoom(MapHelper.MAX_ZOOM);
-		mapController.animateTo(MapHelper.getRestrictedAreaCenter());
+		mapController.animateTo(MapHelper.getRestrictedAreaCenter(getApplicationContext()));
 
 		/*
 		 * Init location
@@ -228,10 +229,10 @@ public class AddressActivity extends MapActivity {
 				int lastKnownLatitude = (int) (lastKnownLocation.getLatitude() * 1E6);
 				int lastKnownLongitude = (int) (lastKnownLocation.getLongitude() * 1E6);
 				GeoPoint initGeoPoint = new GeoPoint(lastKnownLatitude, lastKnownLongitude);
-				if (MapHelper.isInRestrictedArea(initGeoPoint)) {
+				if (MapHelper.isInRestrictedArea(getApplicationContext(), initGeoPoint)) {
 					mapController.animateTo(initGeoPoint);
 				} else {
-					mapController.animateTo(MapHelper.getRestrictedAreaCenter());
+					mapController.animateTo(MapHelper.getRestrictedAreaCenter(getApplicationContext()));
 				}
 			}
 		}
@@ -387,10 +388,10 @@ public class AddressActivity extends MapActivity {
 		for (Address address : addresses) {
 			GeoPoint geoPoint = new GeoPoint((int) (address.getLatitude() * 1E6), (int) (address.getLongitude() * 1E6));
 
-			if (MapHelper.isInRestrictedArea(geoPoint)) {
+			if (MapHelper.isInRestrictedArea(getApplicationContext(), geoPoint)) {
 				geopoints.add(geoPoint);
 			} else {
-				mapView.getController().animateTo(MapHelper.getRestrictedAreaCenter());
+				mapView.getController().animateTo(MapHelper.getRestrictedAreaCenter(getApplicationContext()));
 			}
 
 			int lat = geoPoint.getLatitudeE6();
