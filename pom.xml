@@ -7,8 +7,6 @@
 	<packaging>apk</packaging>
 	
 	<properties>
-        <storepass>googlekapiko</storepass>
-        <keypass>googlekapiko</keypass>
 		<maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
 		<maven.jarsigner.plugin.version>1.2</maven.jarsigner.plugin.version>
 		<java.version>1.6</java.version>
@@ -132,7 +130,9 @@
 				<min.lon>2244110</min.lon>
 				<center.lat>48862481</center.lat>
 				<center.lon>2351723</center.lon>	
-				<default.hint>Place d'italie</default.hint>    
+				<default.hint>Place d'italie</default.hint>   
+		        <storepass></storepass>
+        		<keypass></keypass> 
 			</properties> 
         </profile>
         
@@ -150,6 +150,8 @@
 				<center.lat>47220060</center.lat>
 				<center.lon>-1552200</center.lon>
 				<default.hint>Bouffay</default.hint>
+		        <storepass>googlekapiko</storepass>
+        		<keypass>googlekapiko</keypass>
 			</properties>            
         </profile>
         
@@ -177,7 +179,7 @@
                                     <keystore>${keystore}</keystore>
                                     <storepass>${storepass}</storepass>
                                     <keypass>${keypass}</keypass>
-                                    <alias>${keyalias}</alias>
+                                    <alias>${alias}</alias>
                                 </configuration>
                             </execution>
                         </executions>
