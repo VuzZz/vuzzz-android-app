@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <com.vuzzz.android.component.RatingButton_
+    <com.vuzzz.android.activity.note.rating.RatingButton_
         android:id="@+id/global_rating"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -22,7 +22,7 @@
         android:orientation="horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge" >
 
-        <com.vuzzz.android.component.RatingButton_
+        <com.vuzzz.android.activity.note.rating.RatingButton_
             android:id="@+id/culture_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -31,7 +31,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"/>
         
-        <com.vuzzz.android.component.RatingButton_
+        <com.vuzzz.android.activity.note.rating.RatingButton_
             android:id="@+id/leisure_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -48,7 +48,7 @@
         android:layout_weight="1.0"
         android:orientation="horizontal" >
 
-        <com.vuzzz.android.component.RatingButton_
+        <com.vuzzz.android.activity.note.rating.RatingButton_
             android:id="@+id/nature_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -57,7 +57,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1.0"/>
 
-        <com.vuzzz.android.component.RatingButton_
+        <com.vuzzz.android.activity.note.rating.RatingButton_
             android:id="@+id/security_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -73,7 +73,7 @@
         android:layout_weight="1.0"
         android:orientation="horizontal" >
 
-        <com.vuzzz.android.component.RatingButton_
+        <com.vuzzz.android.activity.note.rating.RatingButton_
             android:id="@+id/shops_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -82,7 +82,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1.0" />
 
-        <com.vuzzz.android.component.RatingButton_
+        <com.vuzzz.android.activity.note.rating.RatingButton_
             android:id="@+id/transit_rating"
             android:layout_width="0dp"
             android:layout_height="fill_parent"

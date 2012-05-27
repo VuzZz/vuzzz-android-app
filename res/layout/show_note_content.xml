@@ -37,13 +37,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/titles" />
 
-    <com.vuzzz.android.views.SettingsView_
+    <com.vuzzz.android.activity.note.SettingsView_
         android:id="@+id/settingsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
 
-    <com.vuzzz.android.views.HelpView_
+    <com.vuzzz.android.activity.note.HelpView_
         android:id="@+id/helpView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

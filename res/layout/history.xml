@@ -17,19 +17,19 @@
             android:padding="6dp"
             android:paddingBottom="0dp" >
 
-            <com.vuzzz.android.component.LegendItem_
+            <com.vuzzz.android.activity.note.history.LegendItem_
                 android:id="@+id/legendCulture"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
-            <com.vuzzz.android.component.LegendItem_
+            <com.vuzzz.android.activity.note.history.LegendItem_
                 android:id="@+id/legendLeisure"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
-            <com.vuzzz.android.component.LegendItem_
+            <com.vuzzz.android.activity.note.history.LegendItem_
                 android:id="@+id/legendNature"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -45,19 +45,19 @@
             android:padding="6dp"
             android:paddingTop="0dp" >
 
-            <com.vuzzz.android.component.LegendItem_
+            <com.vuzzz.android.activity.note.history.LegendItem_
                 android:id="@+id/legendSecurity"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
 
-            <com.vuzzz.android.component.LegendItem_
+            <com.vuzzz.android.activity.note.history.LegendItem_
                 android:id="@+id/legendShops"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
 
-            <com.vuzzz.android.component.LegendItem_
+            <com.vuzzz.android.activity.note.history.LegendItem_
                 android:id="@+id/legendTransit"
                 android:layout_width="0dp"
                 android:layout_weight="1"
