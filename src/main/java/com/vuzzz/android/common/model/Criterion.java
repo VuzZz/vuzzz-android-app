@@ -8,6 +8,7 @@ public class Criterion implements Serializable, RatingDetails {
 	
 	public String name;
 	public String description;
+	public String id;
 	public float note;
 	public float coefficient;
 	
@@ -31,6 +32,12 @@ public class Criterion implements Serializable, RatingDetails {
 	public void setNote(float note) {
 		this.note = note;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	@Override
 	public int getColor() {
@@ -45,5 +52,5 @@ public class Criterion implements Serializable, RatingDetails {
 	public void setCoefficient(float coefficient) {
 		this.coefficient = coefficient;
 	}
-	
+
 }

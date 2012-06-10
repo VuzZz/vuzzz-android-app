@@ -1,17 +1,11 @@
 package com.vuzzz.android.activity.download;
 
-import java.util.List;
-
-import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
 import android.content.Context;
 
+import com.vuzzz.android.common.VuzZzConfig;
 import com.vuzzz.android.common.model.Rating;
 import com.vuzzz.android.common.rest.RestClient_;
 
@@ -31,24 +25,8 @@ public class RatingDownloadTask<T extends Activity & TaskResultListener<Rating>>
 		this.address = address;
 		this.latitudeE6 = latitudeE6;
 		this.longitudeE6 = longitudeE6;
-
-		objectMapper = new ObjectMapper();
-		objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		objectMapper.configure(DeserializationConfig.Feature.AUTO_DETECT_SETTERS, false);
-		objectMapper.configure(DeserializationConfig.Feature.USE_GETTERS_AS_SETTERS, false);
-		objectMapper.configure(SerializationConfig.Feature.AUTO_DETECT_GETTERS, false);
-
-		RestTemplate restTemplate = new RestTemplate();
-
-		List<HttpMessageConverter<?>> messageConverters = restTemplate.getMessageConverters();
-		for (HttpMessageConverter<?> httpMessageConverter : messageConverters) {
-			if (httpMessageConverter instanceof MappingJacksonHttpMessageConverter) {
-				MappingJacksonHttpMessageConverter jacksonConverter = (MappingJacksonHttpMessageConverter) httpMessageConverter;
-				jacksonConverter.setObjectMapper(objectMapper);
-			}
-		}
-
-		restClient = new RestClient_(restTemplate);
+		objectMapper = VuzZzConfig.configureObjectMapper();
+		restClient = VuzZzConfig.configureRestClient();
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package com.vuzzz.android.common.model;
 import java.io.Serializable;
 import java.util.List;
 
+import com.vuzzz.android.R;
+
 public class Theme implements Serializable, RatingDetails{
 
 	private static final long serialVersionUID = 1L;
@@ -73,6 +75,18 @@ public class Theme implements Serializable, RatingDetails{
 	
 	public boolean isRelevant() {
 		return criteria.size() > 0;
+	}
+
+	public static int getPictoId(Theme theme) {
+		switch(theme.name){
+		case CULTURE: return R.drawable.ic_rating_culture;
+		case LEISURE: return R.drawable.ic_rating_leasure;
+		case NATURE: return R.drawable.ic_rating_nature;
+		case SECURITY: return R.drawable.ic_rating_security;
+		case SHOPS: return R.drawable.ic_rating_shop;
+		case TRANSIT: return R.drawable.ic_rating_transit;
+		default: case GLOBAL: return R.drawable.ic_rating_global;
+		}
 	}
 	
 }
